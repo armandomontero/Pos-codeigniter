@@ -1,10 +1,12 @@
 <?php
+
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\unidadesModel;
 
-class Unidades extends BaseController{
+class Unidades extends BaseController
+{
     protected $unidades;
 
     public function __construct()
@@ -12,52 +14,56 @@ class Unidades extends BaseController{
         $this->unidades = new unidadesModel();
     }
 
-    public function index($activo = 1){
+    public function index($activo = 1)
+    {
         $unidades = $this->unidades->where('activo', $activo)->findAll();
-        $data = ['titulo'=>'Unidades', 'datos'=>$unidades];
+        $data = ['titulo' => 'Unidades', 'datos' => $unidades];
 
         echo view('header');
         echo view('unidades/index', $data);
         echo view('footer');
     }
 
-    public function eliminados($activo = 0){
+    public function eliminados($activo = 0)
+    {
         $unidades = $this->unidades->where('activo', $activo)->findAll();
-        $data = ['titulo'=>'Unidades', 'datos'=>$unidades];
+        $data = ['titulo' => 'Unidades', 'datos' => $unidades];
 
         echo view('header');
         echo view('unidades/eliminados', $data);
         echo view('footer');
     }
 
-    public function nuevo(){
+    public function nuevo()
+    {
 
-         $data = ['titulo'=>'Agregar Unidad'];
+        $data = ['titulo' => 'Agregar Unidad'];
 
         echo view('header');
         echo view('unidades/nuevo', $data);
         echo view('footer');
     }
 
-    public function insertar(){
+    public function insertar()
+    {
         $this->unidades->save([
-            'nombre'=>$this->request->getPost('nombre'),
-            'nombre_corto'=>$this->request->getPost('nombre_corto')
+            'nombre' => $this->request->getPost('nombre'),
+            'nombre_corto' => $this->request->getPost('nombre_corto')
         ]);
-        return redirect()->to(base_url().'unidades');
+        return redirect()->to(base_url() . 'unidades');
     }
 
 
-    public function editar($id){
-    try{
-        $unidad = $this->unidades->where('id', $id)->first();
-    
-    }catch (\Exception $e) {
-    exit($e->getMessage());
-}
-         $data = ['titulo'=>'Editar Unidad', 'datos'=>$unidad];
+    public function editar($id)
+    {
+        try {
+            $unidad = $this->unidades->where('id', $id)->first();
+        } catch (\Exception $e) {
+            exit($e->getMessage());
+        }
+        $data = ['titulo' => 'Editar Unidad', 'datos' => $unidad];
 
-         
+
 
         echo view('header');
         echo view('unidades/editar', $data);
@@ -65,26 +71,28 @@ class Unidades extends BaseController{
     }
 
 
-    public function actualizar(){
+    public function actualizar()
+    {
         $this->unidades->update($this->request->getPost('id'), [
-            'nombre'=>$this->request->getPost('nombre'),
-            'nombre_corto'=>$this->request->getPost('nombre_corto')
+            'nombre' => $this->request->getPost('nombre'),
+            'nombre_corto' => $this->request->getPost('nombre_corto')
         ]);
-        return redirect()->to(base_url().'unidades/editar/'.$this->request->getPost('id'));
+        return redirect()->to(base_url() . 'unidades/editar/' . $this->request->getPost('id'));
     }
 
-    public function eliminar($id){
+    public function eliminar($id)
+    {
         $this->unidades->update($id, [
-            'activo'=>0
+            'activo' => 0
         ]);
-        return redirect()->to(base_url().'unidades');
+        return redirect()->to(base_url() . 'unidades');
     }
 
-    public function reingresar($id){
+    public function reingresar($id)
+    {
         $this->unidades->update($id, [
-            'activo'=>1
+            'activo' => 1
         ]);
-        return redirect()->to(base_url().'unidades');
+        return redirect()->to(base_url() . 'unidades');
     }
 }
-?>

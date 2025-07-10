@@ -11,17 +11,14 @@
 
 
         <div class="card-body">
-            <form method="POST" action="<?= base_url() ?>/unidades/insertar" autocomplete="off">
+            <form method="POST" action="<?= base_url() ?>/categorias/insertar" autocomplete="off">
                 <div class="form-group mb-4">
                     <div class="row">
                         <div class="col-12 col-sm-6">
                             <label>Nombre: </label>
                             <input require required autofocus class="form-control" id="nombre" name="nombre" type="text" />
                         </div>
-                        <div class="col-12 col-sm-6">
-                            <label>Nombre Corto: </label>
-                            <input require required class="form-control" id="nombre_corto" name="nombre_corto" type="text" />
-                        </div>
+                        
                     </div>
                 </div>
 
