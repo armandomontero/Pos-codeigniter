@@ -29,5 +29,13 @@ class Unidades extends BaseController{
         echo view('unidades/nuevo', $data);
         echo view('footer');
     }
+
+    public function insertar(){
+        $this->unidades->save([
+            'nombre'=>$this->request->getPost('nombre'),
+             'nombre_corto'=>$this->request->getPost('nombre_corto')
+        ]);
+        return redirect()->to(base_url().'unidades');
+    }
 }
 ?>
