@@ -25,7 +25,7 @@ class Unidades extends BaseController{
 
          $data = ['titulo'=>'Agregar Unidad'];
 
-         echo view('header');
+        echo view('header');
         echo view('unidades/nuevo', $data);
         echo view('footer');
     }
@@ -33,9 +33,26 @@ class Unidades extends BaseController{
     public function insertar(){
         $this->unidades->save([
             'nombre'=>$this->request->getPost('nombre'),
-             'nombre_corto'=>$this->request->getPost('nombre_corto')
+            'nombre_corto'=>$this->request->getPost('nombre_corto')
         ]);
         return redirect()->to(base_url().'unidades');
+    }
+
+
+    public function editar($id){
+    try{
+        $unidad = $this->unidades->where('id', $id)->first();
+    
+    }catch (\Exception $e) {
+    exit($e->getMessage());
+}
+         $data = ['titulo'=>'Editar Unidad', 'datos'=>$unidad];
+
+         
+
+        echo view('header');
+        echo view('unidades/editar', $data);
+        echo view('footer');
     }
 }
 ?>
