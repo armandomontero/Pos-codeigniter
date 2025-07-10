@@ -20,5 +20,14 @@ class Unidades extends BaseController{
         echo view('unidades/index', $data);
         echo view('footer');
     }
+
+    public function nuevo(){
+
+         $data = ['titulo'=>'Agregar Unidad'];
+
+         echo view('header');
+        echo view('unidades/nuevo', $data);
+        echo view('footer');
+    }
 }
 ?>

@@ -11,10 +11,10 @@
     </footer>
 </div>
 </div>
-<script src="js/bootstrap.bundle.min.js" ></script>
-<script src="js/scripts.js"></script>
-<script src="js/simple-datatables.min.js" ></script>
-<script src="js/datatables-simple-demo.js"></script>
+<script src="<?=base_url()?>js/bootstrap.bundle.min.js" ></script>
+<script src="<?=base_url()?>js/scripts.js"></script>
+<script src="<?=base_url()?>js/simple-datatables.min.js" ></script>
+<script src="<?=base_url()?>js/datatables-simple-demo.js"></script>
 </body>
 
 </html>

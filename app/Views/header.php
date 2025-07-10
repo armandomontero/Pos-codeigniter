@@ -8,9 +8,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Infoclever - POS</title>
-    <link href="css/datatables.css" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <script src="js/all.js"></script>
+    <link href="<?=base_url()?>css/datatables.css" rel="stylesheet" />
+    <link href="<?=base_url()?>css/styles.css" rel="stylesheet" />
+    <script src="<?=base_url()?>js/all.js"></script>
 </head>
 
 
