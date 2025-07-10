@@ -1,0 +1,70 @@
+CRITICAL - 2025-07-10 02:46:19 --> ErrorException: Undefined variable $data
+[Method: GET, Route: unidades]
+in APPPATH\Views\unidades\index.php on line 2.
+ 1 APPPATH\Views\unidades\index.php(2): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php', 2)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('unidades/index', [], true)
+ 5 APPPATH\Controllers\Unidades.php(20): view('unidades/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Unidades->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Unidades))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-10 02:46:57 --> ErrorException: Undefined variable $datos
+[Method: GET, Route: unidades]
+in APPPATH\Views\unidades\index.php on line 2.
+ 1 APPPATH\Views\unidades\index.php(2): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $datos', 'C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php', 2)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('unidades/index', [], true)
+ 5 APPPATH\Controllers\Unidades.php(20): view('unidades/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Unidades->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Unidades))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-10 02:47:42 --> ErrorException: Array to string conversion
+[Method: GET, Route: unidades]
+in APPPATH\Views\unidades\index.php on line 2.
+ 1 APPPATH\Views\unidades\index.php(2): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php', 2)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('unidades/index', [], true)
+ 5 APPPATH\Controllers\Unidades.php(20): view('unidades/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Unidades->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Unidades))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-10 02:56:26 --> ErrorException: Undefined variable $base_url
+[Method: GET, Route: unidades]
+in APPPATH\Views\unidades\index.php on line 8.
+ 1 APPPATH\Views\unidades\index.php(8): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $base_url', 'C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php', 8)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('unidades/index', [], true)
+ 5 APPPATH\Controllers\Unidades.php(20): view('unidades/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Unidades->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Unidades))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2025-07-10 03:07:45 --> ErrorException: Array to string conversion
+[Method: GET, Route: unidades]
+in APPPATH\Views\unidades\index.php on line 42.
+ 1 APPPATH\Views\unidades\index.php(42): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Array to string conversion', 'C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php', 42)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\wamp64\\www\\Pos-codeigniter\\app\\Views\\unidades\\index.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('unidades/index', [], true)
+ 5 APPPATH\Controllers\Unidades.php(20): view('unidades/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Unidades->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Unidades))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
