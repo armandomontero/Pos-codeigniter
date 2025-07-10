@@ -21,6 +21,15 @@ class Unidades extends BaseController{
         echo view('footer');
     }
 
+    public function eliminados($activo = 0){
+        $unidades = $this->unidades->where('activo', $activo)->findAll();
+        $data = ['titulo'=>'Unidades', 'datos'=>$unidades];
+
+        echo view('header');
+        echo view('unidades/eliminados', $data);
+        echo view('footer');
+    }
+
     public function nuevo(){
 
          $data = ['titulo'=>'Agregar Unidad'];
@@ -53,6 +62,29 @@ class Unidades extends BaseController{
         echo view('header');
         echo view('unidades/editar', $data);
         echo view('footer');
+    }
+
+
+    public function actualizar(){
+        $this->unidades->update($this->request->getPost('id'), [
+            'nombre'=>$this->request->getPost('nombre'),
+            'nombre_corto'=>$this->request->getPost('nombre_corto')
+        ]);
+        return redirect()->to(base_url().'unidades/editar/'.$this->request->getPost('id'));
+    }
+
+    public function eliminar($id){
+        $this->unidades->update($id, [
+            'activo'=>0
+        ]);
+        return redirect()->to(base_url().'unidades');
+    }
+
+    public function reingresar($id){
+        $this->unidades->update($id, [
+            'activo'=>1
+        ]);
+        return redirect()->to(base_url().'unidades');
     }
 }
 ?>

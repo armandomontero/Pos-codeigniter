@@ -8,6 +8,8 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Infoclever - POS</title>
+    <link rel="icon" href="<?=base_url()?>/favicon.ico" type="image/ico">
+
     <link href="<?=base_url()?>css/datatables.css" rel="stylesheet" />
     <link href="<?=base_url()?>css/styles.css" rel="stylesheet" />
     <script src="<?=base_url()?>js/all.js"></script>

@@ -10,8 +10,7 @@
 
             <div>
                 <p>
-                    <a class="btn btn-info" href="<?=base_url()?>unidades/nuevo">Agregar</a>
-                    <a class="btn btn-warning" href="<?=base_url()?>unidades/eliminados">Eliminados</a>
+                    <a class="btn btn-warning" href="<?=base_url()?>unidades">Unidades</a>
                 </p>
             </div>
            
@@ -23,7 +22,6 @@
                                 <th>Nombre</th>
                                 <th>Nombre Corto</th>
                                 <th></th>
-                                <th></th>
                                 
                             </tr>
                         </thead>
@@ -32,7 +30,6 @@
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Nombre Corto</th>
-                                <th></th>
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -45,8 +42,7 @@
                                 <td><?php echo $dato['id'];?></td>
                                 <td><?php echo $dato['nombre'];?></td>
                                 <td><?php echo $dato['nombre_corto'];?></td>
-                                <td><a class="btn btn-warning" href="<?=base_url()?>unidades/editar/<?php echo $dato['id'];?>"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                                <td><a class="btn btn-danger" href="<?=base_url()?>unidades/eliminar/<?php echo $dato['id'];?>"><i class="fa-solid fa-trash"></i></a></td>
+                                <td><a class="btn btn-success" href="<?=base_url()?>unidades/reingresar/<?php echo $dato['id'];?>"><i class="fa-solid fa-arrow-up-from-bracket"></i></a></td>
                               
                             </tr>
                             <?php

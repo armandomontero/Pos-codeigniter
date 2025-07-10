@@ -12,7 +12,8 @@
 
 
         <div class="card-body">
-            <form method="POST" action="<?= base_url() ?>/unidades/insertar" autocomplete="off">
+            <form method="POST" action="<?= base_url() ?>/unidades/actualizar" autocomplete="off">
+                <input type="hidden" id="id" name="id" value="<?=$datos['id']?>"?>
                 <div class="form-group mb-4">
                     <div class="row">
                         <div class="col-12 col-sm-6">
