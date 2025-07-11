@@ -28,3 +28,13 @@ $routes->get('/categorias/editar/(:num)', 'categorias::editar/$1');
 $routes->post('/categorias/actualizar', 'categorias::actualizar');
 $routes->get('/categorias/eliminar/(:num)', 'categorias::eliminar/$1');
 $routes->get('/categorias/reingresar/(:num)', 'categorias::reingresar/$1');
+
+//Productos
+$routes->get('/productos', 'productos::index');
+$routes->get('/productos/eliminados', 'productos::eliminados');
+$routes->get('/productos/nuevo', 'productos::nuevo');
+$routes->post('/productos/insertar', 'productos::insertar');
+$routes->get('/productos/editar/(:num)', 'productos::editar/$1');
+$routes->post('/productos/actualizar', 'productos::actualizar');
+$routes->get('/productos/eliminar/(:num)', 'productos::eliminar/$1');
+$routes->get('/productos/reingresar/(:num)', 'productos::reingresar/$1');
