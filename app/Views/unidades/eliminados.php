@@ -48,7 +48,7 @@
                                     <td><?php echo $dato['id']; ?></td>
                                     <td><?php echo $dato['nombre']; ?></td>
                                     <td><?php echo $dato['nombre_corto']; ?></td>
-                                    <td><a class="btn btn-success" href="<?= base_url() ?>unidades/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
+                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success" href="#" data-href="<?= base_url() ?>unidades/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
 
                                 </tr>
                             <?php
@@ -62,3 +62,24 @@
 
     </div>
 </main>
+
+<!-- Modal confirmación -->
+    <div class="modal fade" id="modal-confirma" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reingresar Registro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro que desea reingresar la unidad?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a type="button" class="btn btn-success btn-ok">Reingresar</a>
+                </div>
+            </div>
+        </div>
+    </div>

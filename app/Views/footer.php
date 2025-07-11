@@ -56,6 +56,12 @@
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>js/demo/datatables-demo.js"></script>
 
+<!-- funcionalidad ok button para dialogos de confirmacion -->
+ <script>
+    $("#modal-confirma").on('show.bs.modal', function(e){
+        $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+    });
+ </script>
 </body>
 
 </html>

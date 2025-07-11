@@ -8,6 +8,12 @@
 
         <!-- Page Heading -->
         <h1 class="h3 mb-2 text-gray-800"><?= $titulo ?></h1>
+
+<ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="<?= base_url()?>">Inicio</a></li>
+            <li class="breadcrumb-item active"><?= $titulo ?></li>
+        </ol>
+
         <p>
             <a class="btn btn-info" href="<?= base_url() ?>unidades/nuevo">Agregar</a>
             <a class="btn btn-warning" href="<?= base_url() ?>unidades/eliminados">Eliminados</a>
@@ -69,6 +75,9 @@
     <!-- End of Main Content -->
 
 
+</main>
+
+<!-- Modal confirmación -->
     <div class="modal fade" id="modal-confirma" tabindex="-1">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
@@ -83,10 +92,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Guardar cambios</button>
+                    <a type="button" class="btn btn-danger btn-ok">Eliminar</a>
                 </div>
             </div>
         </div>
     </div>
-
-</main>
