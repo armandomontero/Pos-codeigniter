@@ -1,11 +1,14 @@
 <?php
 ?>
 <main>
-    <div class="container-fluid px-4">
-        
-        <h1 class="mt-4"><?= $titulo ?></h1>
+<!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800"><?=$titulo?></h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="<?= base_url() ?>">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url()?>">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url()?>unidades">Unidades</a></li>
             <li class="breadcrumb-item active"><?= $titulo ?></li>
         </ol>
 
@@ -27,8 +30,8 @@
                     </div>
                 </div>
 
-                <a href="<?= base_url() ?>unidades" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Volver</a>
-                <button class="btn btn-success" type="submit"><i class="fa-regular fa-floppy-disk"></i> Guardar</button>
+                <a href="<?= base_url() ?>unidades" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Volver</a>
+                <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar</button>
 
             </form>
         </div>

@@ -1,28 +1,34 @@
 <?php
 ?>
 <main>
-        <div class="container-fluid px-4">
-            <h1 class="mt-4"><?=$titulo?></h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="<?=base_url()?>">Inicio</a></li>
-                <li class="breadcrumb-item active"><?=$titulo?></li>
-            </ol>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4"><?= $titulo ?></h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="<?= base_url() ?>">Inicio</a></li>
+            <li class="breadcrumb-item active"><?= $titulo ?></li>
+        </ol>
 
-            <div>
-                <p>
-                    <a class="btn btn-warning" href="<?=base_url()?>unidades">Unidades</a>
-                </p>
+        <div>
+            <p>
+                <a class="btn btn-warning" href="<?= base_url() ?>unidades">Unidades</a>
+            </p>
+        </div>
+
+        <!-- DataTales -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"></h6>
             </div>
-           
-                <div class="card-body">
-                    <table id="datatablesSimple">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th>Nombre Corto</th>
                                 <th></th>
-                                
+
                             </tr>
                         </thead>
                         <tfoot>
@@ -34,17 +40,17 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            <?php 
-                            foreach($datos as $dato){
-                               
+                            <?php
+                            foreach ($datos as $dato) {
+
                             ?>
-                            <tr>
-                                <td><?php echo $dato['id'];?></td>
-                                <td><?php echo $dato['nombre'];?></td>
-                                <td><?php echo $dato['nombre_corto'];?></td>
-                                <td><a class="btn btn-success" href="<?=base_url()?>unidades/reingresar/<?php echo $dato['id'];?>"><i class="fa-solid fa-arrow-up-from-bracket"></i></a></td>
-                              
-                            </tr>
+                                <tr>
+                                    <td><?php echo $dato['id']; ?></td>
+                                    <td><?php echo $dato['nombre']; ?></td>
+                                    <td><?php echo $dato['nombre_corto']; ?></td>
+                                    <td><a class="btn btn-success" href="<?= base_url() ?>unidades/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
+
+                                </tr>
                             <?php
                             }
                             ?>
@@ -53,5 +59,6 @@
                 </div>
             </div>
         </div>
-    </main>
-    
+
+    </div>
+</main>
