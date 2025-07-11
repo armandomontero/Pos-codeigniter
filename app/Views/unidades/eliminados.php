@@ -48,7 +48,7 @@
                                     <td><?php echo $dato['id']; ?></td>
                                     <td><?php echo $dato['nombre']; ?></td>
                                     <td><?php echo $dato['nombre_corto']; ?></td>
-                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success" href="#" data-href="<?= base_url() ?>unidades/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
+                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success btn-sm" href="#" data-href="<?= base_url() ?>unidades/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
 
                                 </tr>
                             <?php

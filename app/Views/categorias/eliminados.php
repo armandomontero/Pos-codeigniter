@@ -1,27 +1,34 @@
 <?php
 ?>
+<!-- Begin Page Content -->
 <main>
-        <div class="container-fluid px-4">
-            <h1 class="mt-4"><?=$titulo?></h1>
-            <ol class="breadcrumb mb-4">
-                <li class="breadcrumb-item"><a href="<?=base_url()?>">Inicio</a></li>
-                <li class="breadcrumb-item active"><?=$titulo?></li>
-            </ol>
+    <div class="container-fluid">
 
-            <div>
-                <p>
-                    <a class="btn btn-warning" href="<?=base_url()?>categorias">Categorias</a>
-                </p>
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800"><?= $titulo ?></h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="<?= base_url() ?>">Inicio</a></li>
+            <li class="breadcrumb-item active"><?= $titulo ?></li>
+        </ol>
+        <p>
+            <a class="btn btn-info" href="<?= base_url() ?>categorias/nuevo">Agregar</a>
+            <a class="btn btn-warning" href="<?= base_url() ?>categorias/eliminados">Eliminados</a>
+        </p>
+
+        <!-- DataTales -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary"></h6>
             </div>
-           
-                <div class="card-body">
-                    <table id="datatablesSimple">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th></th>
-                                
+
                             </tr>
                         </thead>
                         <tfoot>
@@ -32,16 +39,16 @@
                             </tr>
                         </tfoot>
                         <tbody>
-                            <?php 
-                            foreach($datos as $dato){
-                               
+                            <?php
+                            foreach ($datos as $dato) {
+
                             ?>
-                            <tr>
-                                <td><?php echo $dato['id'];?></td>
-                                <td><?php echo $dato['nombre'];?></td>
-                                <td><a class="btn btn-success" href="<?=base_url()?>categorias/reingresar/<?php echo $dato['id'];?>"><i class="fa-solid fa-arrow-up-from-bracket"></i></a></td>
-                              
-                            </tr>
+                                <tr>
+                                    <td><?php echo $dato['id']; ?></td>
+                                    <td><?php echo $dato['nombre']; ?></td>
+                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success btn-sm" href="#" data-href="<?= base_url() ?>categorias/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
+
+                                </tr>
                             <?php
                             }
                             ?>
@@ -50,5 +57,26 @@
                 </div>
             </div>
         </div>
-    </main>
-    
+    </div>
+</main>
+
+<!-- Modal confirmación -->
+    <div class="modal fade" id="modal-confirma" tabindex="-1">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Reingresar Registro</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Está seguro que desea reingresar la unidad?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <a type="button" class="btn btn-success btn-ok">Reingresar</a>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -55,8 +55,8 @@
                                     <td><?php echo $dato['id']; ?></td>
                                     <td><?php echo $dato['nombre']; ?></td>
                                     <td><?php echo $dato['nombre_corto']; ?></td>
-                                    <td><a class="btn btn-warning" href="<?= base_url() ?>unidades/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
-                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger" href="#" data-href="<?= base_url() ?>unidades/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
+                                    <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>unidades/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
+                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>unidades/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
 
                                 </tr>
                             <?php

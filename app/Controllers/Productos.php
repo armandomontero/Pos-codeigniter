@@ -4,14 +4,20 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\productosModel;
+use App\Models\categoriasModel;
+use App\Models\unidadesModel;
 
 class productos extends BaseController
 {
     protected $productos;
+    protected $unidades;
+    protected $categorias;
 
     public function __construct()
     {
         $this->productos = new productosModel();
+        $this->unidades = new unidadesModel();
+        $this->categorias = new categoriasModel();
     }
 
     public function index($activo = 1)
@@ -36,21 +42,43 @@ class productos extends BaseController
 
     public function nuevo()
     {
+        //llamamos unidades
+        $unidades = $this->unidades->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
 
-        $data = ['titulo' => 'Agregar Producto'];
+        //llamamos categorias
+        $categorias = $this->categorias->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+
+        $data = ['titulo' => 'Agregar Producto', 'unidades' => $unidades, 'categorias' => $categorias];
 
         echo view('header');
         echo view('productos/nuevo', $data);
         echo view('footer');
     }
 
-    public function insertar()
+        public function insertar()
     {
-        $this->productos->save([
-            'nombre' => $this->request->getPost('nombre'),
-            'nombre_corto' => $this->request->getPost('nombre_corto')
-        ]);
-        return redirect()->to(base_url() . 'productos');
+        if ($this->request->getMethod() == "POST") {
+            $this->productos->save([
+                'codigo' => $this->request->getPost('codigo'),
+                'nombre' => $this->request->getPost('nombre'),
+                'precio_venta' => $this->request->getPost('precio_venta'),
+                'precio_compra' => $this->request->getPost('precio_compra'),
+                'stock_minimo' => $this->request->getPost('stock_minimo'),
+                'inventariable' => $this->request->getPost('inventariable'),
+                'id_unidad' => $this->request->getPost('id_unidad'),
+                'id_categoria' => $this->request->getPost('id_categoria'),
+                'activo' => 1
+
+                 ]);
+                 return redirect()->to(base_url() . 'productos');
+        }else{
+            $data = ['titulo' => 'Agregar Unidad', 'validation' => $this->validator];
+
+        echo view('header');
+        echo view('productos/nuevo', $data);
+        echo view('footer');
+        }
+        
     }
 
 
