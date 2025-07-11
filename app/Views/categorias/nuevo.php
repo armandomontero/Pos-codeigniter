@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <a href="<?= base_url() ?>unidades" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Volver</a>
+                <a href="<?= base_url() ?>categorias" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Volver</a>
                 <button class="btn btn-success" type="submit"><i class="fa-regular fa-floppy-disk"></i> Guardar</button>
 
             </form>
