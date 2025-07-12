@@ -97,6 +97,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones de Configuración:</h6>
                         <a class="collapse-item" href="<?= base_url() ?>configuracion">Configuración</a>
+                        <a class="collapse-item" href="<?= base_url() ?>usuarios">Usuarios</a>
 
                     </div>
                 </div>
