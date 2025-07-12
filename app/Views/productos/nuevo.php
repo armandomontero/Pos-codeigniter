@@ -35,7 +35,9 @@ if(isset($validation)){?>
                         <select class="form-control" name="id_unidad" id="id_unidad" required>
                             <option>Selecciona</option>
                             <?php foreach ($unidades as $unidad) { ?>
-                                <option value="<?= $unidad['id'] ?>"><?= $unidad['nombre'] ?></option>
+                                <option
+                                <?php if($unidad['id']==set_value('id_unidad')){echo 'selected';} ?>
+                                value="<?= $unidad['id'] ?>"><?= $unidad['nombre'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -44,7 +46,9 @@ if(isset($validation)){?>
                         <select class="form-control" name="id_categoria" id="id_categoria" required>
                             <option>Selecciona</option>
                             <?php foreach ($categorias as $categoria) { ?>
-                                <option value="<?= $categoria['id'] ?>"><?= $categoria['nombre'] ?></option>
+                                <option
+                                <?php if($categoria['id']==set_value('id_categoria')){echo 'selected';} ?>
+                                value="<?= $categoria['id'] ?>"><?= $categoria['nombre'] ?></option>
                             <?php } ?>
                         </select>
                     </div>
@@ -73,8 +77,12 @@ if(isset($validation)){?>
                     <div class="col-12 col-sm-6">
                         <label>Es inventariable?: </label>
                         <select class="form-control" name="inventariable" id="inventariable">
-                            <option value="1">Si</option>
-                            <option value="0">No</option>
+                            <option
+                            <?php if(1==set_value('inventariable')){echo 'selected';} ?>
+                            value="1">Si</option>
+                            <option
+                             <?php if(0==set_value('inventariable')){echo 'selected';} ?>
+                            value="0">No</option>
                         </select>
                     </div>
                 </div>
