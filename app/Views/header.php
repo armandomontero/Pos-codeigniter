@@ -2,27 +2,26 @@
 <html lang="es">
 
 <head>
-
-    <meta charset="utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content="Infoclever"/>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="Infoclever" />
 
     <title>Infoclever - POS</title>
     <!-- Custom fonts for this template -->
-     <link rel="icon" type="image/vnd.icon" href="<?=base_url()?>favicon.ico"/>
+    <link rel="icon" type="image/vnd.icon" href="<?= base_url() ?>favicon.ico" />
 
-    <link href="<?=base_url()?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"/>
+    <link href="<?= base_url() ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet"/>
+        rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="<?=base_url()?>css/sb-admin-2.min.css" rel="stylesheet"/>
+    <link href="<?= base_url() ?>css/sb-admin-2.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this page -->
-    <link href="<?=base_url()?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet"/>
+    <link href="<?= base_url() ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
 </head>
 
@@ -35,9 +34,9 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?=base_url()?>">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>">
                 <div class="sidebar-brand-icon rotate-n-15">
-                  <i class="fas fa-crosshairs"></i>
+                    <i class="fas fa-crosshairs"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">Infoclever <sup>POS</sup></div>
             </a>
@@ -47,7 +46,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="<?=base_url()?>">
+                <a class="nav-link" href="<?= base_url() ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Inicio</span></a>
             </li>
@@ -70,34 +69,41 @@
                 <div id="collapseUno" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones de Producto:</h6>
-                        <a class="collapse-item" href="<?=base_url()?>productos">Productos</a>
-                        <a class="collapse-item" href="<?=base_url()?>categorias">Categorías</a>
-                         <a class="collapse-item" href="<?=base_url()?>unidades">Unidades</a>
-
+                        <a class="collapse-item" href="<?= base_url() ?>productos">Productos</a>
+                        <a class="collapse-item" href="<?= base_url() ?>categorias">Categorías</a>
+                        <a class="collapse-item" href="<?= base_url() ?>unidades">Unidades</a>
                     </div>
-                    
                 </div>
-
-
             </li>
 
-             <!-- Nav Item - Pages Collapse Menu -->
+            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="<?=base_url()?>clientes" 
-                    aria-expanded="true" >
-                  <i class="fas fa-users"></i>
+                <a class="nav-link collapsed" href="<?= base_url() ?>clientes"
+                    aria-expanded="true">
+                    <i class="fas fa-users"></i>
                     <span>Clientes</span>
                 </a>
-                
-                    
-
 
             </li>
 
-            
-           
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConf"
+                    aria-expanded="true" aria-controls="collapseConf">
+                    <i class="fas fa-tools"></i>
+                    <span>Administración</span>
+                </a>
+                <div id="collapseConf" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Opciones de Configuración:</h6>
+                        <a class="collapse-item" href="<?= base_url() ?>configuracion">Configuración</a>
 
-           
+                    </div>
+                </div>
+            </li>
+
+
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -316,8 +322,6 @@
                                 </a>
                             </div>
                         </li>
-
                     </ul>
-
                 </nav>
                 <!-- End of Topbar -->
