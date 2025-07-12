@@ -52,3 +52,13 @@ $routes->get('/clientes/reingresar/(:num)', 'clientes::reingresar/$1');
 
 //Configuracion
 $routes->get('/configuracion', 'configuracion::index');
+
+//Usuarios
+$routes->get('/usuarios', 'usuarios::index');
+$routes->get('/usuarios/eliminados', 'usuarios::eliminados');
+$routes->get('/usuarios/nuevo', 'usuarios::nuevo');
+$routes->post('/usuarios/insertar', 'usuarios::insertar');
+$routes->get('/usuarios/editar/(:num)', 'usuarios::editar/$1');
+$routes->post('/usuarios/actualizar', 'usuarios::actualizar');
+$routes->get('/usuarios/eliminar/(:num)', 'usuarios::eliminar/$1');
+$routes->get('/usuarios/reingresar/(:num)', 'usuarios::reingresar/$1');
