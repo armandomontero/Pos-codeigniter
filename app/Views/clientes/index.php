@@ -12,8 +12,8 @@ helper('number');
             <li class="breadcrumb-item active"><?= $titulo ?></li>
         </ol>
         <p>
-            <a class="btn btn-info" href="<?= base_url() ?>productos/nuevo">Agregar</a>
-            <a class="btn btn-warning" href="<?= base_url() ?>productos/eliminados">Eliminados</a>
+            <a class="btn btn-info" href="<?= base_url() ?>clientes/nuevo">Agregar</a>
+            <a class="btn btn-warning" href="<?= base_url() ?>clientes/eliminados">Eliminados</a>
         </p>
 
         <!-- DataTales -->
@@ -58,8 +58,8 @@ helper('number');
                                      <td><?php echo $dato['nombre']; ?></td>
                                       <td><?php echo number_to_currency($dato['precio_venta'], 'USD', 'en_US', 0); ?></td>
                                        <td><?php echo $dato['existencias']; ?></td>
-                                    <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>productos/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
-                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>productos/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
+                                    <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>clientes/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
+                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>clientes/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
 
                                 </tr>
                             <?php

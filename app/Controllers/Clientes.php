@@ -23,14 +23,13 @@ class clientes extends BaseController
         helper(['form']);
 
         $this->reglas = [
-            'codigo' => [
-                'rules' => 'required|is_unique[clientes.codigo]',
+            'nombre' => [
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'El campo {field} es obligatorio.',
-                     'is_unique' => 'El código ya está registrado.'
+                    'required' => 'El campo {field} es obligatorio.'
                 ]
             ],
-            'nombre' => [
+            'telefono' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio.'
@@ -61,18 +60,14 @@ class clientes extends BaseController
 
     public function nuevo($valid = null)
     {
-        //llamamos unidades
-        $unidades = $this->unidades->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
-
-        //llamamos categorias
-        $categorias = $this->categorias->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+       
 if($valid!=null){
-            $data = ['titulo' => 'Agregar Producto', 'unidades' => $unidades, 'categorias' => $categorias, 'validation' => $valid];
+            $data = ['titulo' => 'Agregar Cliente', 'validation' => $valid];
 
     
 }
 else{
-        $data = ['titulo' => 'Agregar Producto', 'unidades' => $unidades, 'categorias' => $categorias];
+        $data = ['titulo' => 'Agregar Cliente'];
 }
         echo view('header');
         echo view('clientes/nuevo', $data);
@@ -83,14 +78,12 @@ else{
     {
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
             $this->clientes->save([
-                'codigo' => $this->request->getPost('codigo'),
                 'nombre' => $this->request->getPost('nombre'),
-                'precio_venta' => $this->request->getPost('precio_venta'),
-                'precio_compra' => $this->request->getPost('precio_compra'),
-                'stock_minimo' => $this->request->getPost('stock_minimo'),
-                'inventariable' => $this->request->getPost('inventariable'),
-                'id_unidad' => $this->request->getPost('id_unidad'),
-                'id_categoria' => $this->request->getPost('id_categoria'),
+                'direccion' => $this->request->getPost('direccion'),
+                'region' => $this->request->getPost('region'),
+                'comuna' => $this->request->getPost('comuna'),
+                'telefono' => $this->request->getPost('telefono'),
+                'correo' => $this->request->getPost('correo'),
                 'activo' => 1
 
                  ]);
