@@ -60,7 +60,7 @@ class Usuarios extends BaseController
     public function index($activo = 1)
     {
         $usuarios = $this->usuarios->where('activo', $activo)->findAll();
-        $data = ['titulo' => 'usuarios', 'datos' => $usuarios];
+        $data = ['titulo' => 'Usuarios', 'datos' => $usuarios];
 
         echo view('header');
         echo view('usuarios/index', $data);
