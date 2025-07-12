@@ -6,7 +6,7 @@ class unidadesModel extends Model{
     protected $table      = 'unidades';
     protected $primaryKey = 'id';
 
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = true; 
 
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
