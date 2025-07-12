@@ -38,3 +38,13 @@ $routes->get('/productos/editar/(:num)', 'productos::editar/$1');
 $routes->post('/productos/actualizar', 'productos::actualizar');
 $routes->get('/productos/eliminar/(:num)', 'productos::eliminar/$1');
 $routes->get('/productos/reingresar/(:num)', 'productos::reingresar/$1');
+
+//Clientes
+$routes->get('/clientes', 'clientes::index');
+$routes->get('/clientes/eliminados', 'clientes::eliminados');
+$routes->get('/clientes/nuevo', 'clientes::nuevo');
+$routes->post('/clientes/insertar', 'clientes::insertar');
+$routes->get('/clientes/editar/(:num)', 'clientes::editar/$1');
+$routes->post('/clientes/actualizar', 'clientes::actualizar');
+$routes->get('/clientes/eliminar/(:num)', 'clientes::eliminar/$1');
+$routes->get('/clientes/reingresar/(:num)', 'clientes::reingresar/$1');
