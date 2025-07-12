@@ -2,8 +2,8 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class unidadesModel extends Model{
-    protected $table      = 'unidades';
+class usuariosModel extends Model{
+    protected $table      = 'usuarios';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true; 
@@ -11,7 +11,7 @@ class unidadesModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'nombre_corto', 'activo'];
+    protected $allowedFields = ['usuario', 'password', 'nombre', 'id_caja', 'id_rol', 'activo'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
