@@ -5,14 +5,12 @@
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <h1 class="h3 mb-2 text-gray-800"><?= $titulo ?></h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item"><a href="<?= base_url() ?>">Inicio</a></li>
             <li class="breadcrumb-item active"><?= $titulo ?></li>
         </ol>
         <p>
-            <a class="btn btn-info" href="<?= base_url() ?>categorias/nuevo">Agregar</a>
-            <a class="btn btn-warning" href="<?= base_url() ?>categorias/eliminados">Eliminados</a>
+            <a class="btn btn-warning" href="<?= base_url() ?>categorias">Categorías</a>
         </p>
 
         <!-- DataTales -->
