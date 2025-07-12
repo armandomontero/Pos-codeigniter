@@ -16,13 +16,39 @@ class Usuarios extends BaseController
         helper(['form']);
 
         $this->reglas = [
+            'usuario' => [
+                'rules' => 'required|is_unique[usuarios.usuario]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'required' => 'El usuario ingresado ya está registrado.'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ],
+            'repassword' => [
+                'rules' => 'required|matches[password]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'matches' => 'La contraseña no coincide.'
+                ]
+                ],
             'nombre' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio.'
                 ]
             ],
-            'nombre_corto' => [
+            'id_caja' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ],
+            'id_rol' => [
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio.'
