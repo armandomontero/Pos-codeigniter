@@ -11,43 +11,63 @@
 
 
         <div class="card-body">
-            <form method="POST" action="<?= base_url() ?>/productos/actualizar" autocomplete="off">
+            <form method="POST" action="<?= base_url() ?>/clientes/actualizar" autocomplete="off">
                 <input type="hidden" id="id" name="id" value="<?=$datos['id']?>"?>
-                 <div class="form-group">
+            <div class="form-group">
                 <div class="row">
                     <div class="col-12 col-sm-6">
-                        <label>Código: </label>
-                    <input required autofocus class="form-control" value="<?=$datos['codigo']?>" id="codigo" name="codigo" type="text" />
+                        <label>Nombre: </label>
+                        <input required autofocus value="<?=$datos['nombre']?>" class="form-control" id="nombre" name="nombre" type="text" />
                     </div>
                     <div class="col-12 col-sm-6">
-                        <label>Nombre: </label>
-                        <input required class="form-control" value="<?=$datos['nombre']?>" id="nombre" name="nombre" type="text" />
+                        <label>Dirección: </label>
+                        <input required class="form-control" value="<?=$datos['direccion']?>" id="direccion" name="direccion" type="text" />
                     </div>
                 </div>
             </div>
             <div class="form-group mb-4 mt-4">
                 <div class="row ">
                     <div class="col-12 col-sm-6">
-                        <label>Unidad: </label>
-                        <select class="form-control" name="id_unidad" id="id_unidad" required>
-                            <option>Selecciona</option>
-                            <?php foreach ($unidades as $unidad) { ?>
-                                <option
-                                <?php if($unidad['id']==$datos['id_unidad']) echo 'selected'; ?>
-                                value="<?= $unidad['id'] ?>"><?= $unidad['nombre'] ?></option>
-                            <?php } ?>
+                        <label>Región: </label>
+                        <select required class="form-control" name="region" id="region" required>
+                            <option value="">Selecciona</option>
+                           <option <?php if($datos['region']=='Región de Arica y Parinacota'){echo 'selected';} ?> 
+                            value="Región de Arica y Parinacota">Región de Arica y Parinacota</option>
+                           <option <?php if($datos['region']=='Región de Tarapacá'){echo 'selected';} ?> 
+                            value="Región de Tarapacá">Región de Tarapacá</option>
+                           <option <?php if($datos['region']=='Región de Antofagasta'){echo 'selected';} ?> 
+                            value="Región de Antofagasta">Región de Antofagasta</option>
+                           <option <?php if($datos['region']=='Región de Atacama'){echo 'selected';} ?> 
+                            value="Región de Atacama">Región de Atacama</option>
+                           <option <?php if($datos['region']=='Región de Coquimbo'){echo 'selected';} ?> 
+                             value="Región de Coquimbo">Región de Coquimbo</option>
+                           <option <?php if($datos['region']=='Región de Valparaíso'){echo 'selected';} ?> 
+                             value="Región de Valparaíso">Región de Valparaíso</option>
+                           <option <?php if($datos['region']=='Región Metropolitana de Santiago'){echo 'selected';} ?> 
+                            value="Región Metropolitana de Santiago">Región Metropolitana de Santiago</option>
+                           <option <?php if($datos['region']=="Región del Libertador General Bernardo O'Higgins"){echo 'selected';} ?> 
+                            value="Región del Libertador General Bernardo O'Higgins">Región del Libertador General Bernardo O'Higgins</option>
+                           <option <?php if($datos['region']=='Región del Maule'){echo 'selected';} ?> 
+                            value="Región del Maule">Región del Maule</option>
+                           <option <?php if($datos['region']=='Región de Ñuble'){echo 'selected';} ?> 
+                            value="Región de Ñuble">Región de Ñuble</option>
+                           <option <?php if($datos['region']=='Región del Biobío'){echo 'selected';} ?> 
+                            value="Región del Biobío">Región del Biobío</option>
+                           <option <?php if($datos['region']=='Región de la Araucanía'){echo 'selected';} ?> 
+                            value="Región de la Araucanía">Región de la Araucanía</option>
+                           <option <?php if($datos['region']=='Región de Los Ríos'){echo 'selected';} ?> 
+                            value="Región de Los Ríos">Región de Los Ríos</option>
+                           <option <?php if($datos['region']=='Región de Los Lagos'){echo 'selected';} ?> 
+                            value="Región de Los Lagos">Región de Los Lagos</option>
+                           <option <?php if($datos['region']=='Región de Aysén del General Carlos Ibáñez del Campo'){echo 'selected';} ?> 
+                            value="Región de Aysén del General Carlos Ibáñez del Campo">Región de Aysén del General Carlos Ibáñez del Campo</option>
+                           <option <?php if($datos['region']=='Región de Magallanes y de la Antártica Chilena'){echo 'selected';} ?> 
+                            value="Región de Magallanes y de la Antártica Chilena">Región de Magallanes y de la Antártica Chilena</option>
                         </select>
                     </div>
                     <div class="col-12 col-sm-6">
-                        <label>Categoría: </label>
-                        <select class="form-control" name="id_categoria" id="id_categoria" required>
-                            <option>Selecciona</option>
-                            <?php foreach ($categorias as $categoria) { ?>
-                                <option 
-                                <?php if($categoria['id']==$datos['id_categoria']) echo 'selected'; ?>
-                                 value="<?= $categoria['id'] ?>"><?= $categoria['nombre'] ?></option>
-                            <?php } ?>
-                        </select>
+                         <label>Comuna: </label>
+                        <input required class="form-control" value="<?=$datos['comuna']?>" id="comuna" name="comuna" type="text" />
                     </div>
                 </div>
             </div>
@@ -55,37 +75,17 @@
             <div class="form-group">
                 <div class="row">
                     <div class="col-12 col-sm-6">
-                        <label>Precio Venta: </label>
-                        <input required autofocus class="form-control" value="<?=$datos['precio_venta']?>" id="precio_venta" name="precio_venta" type="text" />
+                        <label>Teléfono: </label>
+                        <input required autofocus value="<?=$datos['telefono']?>" class="form-control" id="telefono" name="telefono" type="text" />
                     </div>
                     <div class="col-12 col-sm-6">
-                        <label>Precio Compra: </label>
-                        <input required class="form-control" id="precio_compra" value="<?=$datos['precio_compra']?>" name="precio_compra" type="text" />
+                        <label>E-Mail: </label>
+                        <input  class="form-control" value="<?=$datos['correo']?>" id="correo" name="correo" type="email" />
                     </div>
                 </div>
             </div>
 
-             <div class="form-group">
-                <div class="row">
-                    <div class="col-12 col-sm-6">
-                        <label>Stock Mínimo: </label>
-                        <input required autofocus class="form-control" value="<?=$datos['stock_minimo']?>" id="stock_minimo" name="stock_minimo" type="text" />
-                    </div>
-                    <div class="col-12 col-sm-6">
-                        <label>Es inventariable?: </label>
-                        <select class="form-control" name="inventariable" id="inventariable">
-                            <option
-                            <?php if($datos['inventariable']==1) echo 'selected'; ?>
-                            value="1">Si</option>
-                            <option
-                             <?php if($datos['inventariable']==0) echo 'selected'; ?>
-                            value="0">No</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-                <a href="<?= base_url() ?>productos" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Volver</a>
+                <a href="<?= base_url() ?>clientes" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Volver</a>
                 <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar</button>
 
             </form>

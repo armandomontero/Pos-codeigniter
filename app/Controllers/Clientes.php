@@ -122,14 +122,12 @@ else{
     {
 
         $this->clientes->update($this->request->getPost('id'), [
-                'codigo' => $this->request->getPost('codigo'),
-                'nombre' => $this->request->getPost('nombre'),
-                'precio_venta' => $this->request->getPost('precio_venta'),
-                'precio_compra' => $this->request->getPost('precio_compra'),
-                'stock_minimo' => $this->request->getPost('stock_minimo'),
-                'inventariable' => $this->request->getPost('inventariable'),
-                'id_unidad' => $this->request->getPost('id_unidad'),
-                'id_categoria' => $this->request->getPost('id_categoria')
+                 'nombre' => $this->request->getPost('nombre'),
+                'direccion' => $this->request->getPost('direccion'),
+                'region' => $this->request->getPost('region'),
+                'comuna' => $this->request->getPost('comuna'),
+                'telefono' => $this->request->getPost('telefono'),
+                'correo' => $this->request->getPost('correo')
         ]);
         return redirect()->to(base_url() . 'clientes/editar/' . $this->request->getPost('id'));
     }

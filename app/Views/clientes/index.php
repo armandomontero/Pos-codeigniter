@@ -27,10 +27,12 @@ helper('number');
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Código</th>
                                 <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Existencias</th>
+                                <th>Dirección</th>
+                                <th>Comuna</th>
+                                <th>Región</th>
+                                <th>Teléfono</th>
+                                <th>E-mail</th>
                                 <th></th>
                                 <th></th>
 
@@ -38,11 +40,13 @@ helper('number');
                         </thead>
                         <tfoot>
                             <tr>
-                               <th>ID</th>
-                                <th>Código</th>
+                                <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Existencias</th>
+                                <th>Dirección</th>
+                                <th>Comuna</th>
+                                <th>Región</th>
+                                <th>Teléfono</th>
+                                <th>E-mail</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -54,10 +58,12 @@ helper('number');
                             ?>
                                 <tr>
                                     <td><?php echo $dato['id']; ?></td>
-                                    <td><?php echo $dato['codigo']; ?></td>
-                                     <td><?php echo $dato['nombre']; ?></td>
-                                      <td><?php echo number_to_currency($dato['precio_venta'], 'USD', 'en_US', 0); ?></td>
-                                       <td><?php echo $dato['existencias']; ?></td>
+                                    <td><?php echo $dato['nombre']; ?></td>
+                                    <td><?php echo $dato['direccion']; ?></td>
+                                    <td><?php echo $dato['comuna']; ?></td>
+                                    <td><?php echo $dato['region']; ?></td>
+                                    <td><?php echo $dato['telefono']; ?></td>
+                                    <td><a href="mailto:<?=$dato['correo']?>" target="_blank"><?php echo $dato['correo']; ?></a></td>
                                     <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>clientes/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
                                     <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>clientes/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
 

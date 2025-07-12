@@ -12,7 +12,7 @@ helper('number');
 
         <div>
             <p>
-                <a class="btn btn-warning" href="<?= base_url() ?>productos">Productos</a>
+                <a class="btn btn-warning" href="<?= base_url() ?>clientes">clientes</a>
             </p>
         </div>
 
@@ -27,21 +27,25 @@ helper('number');
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Código</th>
                                 <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Existencias</th>
+                                <th>Dirección</th>
+                                <th>Comuna</th>
+                                <th>Región</th>
+                                <th>Teléfono</th>
+                                <th>E-mail</th>
                                 <th></th>
 
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>ID</th>
-                                <th>Código</th>
+                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Existencias</th>
+                                <th>Dirección</th>
+                                <th>Comuna</th>
+                                <th>Región</th>
+                                <th>Teléfono</th>
+                                <th>E-mail</th>
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -52,11 +56,12 @@ helper('number');
                             ?>
                                 <tr>
                                     <td><?php echo $dato['id']; ?></td>
-                                    <td><?php echo $dato['codigo']; ?></td>
                                     <td><?php echo $dato['nombre']; ?></td>
-                                    <td><?php echo number_to_currency($dato['precio_venta'], 'USD', 'en_US', 0); ?></td>
-                                    <td><?php echo $dato['existencias']; ?></td>
-                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success btn-sm" href="#" data-href="<?= base_url() ?>productos/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
+                                    <td><?php echo $dato['direccion']; ?></td>
+                                    <td><?php echo $dato['comuna']; ?></td>
+                                    <td><?php echo $dato['region']; ?></td>
+                                    <td><?php echo $dato['telefono']; ?></td>
+                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success btn-sm" href="#" data-href="<?= base_url() ?>clientes/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
 
                                 </tr>
                             <?php
@@ -82,7 +87,7 @@ helper('number');
                 </button>
             </div>
             <div class="modal-body">
-                <p>¿Está seguro que desea reingresar el producto?</p>
+                <p>¿Está seguro que desea reingresar el cliente?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
