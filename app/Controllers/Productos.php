@@ -12,12 +12,31 @@ class productos extends BaseController
     protected $productos;
     protected $unidades;
     protected $categorias;
+    protected $reglas;
 
     public function __construct()
     {
         $this->productos = new productosModel();
         $this->unidades = new unidadesModel();
         $this->categorias = new categoriasModel();
+
+        helper(['form']);
+
+        $this->reglas = [
+            'codigo' => [
+                'rules' => 'required|is_unique[productos.codigo]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                     'is_unique' => 'El código ya está registrado.'
+                ]
+            ],
+            'nombre' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ]
+        ];
     }
 
     public function index($activo = 1)
@@ -40,16 +59,21 @@ class productos extends BaseController
         echo view('footer');
     }
 
-    public function nuevo()
+    public function nuevo($valid = null)
     {
         //llamamos unidades
         $unidades = $this->unidades->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
 
         //llamamos categorias
         $categorias = $this->categorias->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+if($valid!=null){
+            $data = ['titulo' => 'Agregar Producto', 'unidades' => $unidades, 'categorias' => $categorias, 'validation' => $valid];
 
+    
+}
+else{
         $data = ['titulo' => 'Agregar Producto', 'unidades' => $unidades, 'categorias' => $categorias];
-
+}
         echo view('header');
         echo view('productos/nuevo', $data);
         echo view('footer');
@@ -57,7 +81,7 @@ class productos extends BaseController
 
         public function insertar()
     {
-        if ($this->request->getMethod() == "POST") {
+        if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
             $this->productos->save([
                 'codigo' => $this->request->getPost('codigo'),
                 'nombre' => $this->request->getPost('nombre'),
@@ -72,11 +96,7 @@ class productos extends BaseController
                  ]);
                  return redirect()->to(base_url() . 'productos');
         }else{
-            $data = ['titulo' => 'Agregar Unidad', 'validation' => $this->validator];
-
-        echo view('header');
-        echo view('productos/nuevo', $data);
-        echo view('footer');
+            $this->nuevo($this->validator);
         }
         
     }

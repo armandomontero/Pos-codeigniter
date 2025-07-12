@@ -8,18 +8,23 @@
         </ol>
 
 
-
+<?php 
+if(isset($validation)){?>
+<div class="alert alert-danger">
+<?php echo $validation->listErrors();?>
+</div>
+<?php }?>
 
         <form method="POST" action="<?= base_url() ?>/productos/insertar" autocomplete="off">
             <div class="form-group">
                 <div class="row">
                     <div class="col-12 col-sm-6">
                         <label>Código: </label>
-                        <input required autofocus class="form-control" id="codigo" name="codigo" type="text" />
+                        <input required autofocus value="<?=set_value('codigo')?>" class="form-control" id="codigo" name="codigo" type="text" />
                     </div>
                     <div class="col-12 col-sm-6">
                         <label>Nombre: </label>
-                        <input required class="form-control" id="nombre" name="nombre" type="text" />
+                        <input required class="form-control" value="<?=set_value('nombre')?>" id="nombre" name="nombre" type="text" />
                     </div>
                 </div>
             </div>
@@ -50,11 +55,11 @@
                 <div class="row">
                     <div class="col-12 col-sm-6">
                         <label>Precio Venta: </label>
-                        <input required autofocus class="form-control" id="precio_venta" name="precio_venta" type="text" />
+                        <input required autofocus value="<?=set_value('precio_venta')?>" class="form-control" id="precio_venta" name="precio_venta" type="text" />
                     </div>
                     <div class="col-12 col-sm-6">
                         <label>Precio Compra: </label>
-                        <input required class="form-control" id="precio_compra" name="precio_compra" type="text" />
+                        <input required class="form-control" value="<?=set_value('precio_compra')?>" id="precio_compra" name="precio_compra" type="text" />
                     </div>
                 </div>
             </div>
@@ -63,7 +68,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-6">
                         <label>Stock Mínimo: </label>
-                        <input required autofocus class="form-control" id="stock_minimo" name="stock_minimo" type="text" />
+                        <input required autofocus value="<?=set_value('stock_minimo')?>" class="form-control" id="stock_minimo" name="stock_minimo" type="text" />
                     </div>
                     <div class="col-12 col-sm-6">
                         <label>Es inventariable?: </label>
