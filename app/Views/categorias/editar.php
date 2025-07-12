@@ -9,7 +9,12 @@
             <li class="breadcrumb-item active"><?= $titulo ?></li>
         </ol>
 
-
+<?php 
+if(isset($validation)){?>
+<div class="alert alert-danger">
+<?php echo $validation->listErrors();?>
+</div>
+<?php }?>
 
         <div class="card-body">
             <form method="POST" action="<?= base_url() ?>/categorias/actualizar" autocomplete="off">
@@ -24,8 +29,8 @@
                     </div>
                 </div>
 
-                <a href="<?= base_url() ?>categorias" class="btn btn-primary"><i class="fa-solid fa-arrow-left"></i> Volver</a>
-                <button class="btn btn-success" type="submit"><i class="fa-regular fa-floppy-disk"></i> Guardar</button>
+                <a href="<?= base_url() ?>categorias" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Volver</a>
+                <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar</button>
 
             </form>
         </div>

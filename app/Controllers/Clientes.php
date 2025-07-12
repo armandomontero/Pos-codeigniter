@@ -95,21 +95,18 @@ else{
     }
 
 
-    public function editar($id)
+    public function editar($id, $valid=null)
     {
         try {
-            $unidad = $this->clientes->where('id', $id)->first();
+            $cliente = $this->clientes->where('id', $id)->first();
         } catch (\Exception $e) {
             exit($e->getMessage());
         }
-         //llamamos unidades
-        $unidades = $this->unidades->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
-
-        //llamamos categorias
-        $categorias = $this->categorias->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
-
-        $data = ['titulo' => 'Editar Producto', 'datos' => $unidad, 'unidades' => $unidades, 'categorias' => $categorias];
-
+         if ($valid != null) {
+            $data = ['titulo' => 'Editar Cliente', 'datos' => $cliente, 'validation' => $valid];
+        } else {
+        $data = ['titulo' => 'Editar Cliente', 'datos' => $cliente];
+        }
 
 
         echo view('header');
@@ -120,7 +117,7 @@ else{
 
     public function actualizar()
     {
-
+ if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
         $this->clientes->update($this->request->getPost('id'), [
                  'nombre' => $this->request->getPost('nombre'),
                 'direccion' => $this->request->getPost('direccion'),
@@ -130,6 +127,9 @@ else{
                 'correo' => $this->request->getPost('correo')
         ]);
         return redirect()->to(base_url() . 'clientes/editar/' . $this->request->getPost('id'));
+        } else {
+            return $this->editar($this->request->getPost('id'), $this->validator);
+        }
     }
 
     public function eliminar($id)

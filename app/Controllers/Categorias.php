@@ -5,14 +5,27 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\categoriasModel;
 
-class Categorias extends BaseController{
+class Categorias extends BaseController
+{
 
     protected $categorias;
+    protected $reglas;
 
     public function __construct()
     {
         $this->categorias = new categoriasModel();
-    
+
+        helper(['form']);
+
+        $this->reglas = [
+            'nombre' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+
+                ]
+            ]
+        ];
     }
 
     public function index($activo = 1)
@@ -25,7 +38,7 @@ class Categorias extends BaseController{
         echo view('footer');
     }
 
-        public function eliminados($activo = 0)
+    public function eliminados($activo = 0)
     {
         $categorias = $this->categorias->where('activo', $activo)->findAll();
         $data = ['titulo' => 'Categorías', 'datos' => $categorias];
@@ -35,11 +48,13 @@ class Categorias extends BaseController{
         echo view('footer');
     }
 
-        public function nuevo()
+    public function nuevo($valid = null)
     {
-
-        $data = ['titulo' => 'Agregar Categoría'];
-
+        if ($valid != null) {
+            $data = ['titulo' => 'Agregar Categoría', 'validation' => $valid];
+        } else {
+            $data = ['titulo' => 'Agregar Categoría'];
+        }
         echo view('header');
         echo view('categorias/nuevo', $data);
         echo view('footer');
@@ -47,22 +62,30 @@ class Categorias extends BaseController{
 
     public function insertar()
     {
-        $this->categorias->save([
-            'nombre' => $this->request->getPost('nombre')
-        ]);
-        return redirect()->to(base_url() . 'categorias');
+        if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
+            $this->categorias->save([
+                'nombre' => $this->request->getPost('nombre')
+            ]);
+            return redirect()->to(base_url() . 'categorias');
+        } else {
+            $this->nuevo($this->validator);
+        }
     }
 
 
-    public function editar($id)
+    public function editar($id, $valid=null)
     {
         try {
             $categoria = $this->categorias->where('id', $id)->first();
         } catch (\Exception $e) {
             exit($e->getMessage());
         }
-        $data = ['titulo' => 'Editar Categoría', 'datos' => $categoria];
+if ($valid != null) {
+            $data = ['titulo' => 'Editar Categoría', 'datos' => $categoria, 'validation' => $valid];
+        } else {
 
+        $data = ['titulo' => 'Editar Categoría', 'datos' => $categoria];
+        }
 
 
         echo view('header');
@@ -73,10 +96,15 @@ class Categorias extends BaseController{
 
     public function actualizar()
     {
+        if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
         $this->categorias->update($this->request->getPost('id'), [
             'nombre' => $this->request->getPost('nombre')
         ]);
         return redirect()->to(base_url() . 'categorias/editar/' . $this->request->getPost('id'));
+    }else{
+         return $this->editar($this->request->getPost('id'), $this->validator);
+    }
+
     }
 
     public function eliminar($id)

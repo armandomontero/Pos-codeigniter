@@ -8,7 +8,12 @@
             <li class="breadcrumb-item active"><?= $titulo ?></li>
         </ol>
 
-
+<?php 
+if(isset($validation)){?>
+<div class="alert alert-danger">
+<?php echo $validation->listErrors();?>
+</div>
+<?php }?>
 
         <div class="card-body">
             <form method="POST" action="<?= base_url() ?>/clientes/actualizar" autocomplete="off">
