@@ -48,3 +48,7 @@ $routes->get('/clientes/editar/(:num)', 'clientes::editar/$1');
 $routes->post('/clientes/actualizar', 'clientes::actualizar');
 $routes->get('/clientes/eliminar/(:num)', 'clientes::eliminar/$1');
 $routes->get('/clientes/reingresar/(:num)', 'clientes::reingresar/$1');
+
+
+//Configuracion
+$routes->get('/configuracion', 'configuracion::index');
