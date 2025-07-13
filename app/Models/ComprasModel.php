@@ -2,17 +2,16 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class ProductosModel extends Model{
-    protected $table      = 'productos';
+class ComprasModel extends Model{
+    protected $table      = 'compras';
     protected $primaryKey = 'id';
 
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = true; 
 
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['codigo', 'nombre', 'precio_venta', 'precio_compra', 'existencias', 
-    'stock_minimo', 'inventariable', 'id_unidad', 'id_categoria', 'activo'];
+    protected $allowedFields = ['folio', 'total', 'id_usuario', 'activo'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -21,7 +20,6 @@ class ProductosModel extends Model{
     protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
 
     // Validation
     protected $validationRules      = [];

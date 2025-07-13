@@ -41,6 +41,8 @@ $routes->get('/productos/editar/(:num)', 'productos::editar/$1');
 $routes->post('/productos/actualizar', 'productos::actualizar');
 $routes->get('/productos/eliminar/(:num)', 'productos::eliminar/$1');
 $routes->get('/productos/reingresar/(:num)', 'productos::reingresar/$1');
+$routes->get('/productos/buscarPorCodigo/(:any)', 'productos::buscarPorCodigo/$1');
+
 
 //Clientes
 $routes->get('/clientes', 'clientes::index');
@@ -69,3 +71,6 @@ $routes->post('/usuarios/valida', 'usuarios::valida');
 $routes->get('/usuarios/logout', 'usuarios::logout');
 $routes->get('/usuarios/cambia_password', 'usuarios::cambia_password');
 $routes->post('/usuarios/actualizar_password', 'usuarios::actualizar_password');
+
+//Compras
+$routes->get('/compras/nuevo', 'compras::nuevo');

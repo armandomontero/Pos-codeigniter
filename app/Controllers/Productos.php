@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\productosModel;
+use App\Models\ProductosModel;
 use App\Models\categoriasModel;
 use App\Models\unidadesModel;
 
@@ -16,7 +16,7 @@ class productos extends BaseController
 
     public function __construct()
     {
-        $this->productos = new productosModel();
+        $this->productos = new ProductosModel();
         $this->unidades = new unidadesModel();
         $this->categorias = new categoriasModel();
 
@@ -155,5 +155,27 @@ else{
             'activo' => 1
         ]);
         return redirect()->to(base_url() . 'productos');
+    }
+
+    public function buscarPorCodigo($codigo){
+        $this->productos->select('*');
+        $this->productos->where('codigo', $codigo);
+        $this->productos->where('activo', 1);
+        $datos = $this->productos->get()->getRow();
+
+        $res['existe'] = false;
+        $res['datos'] = '';
+        $res['error'] = '';
+
+        if($datos){
+            $res['datos'] = $datos;
+            $res['existe'] = true;
+        }
+        else{
+            $res['error'] = "No existe el producto";
+            $res['existe'] = false;
+        }
+
+        echo json_encode($res);
     }
 }

@@ -1,10 +1,7 @@
 <?php
 $user_session = session();
 
-if(!is_numeric($user_session->id_usuario)){
- header("Location: ".base_url()."");
-die();
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +91,15 @@ die();
                 </a>
 
             </li>
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<?= base_url() ?>compras"
+                    aria-expanded="true">
+                    <i class="fas fa-cash-register"></i>
+                    <span>Compras</span>
+                </a>
 
+            </li>
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConf"
@@ -182,16 +187,16 @@ die();
                                 </form>
                             </div>
                         </li>
-
-                        <!-- Nav Item - Alerts -->
+<!--
+                         Nav Item - Alerts 
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
+                                 Counter - Alerts 
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            <!-- Dropdown - Alerts -->
+                             Dropdown - Alerts 
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
@@ -234,15 +239,15 @@ die();
                             </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
+                         Nav Item - Messages 
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
+                                Counter - Messages 
                                 <span class="badge badge-danger badge-counter">7</span>
                             </a>
-                            <!-- Dropdown - Messages -->
+                          Dropdown - Messages 
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
@@ -299,16 +304,15 @@ die();
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
                         </li>
-
+-->
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><i class="fas fa-user mr-1"
-                                    ></i> <?=$user_session->user?></span>
-                                
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><i class="fas fa-user mr-1"></i> <?= $user_session->user ?></span>
+
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -317,7 +321,7 @@ die();
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="<?=base_url()?>usuarios/cambia_password">
+                                <a class="dropdown-item" href="<?= base_url() ?>usuarios/cambia_password">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cambiar contraseña
                                 </a>

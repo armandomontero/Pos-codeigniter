@@ -1,0 +1,132 @@
+<?php
+?>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+
+
+
+    <div class="card-body">
+        <form method="POST" action="<?= base_url() ?>/compras/guardar" autocomplete="off">
+            <input type="hidden" id="id_producto" name="id_producto" />
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-12 col-sm-4">
+                        <label>Código: </label>
+                        <input autofocus class="form-control" id="codigo" name="codigo"
+                         placeholder="Escribe el código y presiona Enter" type="text"
+                         onkeyup="buscarProducto(event, this, this.value)" />
+                        <label id="resultado_error" for="codigo" style="color: red;">error</label>
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <label>Nombre Producto: </label>
+                        <input disabled class="form-control" id="nombre" name="nombre" type="text" />
+                    </div>
+
+                    <div class="col-12 col-sm-4">
+                        <label>Cantidad: </label>
+                        <input class="form-control" id="cantidad" name="cantidad" type="text" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-4">
+                <div class="row">
+                    <div class="col-12 col-sm-4">
+                        <label>Precio Compra: </label>
+                        <input class="form-control" id="precio" name="precio" type="text" />
+                    </div>
+                    <div class="col-12 col-sm-4">
+                        <label>Subtotal: </label>
+                        <input disabled class="form-control" id="subtotal" name="subtotal" type="text" />
+                    </div>
+
+                    <div class="col-12 col-sm-4">
+                        <label>
+                            <p>&nbsp;</p>
+                            <p>&nbsp;</p>
+                        </label>
+                        <button id="agregar_producto" type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Producto</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <table id="tablaProductos" class="table table-hover table-striped table-sm table-responsive tablaProductos">
+                    <thead class="thead-dark">
+                        <th>#</th>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th width="1%"></th>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <div class="col-12 col-sm-6 offset-md-5">
+                    <label style="font-weight: bold; font-size: 30px; text-align: center;">Total $</label>
+                    <input type="text" id="total" name="total" size="7" readonly="true" value="0"
+                        style="font-weight: bold; font-size: 30px; text-align: left;" />
+                    <button type="button" id="completa_compra" class="btn btn-success">Completar Compra</button>
+                </div>
+
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+<!-- invocamos jquery desde acá, ya que si no no carga, la otra opción era afectar todo el template para llamar desde el header -->
+<script src="<?= base_url() ?>vendor/jquery/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+
+    });
+
+    function buscarProducto(e, tagCodigo, codigo) {
+        var enterKey = 13;
+
+        if (codigo != '') {
+          
+            if (e.which == enterKey) {
+                  
+                $.ajax({
+                    url: '<?= base_url() ?>productos/buscarPorCodigo/' + codigo,
+                    dataType: 'json',
+                    success: function(resultado) {
+                        if (resultado == 0) {
+                            $(tagCodigo).val('');
+                        } else {
+                            $(tagCodigo).removeClass('has-error');
+                            $("#resultado_error").html(resultado.error);
+
+                            if (resultado.existe) {
+                                $("#id_producto").val(resultado.datos.id);
+                                $("#nombre").val(resultado.datos.nombre);
+                                $("#cantidad").val(1);
+                                $("#precio").val(resultado.datos.precio_compra);
+                                $("#precio").val(resultado.datos.precio_compra);
+                                $("#cantidad").focus();
+                            }
+                            else{
+                                $("#id_producto").val('');
+                                $("#nombre").val('');
+                                $("#cantidad").val('');
+                                $("#precio").val('');
+                                $("#precio").val('');
+                            }
+                        }
+                    }
+                })
+            }
+        }
+    }
+</script>

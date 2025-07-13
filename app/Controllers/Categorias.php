@@ -13,7 +13,7 @@ class Categorias extends BaseController
 
     public function __construct()
     {
-        $this->categorias = new categoriasModel();
+        $this->categorias = new CategoriasModel();
 
         helper(['form']);
 
