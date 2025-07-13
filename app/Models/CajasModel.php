@@ -2,7 +2,7 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class cajasModel extends Model{
+class CajasModel extends Model{
     protected $table      = 'cajas';
     protected $primaryKey = 'id';
 

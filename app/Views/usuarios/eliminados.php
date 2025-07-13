@@ -10,7 +10,7 @@
 
         <div>
             <p>
-                <a class="btn btn-warning" href="<?= base_url() ?>unidades">Unidades</a>
+                <a class="btn btn-warning" href="<?= base_url() ?>usuarios">usuarios</a>
             </p>
         </div>
 
@@ -24,18 +24,20 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                               <th>ID</th>
+                                <th>Usuario</th>
                                 <th>Nombre</th>
-                                <th>Nombre Corto</th>
+                                <th></th>
                                 <th></th>
 
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>ID</th>
+                                 <th>ID</th>
+                                <th>Usuario</th>
                                 <th>Nombre</th>
-                                <th>Nombre Corto</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                         </tfoot>
@@ -46,9 +48,9 @@
                             ?>
                                 <tr>
                                     <td><?php echo $dato['id']; ?></td>
+                                    <td><?php echo $dato['usuario']; ?></td>
                                     <td><?php echo $dato['nombre']; ?></td>
-                                    <td><?php echo $dato['nombre_corto']; ?></td>
-                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success btn-sm" href="#" data-href="<?= base_url() ?>unidades/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
+                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success btn-sm" href="#" data-href="<?= base_url() ?>usuarios/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
 
                                 </tr>
                             <?php

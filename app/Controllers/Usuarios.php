@@ -4,15 +4,20 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\UsuariosModel;
+use App\Models\CajasModel;
+use App\Models\RolesModel;
 
 class Usuarios extends BaseController
 {
-    protected $usuarios;
-    protected $reglas;
+    protected $usuarios, $cajas, $roles;
+    protected $reglas, $reglasLogin;
 
     public function __construct()
     {
-        $this->usuarios = new usuariosModel();
+        $this->usuarios = new UsuariosModel();
+        $this->cajas = new CajasModel();
+        $this->roles = new RolesModel();
+
         helper(['form']);
 
         $this->reglas = [
@@ -35,7 +40,7 @@ class Usuarios extends BaseController
                     'required' => 'El campo {field} es obligatorio.',
                     'matches' => 'La contraseña no coincide.'
                 ]
-                ],
+            ],
             'nombre' => [
                 'rules' => 'required',
                 'errors' => [
@@ -55,6 +60,22 @@ class Usuarios extends BaseController
                 ]
             ]
         ];
+
+        $this->reglasLogin = [
+            'usuario' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ],
+            'password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ]
+
+        ];
     }
 
     public function index($activo = 1)
@@ -70,17 +91,26 @@ class Usuarios extends BaseController
     public function eliminados($activo = 0)
     {
         $usuarios = $this->usuarios->where('activo', $activo)->findAll();
-        $data = ['titulo' => 'usuarios', 'datos' => $usuarios];
+        $data = ['titulo' => 'Usuarios', 'datos' => $usuarios];
 
         echo view('header');
         echo view('usuarios/eliminados', $data);
         echo view('footer');
     }
 
-    public function nuevo()
+    public function nuevo($valid = null)
     {
+        //llamamos cajas
+        $cajas = $this->cajas->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        //llamamos roles
+        $roles = $this->roles->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
 
-        $data = ['titulo' => 'Agregar Unidad'];
+        if ($valid != null) {
+            $data = ['titulo' => 'Agregar Usuario', 'cajas' => $cajas, 'roles' => $roles, 'validation' => $valid];
+        } else {
+            $data = ['titulo' => 'Agregar Usuario', 'cajas' => $cajas, 'roles' => $roles];
+        }
+
 
         echo view('header');
         echo view('usuarios/nuevo', $data);
@@ -90,17 +120,20 @@ class Usuarios extends BaseController
     public function insertar()
     {
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
+
+            $hash = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+
             $this->usuarios->save([
+                'usuario' => $this->request->getPost('usuario'),
                 'nombre' => $this->request->getPost('nombre'),
-                'nombre_corto' => $this->request->getPost('nombre_corto')
+                'password' => $hash,
+                'id_caja' => $this->request->getPost('id_caja'),
+                'id_rol' => $this->request->getPost('id_rol'),
+                'activo' => 1
             ]);
             return redirect()->to(base_url() . 'usuarios');
         } else {
-            $data = ['titulo' => 'Agregar Unidad', 'validation' => $this->validator];
-
-            echo view('header');
-            echo view('usuarios/nuevo', $data);
-            echo view('footer');
+            $this->nuevo($this->validator);
         }
     }
 
@@ -153,5 +186,58 @@ class Usuarios extends BaseController
             'activo' => 1
         ]);
         return redirect()->to(base_url() . 'usuarios');
+    }
+
+    public function login()
+    {
+        //comprobamos si ya no habia iniciado sesion
+        $session = session();
+        if ($session->user != null) {
+            return redirect()->to(base_url() . 'index');
+        }
+        echo view('login');
+    }
+
+    public function valida()
+    {
+
+        if ($this->request->getMethod() == "POST" && $this->validate($this->reglasLogin)) {
+            $usuario = $this->request->getPost('usuario');
+            $password = $this->request->getPost('password');
+            $datosUsuario = $this->usuarios->where('usuario', $usuario)->first();
+            if ($datosUsuario != null) {
+                if (password_verify($password, $datosUsuario['password'])) {
+                    $datosSesion = [
+                        'id_usuario' => $datosUsuario['id'],
+                        'nombre' => $datosUsuario['nombre'],
+                        'user' => $datosUsuario['usuario'],
+                        'id_caja' => $datosUsuario['id_caja'],
+                        'id_rol' => $datosUsuario['id_rol']
+                    ];
+
+                    $session = session();
+                    $session->set($datosSesion);
+
+                    return redirect()->to(base_url() . 'index');
+                } else {
+                    $data['error'] = 'Usuario o contraseña incorrecta';
+                    echo view('login', $data);
+                }
+            } else {
+                $data['error'] = 'Usuario o contraseña incorrecta';
+                echo view('login', $data);
+            }
+        } else {
+            $data = ['validation' => $this->validator];
+
+            echo view('login', $data);
+        }
+    }
+
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to(base_url());
     }
 }
