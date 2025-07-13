@@ -1,5 +1,10 @@
 <?php
 $user_session = session();
+
+if(!is_numeric($user_session->id_usuario)){
+ header("Location: ".base_url()."");
+die();
+}
 ?>
 
 <!DOCTYPE html>
@@ -312,9 +317,9 @@ $user_session = session();
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="<?=base_url()?>usuarios/cambia_password">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
+                                    Cambiar contraseña
                                 </a>
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>

@@ -67,3 +67,5 @@ $routes->get('/usuarios/eliminar/(:num)', 'usuarios::eliminar/$1');
 $routes->get('/usuarios/reingresar/(:num)', 'usuarios::reingresar/$1');
 $routes->post('/usuarios/valida', 'usuarios::valida');
 $routes->get('/usuarios/logout', 'usuarios::logout');
+$routes->get('/usuarios/cambia_password', 'usuarios::cambia_password');
+$routes->post('/usuarios/actualizar_password', 'usuarios::actualizar_password');
