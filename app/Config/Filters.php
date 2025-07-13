@@ -34,6 +34,7 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
+        'session'  => \App\Filters\SessionFilter::class,
     ];
 
     /**
@@ -69,6 +70,8 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
+            'session' => ['except' => ['/', 'usuarios/valida']],
+             // Example: Exclude login routes
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
