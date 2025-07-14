@@ -1,6 +1,5 @@
 <?php
 $id_compra = uniqid();
-echo $id_compra;
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -19,7 +18,7 @@ echo $id_compra;
                         <input autofocus class="form-control" id="codigo" name="codigo"
                             placeholder="Escribe el código y presiona Enter" type="text"
                             onkeyup="buscarProducto(event, this, this.value)" />
-                        <label id="resultado_error" for="codigo" style="color: red;">error</label>
+                        <label id="resultado_error" for="codigo" style="color: red;"></label>
                     </div>
                     <div class="col-12 col-sm-4">
                         <label>Nombre Producto: </label>
@@ -73,7 +72,7 @@ echo $id_compra;
 
             <div class="row">
                 <div class="col-12 col-sm-6 offset-md-5">
-                    <label style="font-weight: bold; font-size: 30px; text-align: center;">Total $</label>
+                    <label style="font-weight: bold; font-size: 30px; text-align: center;">Total</label>
                     <input type="text" id="total" name="total" size="7" readonly="true" value="0"
                         style="font-weight: bold; font-size: 30px; text-align: left;" />
                     <button type="button" id="completa_compra" class="btn btn-success">Completar Compra</button>
@@ -163,20 +162,20 @@ echo $id_compra;
 
                     } else {
                         //var datos = JSON.parse(resultado.datos);
-                     
-                        if(resultado.error==''){
+
+                        if (resultado.error == '') {
                             $("#tablaProductos tbody").empty();
                             $("#tablaProductos tbody").append(resultado.datos);
                             $("#total").val(resultado.total);
 
                             $("#id_producto").val('');
                             $("#codigo").val('');
-                                $("#nombre").val('');
-                                $("#cantidad").val('');
-                                $("#precio").val('');
-                                $("#subtotal").val('');
+                            $("#nombre").val('');
+                            $("#cantidad").val('');
+                            $("#precio").val('');
+                            $("#subtotal").val('');
 
-                                $("#codigo").focus();
+                            $("#codigo").focus();
 
                         }
                     }
@@ -184,5 +183,35 @@ echo $id_compra;
             })
 
         }
+    }
+
+
+    function eliminarProducto(id_producto, id_compra) {
+        if (id_producto != null && id_producto != 0 ) {
+
+
+            $.ajax({
+                url: '<?= base_url() ?>temporalcompras/eliminar/' + id_producto + '/' + id_compra,
+                dataType: 'json',
+                success: function(resultado) {
+                    if (resultado == 0) {
+
+                    } else {
+                        //var datos = JSON.parse(resultado.datos);
+
+                        if (resultado.error == '') {
+                            $("#tablaProductos tbody").empty();
+                            $("#tablaProductos tbody").append(resultado.datos);
+                            $("#total").val(resultado.total);
+
+
+
+                        }
+                    }
+                }
+            })
+
+        }
+
     }
 </script>

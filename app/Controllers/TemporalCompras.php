@@ -16,6 +16,8 @@ class TemporalCompras extends BaseController
         $this->temporal_compras = new TemporalComprasModel();
         $this->productos = new ProductosModel();
         helper(['form']);
+        helper('number');
+
     }
 
 
@@ -58,7 +60,7 @@ class TemporalCompras extends BaseController
 
         $res['error'] = $error;
         $res['datos'] = $this->cargaProductos($id_compra);
-        $res['total'] = $this->totalProductos($id_compra);
+        $res['total'] = number_to_currency($this->totalProductos($id_compra), 'USD', 'en_US', 0);
         echo json_encode($res);
     }
 
@@ -77,7 +79,7 @@ class TemporalCompras extends BaseController
             $fila .="<td>".$row['precio']."</td>";
             $fila .="<td>".$row['cantidad']."</td>";
             $fila .="<td>".$row['subtotal']."</td>";
-            $fila .="<td> <a class='borrar btn btn-danger btn-sm' onClick=\"eliminaProducto(".$row['id'].")\"><i class='fas fa-trash-alt sm'></i></a> </td>";
+            $fila .="<td> <a class='borrar btn btn-danger btn-sm' onClick=\"eliminarProducto(".$row['id_producto'].", '".$row['folio']."')\"><i class='fas fa-trash-alt sm'></i></a> </td>";
             $fila .= "</tr>";
 
         }
@@ -94,5 +96,28 @@ class TemporalCompras extends BaseController
 
         }
        return $total;
+    }
+
+
+    public function eliminar($id_producto, $id_compra)
+    {
+        $datosExiste = $this->temporal_compras->porIdProductoCompra($id_producto, $id_compra);
+        if($datosExiste){
+           if($datosExiste->cantidad>1){
+            $cantidad = $datosExiste->cantidad - 1;
+            $subtotal = $datosExiste->precio*$cantidad;
+
+            //actualizamos
+            $this->temporal_compras->updProdCompra($id_producto, $id_compra, $cantidad, $subtotal);
+           }
+           else{
+            $this->temporal_compras->delProdCompra($id_producto, $id_compra);
+           }
+        }
+
+        $res['error'] = '';
+        $res['datos'] = $this->cargaProductos($id_compra);
+        $res['total'] = number_to_currency($this->totalProductos($id_compra), 'USD', 'en_US', 0);
+        echo json_encode($res);
     }
 }

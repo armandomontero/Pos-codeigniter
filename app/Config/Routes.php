@@ -78,6 +78,7 @@ $routes->get('/compras/nuevo', 'compras::nuevo');
 //Temporal Compras
 $routes->get('/temporalcompras/insertar/(:num)/(:num)/(:any)', 'temporalcompras::insertar/$1/$2/$3');
 $routes->get('/temporalcompras/cargaProductos/(:num)', 'temporalcompras::cargaProductos/$1');
+$routes->get('/temporalcompras/eliminar/(:num)/(:any)', 'temporalcompras::eliminar/$1/$2');
 
 
 //Cajas

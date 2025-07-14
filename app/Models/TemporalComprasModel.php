@@ -64,6 +64,14 @@ class TemporalComprasModel extends Model{
         $this->update();
 
     }
+
+        public function delProdCompra( $id_producto, $folio){
+        
+        $this->where('id_producto', $id_producto);
+        $this->where('folio', $folio);
+        $this->delete();
+
+    }
 }
 
 ?>
