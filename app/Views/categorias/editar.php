@@ -35,5 +35,4 @@ if(isset($validation)){?>
             </form>
         </div>
     </div>
-    </div>
 </main>
