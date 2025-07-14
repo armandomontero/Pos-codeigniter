@@ -79,7 +79,7 @@
                     </div>
                 </div>
             </div>
-            <a href="<?= base_url() ?>unidades" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Volver</a>
+            <a href="<?= base_url() ?>usuarios" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Volver</a>
             <button class="btn btn-success" type="submit"><i class="fas fa-save"></i> Guardar</button>
 
         </form>
