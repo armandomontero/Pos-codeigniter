@@ -34,6 +34,10 @@ class TemporalCompras extends BaseController
             if ($datosExiste) {
                 $cantidad = $datosExiste->cantidad + $cantidad;
                 $subtotal = $cantidad * $datosExiste->precio;
+
+                //actualizamos temporal ya existente
+                $this->temporal_compras->updProdCompra($id_producto, $id_compra, $cantidad, $subtotal);
+
             } else {
                 $subtotal = $cantidad * $producto['precio_compra'];
 
@@ -73,7 +77,7 @@ class TemporalCompras extends BaseController
             $fila .="<td>".$row['precio']."</td>";
             $fila .="<td>".$row['cantidad']."</td>";
             $fila .="<td>".$row['subtotal']."</td>";
-            $fila .="<td> <a class='borrar' onClick=\"eliminaProducto(".$row['id'].")\"><i class='fas fa-trash-alt sm'></i></a> </td>";
+            $fila .="<td> <a class='borrar btn btn-danger btn-sm' onClick=\"eliminaProducto(".$row['id'].")\"><i class='fas fa-trash-alt sm'></i></a> </td>";
             $fila .= "</tr>";
 
         }

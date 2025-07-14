@@ -55,6 +55,15 @@ class TemporalComprasModel extends Model{
 
         return $datos;
     }
+
+    public function updProdCompra( $id_producto, $folio, $cantidad, $subtotal){
+        $this->set('cantidad', $cantidad);
+        $this->set('subtotal', $subtotal);
+        $this->where('id_producto', $id_producto);
+        $this->where('folio', $folio);
+        $this->update();
+
+    }
 }
 
 ?>
