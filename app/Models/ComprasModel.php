@@ -17,7 +17,7 @@ class ComprasModel extends Model{
     protected bool $updateOnlyChanged = true;
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
 
@@ -37,6 +37,18 @@ class ComprasModel extends Model{
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+    public function insertarCompra($id_compra, $total, $id_usuario){
+         $this->insert([
+            'folio' => $id_compra,
+            'total' => $total,
+            'id_usuario' => $id_usuario,
+            'activo' => 1
+        ]);
+
+        return $this->insertID();
+    }
 }
 
 ?>

@@ -61,6 +61,8 @@ class TemporalCompras extends BaseController
         $res['error'] = $error;
         $res['datos'] = $this->cargaProductos($id_compra);
         $res['total'] = number_to_currency($this->totalProductos($id_compra), 'USD', 'en_US', 0);
+        $res['total_numero'] = $this->totalProductos($id_compra);
+
         echo json_encode($res);
     }
 
@@ -118,6 +120,7 @@ class TemporalCompras extends BaseController
         $res['error'] = '';
         $res['datos'] = $this->cargaProductos($id_compra);
         $res['total'] = number_to_currency($this->totalProductos($id_compra), 'USD', 'en_US', 0);
+        $res['total_numero'] = $this->totalProductos($id_compra);
         echo json_encode($res);
     }
 }

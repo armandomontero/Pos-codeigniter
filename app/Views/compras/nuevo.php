@@ -5,12 +5,10 @@ $id_compra = uniqid();
 <div class="container-fluid">
 
     <!-- Page Heading -->
-
-
-
     <div class="card-body">
-        <form method="POST" action="<?= base_url() ?>/compras/guardar" autocomplete="off">
+        <form method="POST" name="form_compra" id="form_compra" action="<?= base_url() ?>compras/guardar" autocomplete="off">
             <input type="hidden" id="id_producto" name="id_producto" />
+             <input type="hidden" value="<?=$id_compra?>" id="id_compra" name="id_compra" />
             <div class="form-group mb-4">
                 <div class="row">
                     <div class="col-12 col-sm-4">
@@ -75,6 +73,7 @@ $id_compra = uniqid();
                     <label style="font-weight: bold; font-size: 30px; text-align: center;">Total</label>
                     <input type="text" id="total" name="total" size="7" readonly="true" value="0"
                         style="font-weight: bold; font-size: 30px; text-align: left;" />
+                        <input type="hidden" value="" id="total_numero" name="total_numero"/>
                     <button type="button" id="completa_compra" class="btn btn-success">Completar Compra</button>
                 </div>
 
@@ -90,7 +89,15 @@ $id_compra = uniqid();
 
 <script>
     $(document).ready(function() {
-
+        $("#completa_compra").click(function(){
+            let nFila = $("#tablaProductos tr").length;
+            if(nFila<2){
+                alert('No hay productos!');
+            }
+            else{
+                $("#form_compra").submit();
+            }
+        });
     });
 
     function calcSubTotal() {
@@ -167,6 +174,7 @@ $id_compra = uniqid();
                             $("#tablaProductos tbody").empty();
                             $("#tablaProductos tbody").append(resultado.datos);
                             $("#total").val(resultado.total);
+                            $("#total_numero").val(resultado.total_numero);
 
                             $("#id_producto").val('');
                             $("#codigo").val('');
@@ -203,6 +211,7 @@ $id_compra = uniqid();
                             $("#tablaProductos tbody").empty();
                             $("#tablaProductos tbody").append(resultado.datos);
                             $("#total").val(resultado.total);
+                            $("#total_numero").val(resultado.total_numero);
 
 
 

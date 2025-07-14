@@ -74,6 +74,8 @@ $routes->post('/usuarios/actualizar_password', 'usuarios::actualizar_password');
 
 //Compras
 $routes->get('/compras/nuevo', 'compras::nuevo');
+$routes->post('/compras/guardar', 'compras::guardar');
+
 
 //Temporal Compras
 $routes->get('/temporalcompras/insertar/(:num)/(:num)/(:any)', 'temporalcompras::insertar/$1/$2/$3');

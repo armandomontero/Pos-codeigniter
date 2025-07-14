@@ -4,15 +4,19 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ComprasModel;
+use App\Models\TemporalComprasModel;
+use App\Models\DetalleCompraModel;
+
 
 class Compras extends BaseController
 {
-    protected $compras;
+    protected $compras, $temporal_compra, $detalle_compra;
 
 
     public function __construct()
     {
         $this->compras = new ComprasModel();
+        $this->detalle_compra = new DetalleCompraModel();
         helper(['form']);
     }
 
@@ -44,71 +48,32 @@ class Compras extends BaseController
         echo view('footer');
     }
 
-    public function insertar()
+    public function guardar()
     {
-        if ($this->request->getMethod() == "POST" ) {
-            $this->compras->save([
-                'nombre' => $this->request->getPost('nombre'),
-                'nombre_corto' => $this->request->getPost('nombre_corto')
-            ]);
-            return redirect()->to(base_url() . 'compras');
-        } else {
-            $data = ['titulo' => 'Agregar Unidad', 'validation' => $this->validator];
+        $id_compra = $this->request->getPost('id_compra');
+        $total = $this->request->getPost('total_numero');
 
-            echo view('header');
-            echo view('compras/nuevo', $data);
-            echo view('footer');
+        $session = session();
+        $id_usuario = $session->id_usuario;
+
+        $resultadoId = $this->compras->insertarCompra($id_compra, $total, $id_usuario);
+
+        $this->temporal_compra = new TemporalComprasModel();
+
+        if ($resultadoId) {
+            $resultadoCompra = $this->temporal_compra->porCompra($id_compra);
+
+            foreach ($resultadoCompra as $row) {
+                $this->detalle_compra->save([
+                    'id_compra' => $resultadoId,
+                    'id_producto' => $row['id_producto'],
+                    'nombre' => $row['nombre'],
+                    'cantidad' => $row['cantidad'],
+                    'precio' => $row['precio'],
+                ]);
+            }
         }
-    }
 
-
-    public function editar($id, $valid = null)
-    {
-        try {
-            $unidad = $this->compras->where('id', $id)->first();
-        } catch (\Exception $e) {
-            exit($e->getMessage());
-        }
-        if ($valid != null) {
-            $data = ['titulo' => 'Editar Unidad', 'datos' => $unidad, 'validation' => $valid];
-        } else {
-
-
-            $data = ['titulo' => 'Editar Unidad', 'datos' => $unidad];
-        }
-        echo view('header');
-        echo view('compras/editar', $data);
-        echo view('footer');
-    }
-
-
-
-    public function actualizar()
-    {
-        if ($this->request->getMethod() == "POST" ) {
-            $this->compras->update($this->request->getPost('id'), [
-                'nombre' => $this->request->getPost('nombre'),
-                'nombre_corto' => $this->request->getPost('nombre_corto')
-            ]);
-            return redirect()->to(base_url() . 'compras/editar/' . $this->request->getPost('id'));
-        } else {
-            return $this->editar($this->request->getPost('id'), $this->validator);
-        }
-    }
-
-    public function eliminar($id)
-    {
-        $this->compras->update($id, [
-            'activo' => 0
-        ]);
-        return redirect()->to(base_url() . 'compras');
-    }
-
-    public function reingresar($id)
-    {
-        $this->compras->update($id, [
-            'activo' => 1
-        ]);
-        return redirect()->to(base_url() . 'compras');
+        return redirect()->to(base_url().'productos');
     }
 }
