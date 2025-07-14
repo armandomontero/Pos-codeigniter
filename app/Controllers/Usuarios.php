@@ -10,7 +10,7 @@ use App\Models\RolesModel;
 class Usuarios extends BaseController
 {
     protected $usuarios, $cajas, $roles;
-    protected $reglas, $reglasLogin, $reglasCambiaPassword;
+    protected $reglas, $reglasLogin, $reglasCambiaPassword, $reglasUpdate;
 
     public function __construct()
     {
@@ -60,6 +60,48 @@ class Usuarios extends BaseController
                 ]
             ]
         ];
+
+$this->reglasUpdate = [
+            'usuario' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                    
+                ]
+            ],
+            'password' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ],
+            'repassword' => [
+                'rules' => 'required|matches[password]',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.',
+                    'matches' => 'La contraseña no coincide.'
+                ]
+            ],
+            'nombre' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ],
+            'id_caja' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ],
+            'id_rol' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+            ]
+        ];
+
 
         $this->reglasLogin = [
             'usuario' => [
@@ -156,17 +198,22 @@ class Usuarios extends BaseController
 
     public function editar($id, $valid = null)
     {
+        //llamamos cajas
+        $cajas = $this->cajas->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        //llamamos roles
+        $roles = $this->roles->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+
         try {
-            $unidad = $this->usuarios->where('id', $id)->first();
+            $usuario = $this->usuarios->where('id', $id)->first();
         } catch (\Exception $e) {
             exit($e->getMessage());
         }
         if ($valid != null) {
-            $data = ['titulo' => 'Editar Unidad', 'datos' => $unidad, 'validation' => $valid];
+            $data = ['titulo' => 'Editar Usuario', 'datos' => $usuario, 'cajas' => $cajas, 'roles' => $roles, 'validation' => $valid];
         } else {
 
 
-            $data = ['titulo' => 'Editar Unidad', 'datos' => $unidad];
+            $data = ['titulo' => 'Editar Usuario', 'datos' => $usuario, 'cajas' => $cajas, 'roles' => $roles];
         }
         echo view('header');
         echo view('usuarios/editar', $data);
@@ -177,12 +224,29 @@ class Usuarios extends BaseController
 
     public function actualizar()
     {
-        if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
-            $this->usuarios->update($this->request->getPost('id'), [
-                'nombre' => $this->request->getPost('nombre'),
-                'nombre_corto' => $this->request->getPost('nombre_corto')
-            ]);
-            return redirect()->to(base_url() . 'usuarios/editar/' . $this->request->getPost('id'));
+        if ($this->request->getMethod() == "POST" && $this->validate($this->reglasUpdate)) {
+
+            //actualiza password?
+            $edit_pwd = $this->request->getPost('edit_pwd');
+            if ($edit_pwd == 1) {
+                $hash = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
+                $this->usuarios->update($this->request->getPost('id'), [
+                    'usuario' => $this->request->getPost('usuario'),
+                    'nombre' => $this->request->getPost('nombre'),
+                    'id_caja' => $this->request->getPost('id_caja'),
+                    'id_rol' => $this->request->getPost('id_rol'),
+                    'password' => $hash
+                ]);
+            } else {
+                $this->usuarios->update($this->request->getPost('id'), [
+                    'usuario' => $this->request->getPost('usuario'),
+                    'nombre' => $this->request->getPost('nombre'),
+                    'id_caja' => $this->request->getPost('id_caja'),
+                    'id_rol' => $this->request->getPost('id_rol')
+                ]);
+            }
+
+             return $this->editar($this->request->getPost('id'));
         } else {
             return $this->editar($this->request->getPost('id'), $this->validator);
         }
@@ -280,20 +344,19 @@ class Usuarios extends BaseController
     {
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglasCambiaPassword)) {
 
-         $hash = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);    
+            $hash = password_hash($this->request->getPost('password'), PASSWORD_DEFAULT);
             $this->usuarios->update($this->request->getPost('id'), [
                 'password' => $hash
-                 ]);
-         //llamamos usuario
-        $usuario = $this->usuarios->where('id', $this->request->getPost('id'))->first();
+            ]);
+            //llamamos usuario
+            $usuario = $this->usuarios->where('id', $this->request->getPost('id'))->first();
 
             $data = ['titulo' => 'Cambiar Contraseña', 'usuario' => $usuario, 'mensaje' => 'Contraseña actualizada'];
-                 echo view('header');
-        echo view('usuarios/cambia_password', $data);
-        echo view('footer');
+            echo view('header');
+            echo view('usuarios/cambia_password', $data);
+            echo view('footer');
         } else {
-           $this->cambia_password($this->validator);
+            $this->cambia_password($this->validator);
         }
-   
     }
 }
