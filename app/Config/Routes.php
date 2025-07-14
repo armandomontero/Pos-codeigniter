@@ -74,3 +74,13 @@ $routes->post('/usuarios/actualizar_password', 'usuarios::actualizar_password');
 
 //Compras
 $routes->get('/compras/nuevo', 'compras::nuevo');
+
+//Cajas
+$routes->get('/cajas', 'cajas::index');
+$routes->get('/cajas/eliminados', 'cajas::eliminados');
+$routes->get('/cajas/nuevo', 'cajas::nuevo');
+$routes->post('/cajas/insertar', 'cajas::insertar');
+$routes->get('/cajas/editar/(:num)', 'cajas::editar/$1');
+$routes->post('/cajas/actualizar', 'cajas::actualizar');
+$routes->get('/cajas/eliminar/(:num)', 'cajas::eliminar/$1');
+$routes->get('/cajas/reingresar/(:num)', 'cajas::reingresar/$1');

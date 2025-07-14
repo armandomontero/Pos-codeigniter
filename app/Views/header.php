@@ -112,7 +112,7 @@ $user_session = session();
                         <h6 class="collapse-header">Opciones de Configuración:</h6>
                         <a class="collapse-item" href="<?= base_url() ?>configuracion">Configuración</a>
                         <a class="collapse-item" href="<?= base_url() ?>usuarios">Usuarios</a>
-
+                        <a class="collapse-item" href="<?= base_url() ?>cajas">Cajas</a>
                     </div>
                 </div>
             </li>
