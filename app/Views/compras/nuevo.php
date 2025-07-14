@@ -1,4 +1,6 @@
 <?php
+$id_compra = uniqid();
+echo $id_compra;
 ?>
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -15,8 +17,8 @@
                     <div class="col-12 col-sm-4">
                         <label>Código: </label>
                         <input autofocus class="form-control" id="codigo" name="codigo"
-                         placeholder="Escribe el código y presiona Enter" type="text"
-                         onkeyup="buscarProducto(event, this, this.value)" />
+                            placeholder="Escribe el código y presiona Enter" type="text"
+                            onkeyup="buscarProducto(event, this, this.value)" />
                         <label id="resultado_error" for="codigo" style="color: red;">error</label>
                     </div>
                     <div class="col-12 col-sm-4">
@@ -47,7 +49,8 @@
                             <p>&nbsp;</p>
                             <p>&nbsp;</p>
                         </label>
-                        <button id="agregar_producto" type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Producto</button>
+                        <button onclick="agregarProducto(id_producto.value, cantidad.value, '<?= $id_compra ?>')"
+                            id="agregar_producto" type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Producto</button>
                     </div>
                 </div>
             </div>
@@ -91,31 +94,31 @@
 
     });
 
-function calcSubTotal(){
-    var precio = $("#precio").val();
-    var cantidad = $("#cantidad").val();
-   
-    if(isNaN(precio)){
-        $("#precio").val('0');
-        precio = 0;
+    function calcSubTotal() {
+        var precio = $("#precio").val();
+        var cantidad = $("#cantidad").val();
+
+        if (isNaN(precio)) {
+            $("#precio").val('0');
+            precio = 0;
+        }
+
+        if (isNaN(cantidad)) {
+            $("#cantidad").val('0');
+            cantidad = 0;
+        }
+        var subtotal = Math.round(precio * cantidad);
+        $("#subtotal").val(subtotal);
     }
 
-    if(isNaN(cantidad)){
-        $("#cantidad").val('0');
-        cantidad = 0;
-    }
-    var subtotal = Math.round(precio*cantidad);
-    $("#subtotal").val(subtotal);
-}
-    
 
     function buscarProducto(e, tagCodigo, codigo) {
         var enterKey = 13;
 
         if (codigo != '') {
-          
+
             if (e.which == enterKey) {
-                  
+
                 $.ajax({
                     url: '<?= base_url() ?>productos/buscarPorCodigo/' + codigo,
                     dataType: 'json',
@@ -133,13 +136,12 @@ function calcSubTotal(){
                                 $("#precio").val(resultado.datos.precio_compra);
                                 $("#subtotal").val(resultado.datos.precio_compra);
                                 $("#cantidad").focus();
-                            }
-                            else{
+                            } else {
                                 $("#id_producto").val('');
                                 $("#nombre").val('');
                                 $("#cantidad").val('');
                                 $("#precio").val('');
-                                $("#precio").val('');
+                                $("#subtotal").val('');
                             }
                         }
                     }
@@ -148,5 +150,39 @@ function calcSubTotal(){
         }
     }
 
-    
+
+    function agregarProducto(id_producto, cantidad, id_compra) {
+        if (id_producto != null && id_producto != 0 && cantidad > 0) {
+
+
+            $.ajax({
+                url: '<?= base_url() ?>temporalcompras/insertar/' + id_producto + '/' + cantidad + '/' + id_compra,
+                dataType: 'json',
+                success: function(resultado) {
+                    if (resultado == 0) {
+
+                    } else {
+                        //var datos = JSON.parse(resultado.datos);
+                     
+                        if(resultado.error==''){
+                            $("#tablaProductos tbody").empty();
+                            $("#tablaProductos tbody").append(resultado.datos);
+                            $("#total").val(resultado.total);
+
+                            $("#id_producto").val('');
+                            $("#codigo").val('');
+                                $("#nombre").val('');
+                                $("#cantidad").val('');
+                                $("#precio").val('');
+                                $("#subtotal").val('');
+
+                                $("#codigo").focus();
+
+                        }
+                    }
+                }
+            })
+
+        }
+    }
 </script>
