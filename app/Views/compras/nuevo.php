@@ -26,7 +26,7 @@
 
                     <div class="col-12 col-sm-4">
                         <label>Cantidad: </label>
-                        <input class="form-control" id="cantidad" name="cantidad" type="text" />
+                        <input onkeyup="calcSubTotal(document.getElementById('precio').value, this.value)" value="" class="form-control" id="cantidad" name="cantidad" type="text" />
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-12 col-sm-4">
                         <label>Precio Compra: </label>
-                        <input class="form-control" id="precio" name="precio" type="text" />
+                        <input onkeyup="calcSubTotal(document.getElementById('cantidad').value, this.value)" class="form-control" id="precio" name="precio" type="text" />
                     </div>
                     <div class="col-12 col-sm-4">
                         <label>Subtotal: </label>
@@ -91,6 +91,24 @@
 
     });
 
+function calcSubTotal(){
+    var precio = $("#precio").val();
+    var cantidad = $("#cantidad").val();
+   
+    if(isNaN(precio)){
+        $("#precio").val('0');
+        precio = 0;
+    }
+
+    if(isNaN(cantidad)){
+        $("#cantidad").val('0');
+        cantidad = 0;
+    }
+    var subtotal = Math.round(precio*cantidad);
+    $("#subtotal").val(subtotal);
+}
+    
+
     function buscarProducto(e, tagCodigo, codigo) {
         var enterKey = 13;
 
@@ -113,7 +131,7 @@
                                 $("#nombre").val(resultado.datos.nombre);
                                 $("#cantidad").val(1);
                                 $("#precio").val(resultado.datos.precio_compra);
-                                $("#precio").val(resultado.datos.precio_compra);
+                                $("#subtotal").val(resultado.datos.precio_compra);
                                 $("#cantidad").focus();
                             }
                             else{
@@ -129,4 +147,6 @@
             }
         }
     }
+
+    
 </script>
