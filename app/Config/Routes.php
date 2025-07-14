@@ -84,3 +84,13 @@ $routes->get('/cajas/editar/(:num)', 'cajas::editar/$1');
 $routes->post('/cajas/actualizar', 'cajas::actualizar');
 $routes->get('/cajas/eliminar/(:num)', 'cajas::eliminar/$1');
 $routes->get('/cajas/reingresar/(:num)', 'cajas::reingresar/$1');
+
+//Roles
+$routes->get('/roles', 'roles::index');
+$routes->get('/roles/eliminados', 'roles::eliminados');
+$routes->get('/roles/nuevo', 'roles::nuevo');
+$routes->post('/roles/insertar', 'roles::insertar');
+$routes->get('/roles/editar/(:num)', 'roles::editar/$1');
+$routes->post('/roles/actualizar', 'roles::actualizar');
+$routes->get('/roles/eliminar/(:num)', 'roles::eliminar/$1');
+$routes->get('/roles/reingresar/(:num)', 'roles::reingresar/$1');
