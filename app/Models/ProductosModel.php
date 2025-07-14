@@ -39,6 +39,13 @@ class ProductosModel extends Model{
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+    public function actualizaStock($id_producto, $cantidad){
+        $this->set('existencias', "existencias + $cantidad", FALSE);
+        $this->where('id', $id_producto);
+        $this->update();
+    }
 }
 
 ?>

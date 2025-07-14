@@ -72,6 +72,12 @@ class TemporalComprasModel extends Model{
         $this->delete();
 
     }
+
+     public function eliminarCompra( $folio){
+       $this->where('folio', $folio);
+        $this->delete();
+
+    }
 }
 
 ?>
