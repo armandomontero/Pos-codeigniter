@@ -7,18 +7,20 @@ use App\Models\ComprasModel;
 use App\Models\TemporalComprasModel;
 use App\Models\DetalleCompraModel;
 use App\Models\ProductosModel;
+use App\Models\configuracionModel;
 
 
 
 class Compras extends BaseController
 {
-    protected $compras, $temporal_compra, $detalle_compra, $productos;
+    protected $compras, $temporal_compra, $detalle_compra, $productos, $configuracion;
 
 
     public function __construct()
     {
         $this->compras = new ComprasModel();
         $this->detalle_compra = new DetalleCompraModel();
+        $this->configuracion = new configuracionModel();
         helper(['form']);
     }
 
@@ -81,5 +83,22 @@ class Compras extends BaseController
         }
 
         return redirect()->to(base_url().'productos');
+    }
+
+    function muestraCompraPdf($id_compra){
+        $data['id_compra'] = $id_compra;
+        echo view('header');
+         echo view('compras/ver_compra_pdf', $data);
+          echo view('footer');
+    }
+
+    function generaCompraPdf($id_compra){
+        $datosCompra = $this->compras->where('id', $id_compra)->first();
+
+         $this->detalle_compra->select('*');
+         $this->detalle_compra->where('id_compra', $id_compra);
+        $detalleCompra = $this->detalle_compra->findAll();
+
+        $configuracion = $this->configuracion->first();
     }
 }

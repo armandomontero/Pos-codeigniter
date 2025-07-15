@@ -11,7 +11,7 @@ class configuracionModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'valor'];
+    protected $allowedFields = ['nombre', 'direccion'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

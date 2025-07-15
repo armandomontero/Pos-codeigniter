@@ -75,12 +75,16 @@ $routes->post('/usuarios/actualizar_password', 'usuarios::actualizar_password');
 //Compras
 $routes->get('/compras/nuevo', 'compras::nuevo');
 $routes->post('/compras/guardar', 'compras::guardar');
+$routes->get('/compras/muestraCompraPdf/(:num)', 'compras::muestraCompraPdf/$1');
+$routes->get('/compras/generaCompraPdf/(:num)', 'compras::generaCompraPdf/$1');
+
 
 
 //Temporal Compras
 $routes->get('/temporalcompras/insertar/(:num)/(:num)/(:any)', 'temporalcompras::insertar/$1/$2/$3');
 $routes->get('/temporalcompras/cargaProductos/(:num)', 'temporalcompras::cargaProductos/$1');
 $routes->get('/temporalcompras/eliminar/(:num)/(:any)', 'temporalcompras::eliminar/$1/$2');
+
 
 
 //Cajas
