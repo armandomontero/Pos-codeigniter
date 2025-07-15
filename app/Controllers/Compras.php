@@ -33,6 +33,25 @@ class Compras extends BaseController
         echo view('footer');
     }
 
+
+    public function eliminar($id)
+    {
+        $this->compras->update($id, [
+            'activo' => 0
+        ]);
+        return redirect()->to(base_url() . 'compras');
+    }
+
+
+        public function reingresar($id)
+    {
+        $this->compras->update($id, [
+            'activo' => 1
+        ]);
+        return redirect()->to(base_url() . 'compras');
+    }
+
+
     public function eliminados($activo = 0)
     {
         $compras = $this->compras->where('activo', $activo)->findAll();

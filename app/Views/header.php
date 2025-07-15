@@ -102,6 +102,7 @@ $user_session = session();
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Opciones de Compra:</h6>
                         <a class="collapse-item" href="<?= base_url() ?>compras/nuevo">Nueva Compra</a>
+                        <a class="collapse-item" href="<?= base_url() ?>compras">Compras</a>
                         
                     </div>
                 </div>

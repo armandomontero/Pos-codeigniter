@@ -77,6 +77,13 @@ $routes->get('/compras/nuevo', 'compras::nuevo');
 $routes->post('/compras/guardar', 'compras::guardar');
 $routes->get('/compras/muestraCompraPdf/(:num)', 'compras::muestraCompraPdf/$1');
 $routes->get('/compras/generaCompraPdf/(:num)', 'compras::generaCompraPdf/$1');
+$routes->get('/compras', 'compras::index');
+$routes->get('/compras/eliminar/(:num)', 'compras::eliminar/$1');
+$routes->get('/compras/eliminados', 'compras::eliminados');
+$routes->get('/compras/reingresar/(:num)', 'compras::reingresar/$1');
+
+
+
 
 
 
