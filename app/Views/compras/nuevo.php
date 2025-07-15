@@ -71,7 +71,7 @@ $id_compra = uniqid();
             <div class="row">
                 <div class="col-12 col-sm-6 offset-md-5">
                     <label style="font-weight: bold; font-size: 30px; text-align: center;">Total</label>
-                    <input type="text" id="total" name="total" size="7" readonly="true" value="0"
+                    <input type="text" class="text-center" text id="total" name="total" size="7" readonly="true" value="0"
                         style="font-weight: bold; font-size: 30px; text-align: left;" />
                         <input type="hidden" value="" id="total_numero" name="total_numero"/>
                     <button type="button" id="completa_compra" class="btn btn-success">Completar Compra</button>
