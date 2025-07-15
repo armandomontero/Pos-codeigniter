@@ -24,7 +24,7 @@ $user_session = session();
         rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="<?= base_url() ?>css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="<?= base_url() ?>css/sb-admin-2.css" rel="stylesheet" />
 
     <!-- Custom styles for this page -->
     <link href="<?= base_url() ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -41,10 +41,10 @@ $user_session = session();
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-crosshairs"></i>
+                <div class="sidebar-brand-icon ">
+                  <i class="fas fa-home"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Infoclever <sup>POS</sup></div>
+                <div class="sidebar-brand-text ml-2 "> Bienvenido/a</div>
             </a>
 
             <!-- Divider -->
@@ -149,7 +149,7 @@ $user_session = session();
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
+<img height="100%" src="<?=base_url()?>img/logo.png"/>
                     <!-- Sidebar Toggle (Topbar) -->
                     <form class="form-inline">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
@@ -327,18 +327,12 @@ $user_session = session();
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
+                                
                                 <a class="dropdown-item" href="<?= base_url() ?>usuarios/cambia_password">
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Cambiar contraseña
                                 </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
+                                
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

@@ -141,6 +141,7 @@ $id_compra = uniqid();
                                 $("#cantidad").val(1);
                                 $("#precio").val(resultado.datos.precio_compra);
                                 $("#subtotal").val(resultado.datos.precio_compra);
+                                 $("#cantidad").select();
                                 $("#cantidad").focus();
                             } else {
                                 $("#id_producto").val('');
