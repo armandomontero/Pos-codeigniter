@@ -11,13 +11,13 @@ class configuracionModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'direccion'];
+    protected $allowedFields = ['id_tienda', 'nombre', 'direccion', 'mensaje', 'logo'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

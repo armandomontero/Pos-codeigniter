@@ -142,7 +142,7 @@ class Ventas extends BaseController
          $this->detalle_venta->where('id_venta', $id_venta);
         $detalleVenta = $this->detalle_venta->findAll();
 
-        $configuracion = $this->configuracion->first();
+        $configuracion = $this->configuracion->where('id_tienda', $this->session->id_tienda)->first();
 
 
 ?>
@@ -230,7 +230,7 @@ margin: 0 auto;}
   <div class="ticket">
 
     <div class="header">
-        <img width="100px;" src="<?=base_url()?>img/logo.png"/>
+        <img width="100px;" src="<?=base_url().$configuracion['logo']?>"/>
         <table  class="cabeza" style="table-layout: fixed; width: 90%;">
           <thead>
             <tr>

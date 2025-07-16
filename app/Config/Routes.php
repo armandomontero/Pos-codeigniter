@@ -61,6 +61,8 @@ $routes->get('/clientes/autoCompleteData(:any)', 'clientes::autoCompleteData/$1'
 
 //Configuracion
 $routes->get('/configuracion', 'configuracion::index');
+$routes->post('/configuracion/actualizar', 'configuracion::actualizar');
+
 
 //Usuarios
 $routes->get('/usuarios', 'usuarios::index');
@@ -123,4 +125,3 @@ $routes->get('/roles/editar/(:num)', 'roles::editar/$1');
 $routes->post('/roles/actualizar', 'roles::actualizar');
 $routes->get('/roles/eliminar/(:num)', 'roles::eliminar/$1');
 $routes->get('/roles/reingresar/(:num)', 'roles::reingresar/$1');
-
