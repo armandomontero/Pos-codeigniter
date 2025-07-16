@@ -163,7 +163,7 @@ $id_compra = uniqid();
 
 
             $.ajax({
-                url: '<?= base_url() ?>temporalcompras/insertar/' + id_producto + '/' + cantidad + '/' + id_compra,
+                url: '<?= base_url() ?>temporalmovimiento/insertar/' + id_producto + '/' + cantidad + '/' + id_compra + '/' + 'compra',
                 dataType: 'json',
                 success: function(resultado) {
                     if (resultado == 0) {
@@ -200,7 +200,7 @@ $id_compra = uniqid();
 
 
             $.ajax({
-                url: '<?= base_url() ?>temporalcompras/eliminar/' + id_producto + '/' + id_compra,
+                url: '<?= base_url() ?>temporalmovimiento/eliminar/' + id_producto + '/' + id_compra,
                 dataType: 'json',
                 success: function(resultado) {
                     if (resultado == 0) {

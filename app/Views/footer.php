@@ -44,7 +44,7 @@
     </div>
 
     <!-- Bootstrap core JavaScript-->
-    <script src="<?=base_url()?>vendor/jquery/jquery.min.js"></script>
+    
     <script src="<?=base_url()?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
@@ -59,6 +59,9 @@
 
     <!-- Page level custom scripts -->
     <script src="<?=base_url()?>js/demo/datatables-demo.js"></script>
+
+        
+
 
 <!-- funcionalidad ok button para dialogos de confirmacion -->
  <script>

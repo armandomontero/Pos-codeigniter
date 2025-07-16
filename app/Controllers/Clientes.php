@@ -40,7 +40,7 @@ class clientes extends BaseController
 
     public function index($activo = 1)
     {
-        $clientes = $this->clientes->where('activo', $activo)->findAll();
+        $clientes = $this->clientes->where('activo', $activo)->orderBy('nombre', 'ASC')->findAll();
         $data = ['titulo' => 'clientes', 'datos' => $clientes];
 
         echo view('header');
@@ -146,5 +146,20 @@ else{
             'activo' => 1
         ]);
         return redirect()->to(base_url() . 'clientes');
+    }
+
+
+    public function autoCompleteData(){
+        $returnData = array();
+        $valor = $this->request->getGet('term');
+        $clientes = $this->clientes->like('nombre', $valor)->where('activo', 1)->findAll();
+        if(!empty($clientes)){
+            foreach($clientes as $row){
+                $data['id'] = $row['id'];
+                $data['value'] = $row['nombre'];
+                array_push($returnData, $data);
+            }
+        }
+        echo json_encode($returnData);
     }
 }

@@ -25,9 +25,15 @@ $user_session = session();
 
     <!-- Custom styles for this template -->
     <link href="<?= base_url() ?>css/sb-admin-2.css" rel="stylesheet" />
+    <!-- Jquery-Ui -->
+    <link href="<?= base_url() ?>js/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
 
     <!-- Custom styles for this page -->
     <link href="<?= base_url() ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+    <!--Jquery y JQuery-Ui -->
+    <script src="<?=base_url()?>vendor/jquery/jquery.min.js"></script>
+    <script src="<?=base_url()?>js/jquery-ui/jquery-ui.min.js"></script>
 
 </head>
 
@@ -95,7 +101,7 @@ $user_session = session();
             <li class="nav-item">
                  <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompras"
                     aria-expanded="true" aria-controls="collapseCompras">
-                    <i class="fas fa-cash-register"></i>
+                    <i class="fas fa-truck"></i>
                     <span>Compras</span>
                 </a>
 <div id="collapseCompras" class="collapse" aria-labelledby="headingCompras" data-parent="#accordionSidebar">
@@ -108,7 +114,24 @@ $user_session = session();
                 </div>
             </li>
 
+ <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="<?= base_url() ?>ventas/venta"
+                    aria-expanded="true">
+                    <i class="fas fa-cash-register "></i>
+                    <span>Caja</span>
+                </a>
 
+            </li>
+
+             <li class="nav-item">
+                <a class="nav-link collapsed" href="<?= base_url() ?>ventas"
+                    aria-expanded="true">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Ventas</span>
+                </a>
+
+            </li>
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">

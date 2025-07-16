@@ -2,8 +2,8 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class TemporalComprasModel extends Model{
-    protected $table      = 'temporal_compras';
+class DetalleVentaModel extends Model{
+    protected $table      = 'detalle_venta';
     protected $primaryKey = 'id';
 
     protected $useAutoIncrement = true; 
@@ -11,15 +11,16 @@ class TemporalComprasModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['folio', 'id_producto', 'codigo', 'nombre', 'cantidad', 'precio', 'subtotal'];
+    protected $allowedFields = ['id_venta', 'id_producto', 'nombre', 'cantidad', 'precio'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
 
     // Dates
-    protected $useTimestamps = false;
+   protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
+    protected $updatedField  = '';
 
     // Validation
     protected $validationRules      = [];
@@ -48,7 +49,7 @@ class TemporalComprasModel extends Model{
         return $datos;
     }
 
-     public function porCompra( $folio){
+     public function porVenta( $folio){
         $this->select('*');
         $this->where('folio', $folio);
         $datos = $this->findAll();
@@ -56,7 +57,7 @@ class TemporalComprasModel extends Model{
         return $datos;
     }
 
-    public function updProdCompra( $id_producto, $folio, $cantidad, $subtotal){
+    public function updProdCVenta( $id_producto, $folio, $cantidad, $subtotal){
         $this->set('cantidad', $cantidad);
         $this->set('subtotal', $subtotal);
         $this->where('id_producto', $id_producto);
@@ -65,16 +66,10 @@ class TemporalComprasModel extends Model{
 
     }
 
-        public function delProdCompra( $id_producto, $folio){
+        public function delProdVenta( $id_producto, $folio){
         
         $this->where('id_producto', $id_producto);
         $this->where('folio', $folio);
-        $this->delete();
-
-    }
-
-     public function eliminarCompra( $folio){
-       $this->where('folio', $folio);
         $this->delete();
 
     }

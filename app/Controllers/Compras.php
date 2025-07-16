@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ComprasModel;
-use App\Models\TemporalComprasModel;
+use App\Models\TemporalMovimientoModel;
 use App\Models\DetalleCompraModel;
 use App\Models\ProductosModel;
 use App\Models\configuracionModel;
@@ -20,12 +20,13 @@ class Compras extends BaseController
         $this->compras = new ComprasModel();
         $this->detalle_compra = new DetalleCompraModel();
         $this->configuracion = new configuracionModel();
+        $this->productos = new ProductosModel();
         helper(['form']);
     }
 
     public function index($activo = 1)
     {
-        $compras = $this->compras->where('activo', $activo)->findAll();
+        $compras = $this->compras->where('activo', $activo)->orderBy('id', 'DESC')->findAll();
         $data = ['titulo' => 'compras', 'datos' => $compras];
 
         echo view('header');
@@ -36,6 +37,16 @@ class Compras extends BaseController
 
     public function eliminar($id)
     {
+
+        $this->detalle_compra->select('*');
+        $this->detalle_compra->where('id_compra', $id);
+        $productos = $this->detalle_compra->findAll();
+        
+        foreach($productos as $producto){
+          $this->productos->actualizaStock($producto['id_producto'], -$producto['cantidad']);
+        }
+
+
         $this->compras->update($id, [
             'activo' => 0
         ]);
@@ -45,6 +56,15 @@ class Compras extends BaseController
 
         public function reingresar($id)
     {
+        $this->detalle_compra->select('*');
+        $this->detalle_compra->where('id_compra', $id);
+        $productos = $this->detalle_compra->findAll();
+        
+        foreach($productos as $producto){
+          $this->productos->actualizaStock($producto['id_producto'], $producto['cantidad']);
+        }
+
+
         $this->compras->update($id, [
             'activo' => 1
         ]);
@@ -80,7 +100,7 @@ class Compras extends BaseController
 
         $resultadoId = $this->compras->insertarCompra($id_compra, $total, $id_usuario);
 
-        $this->temporal_compra = new TemporalComprasModel();
+        $this->temporal_compra = new TemporalMovimientoModel();
 
         if ($resultadoId) {
             $resultadoCompra = $this->temporal_compra->porCompra($id_compra);
@@ -94,7 +114,7 @@ class Compras extends BaseController
                     'precio' => $row['precio'],
                 ]);
 
-                $this->productos = new ProductosModel();
+                
             $this->productos->actualizaStock($row['id_producto'], $row['cantidad']);
             }
             $this->temporal_compra->eliminarCompra($id_compra);

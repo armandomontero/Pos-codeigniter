@@ -13,6 +13,7 @@ $(document).ready(function() {
                 "next": "Sig",
                 "previous": "Ant"
             },
-        }
+        },
+          order: []
     });
 });

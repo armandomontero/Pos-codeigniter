@@ -12,7 +12,7 @@ helper('number');
             <li class="breadcrumb-item active"><?= $titulo ?></li>
         </ol>
         <p>
-            <a class="btn btn-success" href="<?= base_url() ?>compras">Activos</a>
+            <a class="btn btn-success" href="<?= base_url() ?>ventas">Activos</a>
         </p>
 
         <!-- DataTales -->
@@ -43,6 +43,7 @@ helper('number');
                                 <th>Precio</th>
                                 <th>Existencias</th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -56,7 +57,8 @@ helper('number');
                                      <td><?php echo number_to_currency($dato['total'], 'USD', 'en_US', 0); ?></td>
                                       <td><?php echo $dato['id_usuario']; ?></td>
                                        <td><?php echo $dato['created_at']; ?></td>
-                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success btn-sm" href="#" data-href="<?= base_url() ?>compras/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
+                                    <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>ventas/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
+                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-success btn-sm" href="#" data-href="<?= base_url() ?>ventas/reingresar/<?php echo $dato['id']; ?>"><i class="fas fa-upload"></i></a></td>
 
                                 </tr>
                             <?php
@@ -85,7 +87,7 @@ helper('number');
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <a type="button" class="btn btn-success btn-ok">Eliminar</a>
+                    <a type="button" class="btn btn-success btn-ok">Reingresar</a>
                 </div>
             </div>
         </div>

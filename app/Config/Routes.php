@@ -42,6 +42,8 @@ $routes->post('/productos/actualizar', 'productos::actualizar');
 $routes->get('/productos/eliminar/(:num)', 'productos::eliminar/$1');
 $routes->get('/productos/reingresar/(:num)', 'productos::reingresar/$1');
 $routes->get('/productos/buscarPorCodigo/(:any)', 'productos::buscarPorCodigo/$1');
+$routes->get('/productos/autoCompleteData(:any)', 'productos::autoCompleteData/$1');
+
 
 
 //Clientes
@@ -53,6 +55,8 @@ $routes->get('/clientes/editar/(:num)', 'clientes::editar/$1');
 $routes->post('/clientes/actualizar', 'clientes::actualizar');
 $routes->get('/clientes/eliminar/(:num)', 'clientes::eliminar/$1');
 $routes->get('/clientes/reingresar/(:num)', 'clientes::reingresar/$1');
+$routes->get('/clientes/autoCompleteData(:any)', 'clientes::autoCompleteData/$1');
+
 
 
 //Configuracion
@@ -84,14 +88,20 @@ $routes->get('/compras/reingresar/(:num)', 'compras::reingresar/$1');
 
 
 
+//Temporal Movimientos
+$routes->get('/temporalmovimiento/insertar/(:num)/(:num)/(:any)', 'temporalmovimiento::insertar/$1/$2/$3');
+$routes->get('/temporalmovimiento/cargaProductos/(:num)', 'temporalmovimiento::cargaProductos/$1');
+$routes->get('/temporalmovimiento/eliminar/(:num)/(:any)', 'temporalmovimiento::eliminar/$1/$2');
 
-
-
-//Temporal Compras
-$routes->get('/temporalcompras/insertar/(:num)/(:num)/(:any)', 'temporalcompras::insertar/$1/$2/$3');
-$routes->get('/temporalcompras/cargaProductos/(:num)', 'temporalcompras::cargaProductos/$1');
-$routes->get('/temporalcompras/eliminar/(:num)/(:any)', 'temporalcompras::eliminar/$1/$2');
-
+//Ventas
+$routes->get('/ventas/venta', 'ventas::venta');
+$routes->post('/ventas/guardar', 'ventas::guardar');
+$routes->get('/ventas/muestraTicket/(:num)', 'ventas::muestraTicket/$1');
+$routes->get('/ventas/generaTicket/(:num)', 'ventas::generaTicket/$1');
+$routes->get('/ventas', 'ventas::index');
+$routes->get('/ventas/eliminar/(:num)', 'ventas::eliminar/$1');
+$routes->get('/ventas/eliminados', 'ventas::eliminados');
+$routes->get('/ventas/reingresar/(:num)', 'ventas::reingresar/$1');
 
 
 //Cajas
@@ -113,3 +123,4 @@ $routes->get('/roles/editar/(:num)', 'roles::editar/$1');
 $routes->post('/roles/actualizar', 'roles::actualizar');
 $routes->get('/roles/eliminar/(:num)', 'roles::eliminar/$1');
 $routes->get('/roles/reingresar/(:num)', 'roles::reingresar/$1');
+
