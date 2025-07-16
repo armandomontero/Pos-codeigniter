@@ -14,10 +14,17 @@
         </div>
 
         <div class="row container  justify-content-center mb-4">
-        <Button onclick="window.location.reload();" class="btn btn-success"><i class="fas fa-print"></i>  Imprimir Nuevamente</Button>
+        <Button onclick="window.location.reload();" class="btn btn-success"><i class="fas fa-print"></i> Imprimir Nuevamente</Button>
        
     </div>
     <div class="row container  justify-content-center">
-      <a href="<?=base_url()?>/ventas/venta" class="btn btn-primary"><i class="fas fa-cash-register"></i> Nueva Venta</a></div>
+      <a href="<?=base_url()?>ventas/venta" id="nueva" class="btn btn-primary"><i class="fas fa-cash-register"></i> Nueva Venta</a></div>
     </div>
 </main>
+
+<script>
+                    setTimeout(() => {
+$("#nueva").select();
+$("#nueva").focus();
+}, "1 second");
+</script>
