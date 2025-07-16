@@ -26,7 +26,7 @@ class Compras extends BaseController
 
     public function index($activo = 1)
     {
-        $compras = $this->compras->where('activo', $activo)->orderBy('id', 'DESC')->findAll();
+        $compras = $this->compras->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->orderBy('id', 'DESC')->findAll();
         $data = ['titulo' => 'compras', 'datos' => $compras];
 
         echo view('header');
@@ -95,10 +95,10 @@ class Compras extends BaseController
         $id_compra = $this->request->getPost('id_compra');
         $total = $this->request->getPost('total_numero');
 
-        $session = session();
-        $id_usuario = $session->id_usuario;
+        
+        $id_usuario = $this->session->id_usuario;
 
-        $resultadoId = $this->compras->insertarCompra($id_compra, $total, $id_usuario);
+        $resultadoId = $this->compras->insertarCompra($id_compra, $total, $id_usuario, $this->session->id_tienda);
 
         $this->temporal_compra = new TemporalMovimientoModel();
 
@@ -131,11 +131,13 @@ class Compras extends BaseController
     }
 
     function generaCompraPdf($id_compra){
-        $datosCompra = $this->compras->where('id', $id_compra)->first();
-
+        $datosCompra = $this->compras->where('id', $id_compra)->where('id_tienda', $this->session->id_tienda)->first();
          $this->detalle_compra->select('*');
          $this->detalle_compra->where('id_compra', $id_compra);
         $detalleCompra = $this->detalle_compra->findAll();
+
+        if($datosCompra){
+           
 
         $configuracion = $this->configuracion->first();
 
@@ -196,4 +198,8 @@ class Compras extends BaseController
         $pdf -> Output('compraPdf.pdf', 'I');
 
     }
+else{
+    echo 'No autorizado';
+}
+}
 }

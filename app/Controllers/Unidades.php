@@ -33,7 +33,7 @@ class Unidades extends BaseController
 
     public function index($activo = 1)
     {
-        $unidades = $this->unidades->where('activo', $activo)->findAll();
+        $unidades = $this->unidades->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'Unidades', 'datos' => $unidades];
 
         echo view('header');
@@ -43,7 +43,7 @@ class Unidades extends BaseController
 
     public function eliminados($activo = 0)
     {
-        $unidades = $this->unidades->where('activo', $activo)->findAll();
+        $unidades = $this->unidades->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'Unidades', 'datos' => $unidades];
 
         echo view('header');
@@ -66,7 +66,8 @@ class Unidades extends BaseController
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
             $this->unidades->save([
                 'nombre' => $this->request->getPost('nombre'),
-                'nombre_corto' => $this->request->getPost('nombre_corto')
+                'nombre_corto' => $this->request->getPost('nombre_corto'),
+                'id_tienda' => $this->session->id_tienda
             ]);
             return redirect()->to(base_url() . 'unidades');
         } else {

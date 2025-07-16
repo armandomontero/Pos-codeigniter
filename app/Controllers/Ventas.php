@@ -26,7 +26,7 @@ class Ventas extends BaseController
 
     public function index($activo = 1)
     {
-        $ventas = $this->ventas->obtener($activo);
+        $ventas = $this->ventas->obtener($activo, $this->session->id_tienda);
         
         $data = ['titulo' => 'ventas', 'datos' => $ventas];
 
@@ -96,11 +96,11 @@ class Ventas extends BaseController
         $id_cliente = $this->request->getPost('id_cliente');
         $forma_pago = $this->request->getPost('forma_pago');
 
-        $session = session();
-        $id_usuario = $session->id_usuario;
-        $id_caja = $session->id_caja;
+        
+        $id_usuario = $this->session->id_usuario;
+        $id_caja = $this->session->id_caja;
 
-        $resultadoId = $this->ventas->insertarVenta($id_venta, $total, $id_usuario, $id_caja, $id_cliente, $forma_pago);
+        $resultadoId = $this->ventas->insertarVenta($id_venta, $total, $id_usuario, $id_caja, $id_cliente, $forma_pago, $this->session->id_tienda);
 
         $this->temporal_compra = new TemporalMovimientoModel();
 
@@ -133,8 +133,11 @@ class Ventas extends BaseController
     }
 
     function generaTicket($id_venta){
-        $datosCompra = $this->ventas->where('id', $id_venta)->first();
-
+        $datosCompra = $this->ventas->where('id', $id_venta)->where('id_tienda', $this->session->id_tienda)->first();
+        if($datosCompra==null){
+          echo 'No autorizado';
+          return 0;
+        }
          $this->detalle_venta->select('*');
          $this->detalle_venta->where('id_venta', $id_venta);
         $detalleVenta = $this->detalle_venta->findAll();

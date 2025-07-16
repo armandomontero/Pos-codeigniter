@@ -40,7 +40,7 @@ class clientes extends BaseController
 
     public function index($activo = 1)
     {
-        $clientes = $this->clientes->where('activo', $activo)->orderBy('nombre', 'ASC')->findAll();
+        $clientes = $this->clientes->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'ASC')->findAll();
         $data = ['titulo' => 'clientes', 'datos' => $clientes];
 
         echo view('header');
@@ -50,7 +50,7 @@ class clientes extends BaseController
 
     public function eliminados($activo = 0)
     {
-        $clientes = $this->clientes->where('activo', $activo)->findAll();
+        $clientes = $this->clientes->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'clientes', 'datos' => $clientes];
 
         echo view('header');
@@ -84,7 +84,8 @@ else{
                 'comuna' => $this->request->getPost('comuna'),
                 'telefono' => $this->request->getPost('telefono'),
                 'correo' => $this->request->getPost('correo'),
-                'activo' => 1
+                'activo' => 1,
+                'id_tienda' => $this->session->id_tienda
 
                  ]);
                  return redirect()->to(base_url() . 'clientes');
@@ -152,7 +153,7 @@ else{
     public function autoCompleteData(){
         $returnData = array();
         $valor = $this->request->getGet('term');
-        $clientes = $this->clientes->like('nombre', $valor)->where('activo', 1)->findAll();
+        $clientes = $this->clientes->like('nombre', $valor)->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->findAll();
         if(!empty($clientes)){
             foreach($clientes as $row){
                 $data['id'] = $row['id'];

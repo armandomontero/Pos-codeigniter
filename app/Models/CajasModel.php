@@ -11,7 +11,7 @@ class CajasModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['numero_caja', 'nombre', 'folio', 'activo'];
+    protected $allowedFields = ['numero_caja', 'nombre', 'folio', 'activo', 'id_tienda'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

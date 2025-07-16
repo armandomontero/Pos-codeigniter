@@ -11,7 +11,7 @@ class RolesModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['nombre', 'activo'];
+    protected $allowedFields = ['nombre', 'activo', 'id_tienda'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

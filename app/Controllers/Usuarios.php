@@ -138,7 +138,7 @@ $this->reglasUpdate = [
 
     public function index($activo = 1)
     {
-        $usuarios = $this->usuarios->where('activo', $activo)->findAll();
+        $usuarios = $this->usuarios->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'Usuarios', 'datos' => $usuarios];
 
         echo view('header');
@@ -148,7 +148,7 @@ $this->reglasUpdate = [
 
     public function eliminados($activo = 0)
     {
-        $usuarios = $this->usuarios->where('activo', $activo)->findAll();
+        $usuarios = $this->usuarios->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'Usuarios', 'datos' => $usuarios];
 
         echo view('header');
@@ -159,9 +159,9 @@ $this->reglasUpdate = [
     public function nuevo($valid = null)
     {
         //llamamos cajas
-        $cajas = $this->cajas->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        $cajas = $this->cajas->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
         //llamamos roles
-        $roles = $this->roles->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        $roles = $this->roles->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
 
         if ($valid != null) {
             $data = ['titulo' => 'Agregar Usuario', 'cajas' => $cajas, 'roles' => $roles, 'validation' => $valid];
@@ -187,7 +187,8 @@ $this->reglasUpdate = [
                 'password' => $hash,
                 'id_caja' => $this->request->getPost('id_caja'),
                 'id_rol' => $this->request->getPost('id_rol'),
-                'activo' => 1
+                'activo' => 1,
+                'id_tienda' => $this->session->id_tienda
             ]);
             return redirect()->to(base_url() . 'usuarios');
         } else {
@@ -199,12 +200,12 @@ $this->reglasUpdate = [
     public function editar($id, $valid = null)
     {
         //llamamos cajas
-        $cajas = $this->cajas->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        $cajas = $this->cajas->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
         //llamamos roles
-        $roles = $this->roles->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        $roles = $this->roles->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
 
         try {
-            $usuario = $this->usuarios->where('id', $id)->first();
+            $usuario = $this->usuarios->where('id', $id)->where('id_tienda', $this->session->id_tienda)->first();
         } catch (\Exception $e) {
             exit($e->getMessage());
         }
@@ -292,7 +293,8 @@ $this->reglasUpdate = [
                         'nombre' => $datosUsuario['nombre'],
                         'user' => $datosUsuario['usuario'],
                         'id_caja' => $datosUsuario['id_caja'],
-                        'id_rol' => $datosUsuario['id_rol']
+                        'id_rol' => $datosUsuario['id_rol'],
+                        'id_tienda' => $datosUsuario['id_tienda']
                     ];
 
                     $session = session();

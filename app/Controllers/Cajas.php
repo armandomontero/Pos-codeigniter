@@ -5,11 +5,13 @@ namespace App\Controllers;
 use App\Controllers\BaseController;
 use App\Models\CajasModel;
 
+
 class Cajas extends BaseController
 {
 
     protected $cajas;
     protected $reglas;
+    
 
     public function __construct()
     {
@@ -46,7 +48,10 @@ class Cajas extends BaseController
 
     public function index($activo = 1)
     {
-        $cajas = $this->cajas->where('activo', $activo)->findAll();
+
+        
+
+        $cajas = $this->cajas->where('activo', $activo)->where('id_tienda', $this->session->id_tienda )->findAll();
         $data = ['titulo' => 'Cajas', 'datos' => $cajas];
 
         echo view('header');
@@ -56,7 +61,7 @@ class Cajas extends BaseController
 
     public function eliminados($activo = 0)
     {
-        $cajas = $this->cajas->where('activo', $activo)->findAll();
+        $cajas = $this->cajas->where('activo', $activo)->where('id_tienda', $this->session->id_tienda )->findAll();
         $data = ['titulo' => 'Cajas', 'datos' => $cajas];
 
         echo view('header');
@@ -82,7 +87,8 @@ class Cajas extends BaseController
             $this->cajas->save([
                 'numero_caja' => $this->request->getPost('numero_caja'),
                 'nombre' => $this->request->getPost('nombre'),
-                'folio' => $this->request->getPost('folio')
+                'folio' => $this->request->getPost('folio'),
+                'id_tienda' => $this->session->id_tienda
             ]);
             return redirect()->to(base_url() . 'cajas');
         } else {

@@ -30,7 +30,7 @@ class roles extends BaseController
 
     public function index($activo = 1)
     {
-        $roles = $this->roles->where('activo', $activo)->findAll();
+        $roles = $this->roles->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'Roles', 'datos' => $roles];
 
         echo view('header');
@@ -40,7 +40,7 @@ class roles extends BaseController
 
     public function eliminados($activo = 0)
     {
-        $roles = $this->roles->where('activo', $activo)->findAll();
+        $roles = $this->roles->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'Roles', 'datos' => $roles];
 
         echo view('header');
@@ -65,7 +65,8 @@ class roles extends BaseController
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
             $this->roles->save([
                 'nombre' => $this->request->getPost('nombre'),
-                'activo' => 1
+                'activo' => 1,
+                'id_tienda' => $this->session->id_tienda
             ]);
             return redirect()->to(base_url() . 'roles');
         } else {
@@ -77,9 +78,14 @@ class roles extends BaseController
     public function editar($id, $valid=null)
     {
         try {
-            $categoria = $this->roles->where('id', $id)->first();
+            $categoria = $this->roles->where('id', $id)->where('id_tienda', $this->session->id_tienda)->first();
         } catch (\Exception $e) {
             exit($e->getMessage());
+        }
+
+        if($categoria==null){
+            echo 'No autorizado';
+            return 0;
         }
 if ($valid != null) {
             $data = ['titulo' => 'Editar Rol', 'datos' => $categoria, 'validation' => $valid];

@@ -30,7 +30,7 @@ class Categorias extends BaseController
 
     public function index($activo = 1)
     {
-        $categorias = $this->categorias->where('activo', $activo)->findAll();
+        $categorias = $this->categorias->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'Categorias', 'datos' => $categorias];
 
         echo view('header');
@@ -40,7 +40,7 @@ class Categorias extends BaseController
 
     public function eliminados($activo = 0)
     {
-        $categorias = $this->categorias->where('activo', $activo)->findAll();
+        $categorias = $this->categorias->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'Categorías', 'datos' => $categorias];
 
         echo view('header');
@@ -64,7 +64,8 @@ class Categorias extends BaseController
     {
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
             $this->categorias->save([
-                'nombre' => $this->request->getPost('nombre')
+                'nombre' => $this->request->getPost('nombre'),
+                'id_tienda' => $this->session->id_tienda
             ]);
             return redirect()->to(base_url() . 'categorias');
         } else {

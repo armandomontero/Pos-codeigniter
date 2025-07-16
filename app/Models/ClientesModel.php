@@ -12,7 +12,7 @@ class clientesModel extends Model{
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['nombre', 'direccion', 'comuna', 'region', 'telefono', 
-    'correo', 'activo'];
+    'correo', 'activo', 'id_tienda'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

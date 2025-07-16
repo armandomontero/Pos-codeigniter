@@ -24,10 +24,9 @@ class productos extends BaseController
 
         $this->reglas = [
             'codigo' => [
-                'rules' => 'required|is_unique[productos.codigo]',
+                'rules' => 'required',
                 'errors' => [
-                    'required' => 'El campo {field} es obligatorio.',
-                     'is_unique' => 'El código ya está registrado.'
+                    'required' => 'El campo {field} es obligatorio.'
                 ]
             ],
             'nombre' => [
@@ -41,7 +40,7 @@ class productos extends BaseController
 
     public function index($activo = 1)
     {
-        $productos = $this->productos->where('activo', $activo)->findAll();
+        $productos = $this->productos->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'Productos', 'datos' => $productos];
 
         echo view('header');
@@ -51,7 +50,7 @@ class productos extends BaseController
 
     public function eliminados($activo = 0)
     {
-        $productos = $this->productos->where('activo', $activo)->findAll();
+        $productos = $this->productos->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
         $data = ['titulo' => 'productos', 'datos' => $productos];
 
         echo view('header');
@@ -62,10 +61,10 @@ class productos extends BaseController
     public function nuevo($valid = null)
     {
         //llamamos unidades
-        $unidades = $this->unidades->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        $unidades = $this->unidades->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
 
         //llamamos categorias
-        $categorias = $this->categorias->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        $categorias = $this->categorias->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
 if($valid!=null){
             $data = ['titulo' => 'Agregar Producto', 'unidades' => $unidades, 'categorias' => $categorias, 'validation' => $valid];
 
@@ -91,7 +90,8 @@ else{
                 'inventariable' => $this->request->getPost('inventariable'),
                 'id_unidad' => $this->request->getPost('id_unidad'),
                 'id_categoria' => $this->request->getPost('id_categoria'),
-                'activo' => 1
+                'activo' => 1,
+                'id_tienda' => $this->session->id_tienda
 
                  ]);
                  return redirect()->to(base_url() . 'productos');
@@ -105,15 +105,21 @@ else{
     public function editar($id)
     {
         try {
-            $unidad = $this->productos->where('id', $id)->first();
+            $unidad = $this->productos->where('id', $id)->where('id_tienda', $this->session->id_tienda)->first();
         } catch (\Exception $e) {
             exit($e->getMessage());
         }
+
+        if($unidad==null){
+            echo 'No autorizado';
+            
+        }else{
+
          //llamamos unidades
-        $unidades = $this->unidades->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        $unidades = $this->unidades->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
 
         //llamamos categorias
-        $categorias = $this->categorias->where('activo', 1)->orderBy('nombre', 'asc')->findAll();
+        $categorias = $this->categorias->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
 
         $data = ['titulo' => 'Editar Producto', 'datos' => $unidad, 'unidades' => $unidades, 'categorias' => $categorias];
 
@@ -122,6 +128,7 @@ else{
         echo view('header');
         echo view('productos/editar', $data);
         echo view('footer');
+        }
     }
 
 
@@ -161,6 +168,7 @@ else{
         $this->productos->select('*');
         $this->productos->where('codigo', $codigo);
         $this->productos->where('activo', 1);
+        $this->productos->where('id_tienda', $this->session->id_tienda);
         $datos = $this->productos->get()->getRow();
 
         $res['existe'] = false;
@@ -182,7 +190,7 @@ else{
     public function autoCompleteData(){
         $returnData = array();
         $valor = $this->request->getGet('term');
-        $productos = $this->productos->like('codigo', $valor)->where('activo', 1)->findAll();
+        $productos = $this->productos->like('codigo', $valor)->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->findAll();
         if(!empty($productos)){
             foreach($productos as $row){
                 $data['id'] = $row['id'];

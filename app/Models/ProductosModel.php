@@ -12,7 +12,7 @@ class ProductosModel extends Model{
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['codigo', 'nombre', 'precio_venta', 'precio_compra', 'existencias', 
-    'stock_minimo', 'inventariable', 'id_unidad', 'id_categoria', 'activo'];
+    'stock_minimo', 'inventariable', 'id_unidad', 'id_categoria', 'activo', 'id_tienda'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
