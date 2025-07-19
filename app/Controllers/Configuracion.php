@@ -41,9 +41,9 @@ class configuracion extends BaseController
         echo view('footer');
     }
 
-    
 
-    
+
+
 
 
     public function actualizar()
@@ -51,7 +51,14 @@ class configuracion extends BaseController
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
             //comprobamos que exista
             $configuracion = $this->configuracion->where('id', $this->request->getPost('id'))->first();
+            $ruta_bd = '/';
+            if ($configuracion) {
+            $ruta_bd = $configuracion['logo'];
+            }
+            $carpeta_base = 'img/' . $this->session->id_tienda . '/logo';
            
+            if($this->request->getFile('tienda_logo')->getPath()){
+
             $validacion = $this->validate([
                 'tienda_logo' => [
                     'uploaded[tienda_logo]',
@@ -59,49 +66,47 @@ class configuracion extends BaseController
                     'max_size[tienda_logo,4096]'
                 ]
             ]);
-            if($validacion){
-            $img = $this->request->getFile('tienda_logo');
-            $nombre_archivo = 'logo.'.$img->getExtension();
-            $carpeta = './img/'.$this->session->id_tienda.'/logo';
-            $carpeta_base = 'img/'.$this->session->id_tienda.'/logo';
+            if ($validacion) {
+                $img = $this->request->getFile('tienda_logo');
+                $nombre_archivo = uniqid().'logo.' . $img->getExtension();
+                $carpeta = './img/' . $this->session->id_tienda . '/logo';
+                
 
-            
-            //Borramos anterior
-            if (file_exists('./'.$configuracion['logo'])){
-            unlink('./'.$configuracion['logo']); 
-            }
 
-            $img->move($carpeta, $nombre_archivo);
-            }
-            else{
+                //Borramos anterior
+                if (file_exists('./' . $configuracion['logo'])&&$configuracion['logo']!="") {
+                    unlink('./' . $configuracion['logo']);
+                }
+
+                $img->move($carpeta, $nombre_archivo);
+            } else {
                 echo $validacion;
             }
 
-            
-            if($configuracion){
+            $ruta_bd = $carpeta_base . '/' . $nombre_archivo;
+        }
+
+            if ($configuracion) {
                 //actualizamos
-            $this->configuracion->update($this->request->getPost('id'), [
-                'nombre' => $this->request->getPost('nombre'),
-                'direccion' => $this->request->getPost('direccion'),
-                'mensaje' => $this->request->getPost('mensaje'),
-                'logo' => $carpeta_base.'/'.$nombre_archivo
-            ]);
-        }
-        else{
-            //insertamos
-            $this->configuracion->save([
-                'nombre' => $this->request->getPost('nombre'),
-                'direccion' => $this->request->getPost('direccion'),
-                'mensaje' => $this->request->getPost('mensaje'),
-                'id_tienda' => $this->session->id_tienda
-            ]);
-        }
+                $this->configuracion->update($this->request->getPost('id'), [
+                    'nombre' => $this->request->getPost('nombre'),
+                    'direccion' => $this->request->getPost('direccion'),
+                    'mensaje' => $this->request->getPost('mensaje'),
+                    'logo' => $ruta_bd
+                ]);
+            } else {
+                //insertamos
+                $this->configuracion->save([
+                    'nombre' => $this->request->getPost('nombre'),
+                    'direccion' => $this->request->getPost('direccion'),
+                    'mensaje' => $this->request->getPost('mensaje'),
+                    'id_tienda' => $this->session->id_tienda,
+                    'logo' => $ruta_bd
+                ]);
+            }
             return redirect()->to(base_url() . 'configuracion');
         } else {
-           return $this->index($this->request->getPost('id'), $this->validator);
+            return $this->index($this->request->getPost('id'), $this->validator);
         }
     }
-    
-
-    
 }

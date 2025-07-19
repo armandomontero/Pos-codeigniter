@@ -2,23 +2,22 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class ProductosModel extends Model{
-    protected $table      = 'productos';
+class RolesPermisosModel extends Model{
+    protected $table      = 'roles_permisos';
     protected $primaryKey = 'id';
 
-    protected $useAutoIncrement = true;
+    protected $useAutoIncrement = true; 
 
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['codigo', 'nombre', 'precio_venta', 'precio_compra', 'existencias', 
-    'stock_minimo', 'inventariable', 'id_unidad', 'id_categoria', 'activo', 'id_tienda'];
+    protected $allowedFields = ['id_rol', 'id_permiso', 'id_tienda'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
 
     // Dates
-    protected $useTimestamps = true;
+    protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -41,21 +40,18 @@ class ProductosModel extends Model{
     protected $afterDelete    = [];
 
 
-    public function actualizaStock($id_producto, $cantidad){
-        $this->set('existencias', "existencias + $cantidad", FALSE);
-        $this->where('id', $id_producto);
-        $this->update();
-    }
+    public function verificaPermiso($id_rol, $permiso){
+        $acceso = false;
 
-    public function totalProductos($id_tienda){
-        $total = $this->where('activo', 1)->where('id_tienda', $id_tienda)->countAllResults();
-        return $total;
-    }
+        $this->select('*');
+        $this->join('permisos', 'roles_permisos.id_permiso = permisos.id');
+        $existe = $this->where(['id_rol'=> $id_rol, 'permisos.nombre'=> $permiso])->first();
 
-    public function productosMinimo($id_tienda){
-        $total = $this->where('activo', 1)->where('id_tienda', $id_tienda)->where('inventariable', 1)
-        ->where('existencias < stock_minimo')->countAllResults();
-    return $total;
+        if($existe!=null){
+            $acceso = true;
+        }
+
+        return $acceso;
     }
 }
 

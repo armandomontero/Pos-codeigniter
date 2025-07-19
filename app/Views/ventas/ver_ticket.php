@@ -23,7 +23,7 @@
 </main>
 
 <script>
-                    setTimeout(() => {
+setTimeout(() => {
 $("#nueva").select();
 $("#nueva").focus();
 }, "1 second");

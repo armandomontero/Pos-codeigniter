@@ -41,18 +41,18 @@
                             <input require autofocus class="form-control" value="<?= $datos['mensaje'] ?>" id="mensaje" name="mensaje" type="text" />
                         </div>
                         <div class="col-12 col-sm-6">
-                         
+
                         </div>
                     </div>
                 </div>
 
-                                <div class="form-group mb-4">
+                <div class="form-group mb-4">
                     <div class="row">
-                        
+
                         <div class="col-12 col-sm-6">
                             <label>Logotipo</label>
-                            <img src="<?=base_url().$datos['logo']?>" class="img-responsive" width="200"/>
-                            <input type="file" class="form-control" id="tienda_logo" name="tienda_logo" accept="image/jpeg, image/png"/>
+                            <img src="<?= base_url() . $datos['logo'] ?>" class="img-responsive" width="200" />
+                            <input  type="file" class="form-control" id="tienda_logo" name="tienda_logo" accept="image/jpeg, image/png" />
                         </div>
                     </div>
                 </div>
@@ -64,3 +64,4 @@
         </div>
     </div>
 </main>
+

@@ -133,6 +133,23 @@ $user_session = session();
 
             </li>
 
+             <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReportes"
+                    aria-expanded="true" aria-controls="collapseReportes">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reportes</span>
+                </a>
+<div id="collapseReportes" class="collapse" aria-labelledby="headingCompras" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Lista de Reportes:</h6>
+                        <a class="collapse-item" href="<?= base_url() ?>productos/reporteMinimos">Mínimo Stock</a>
+                        
+                    </div>
+                </div>
+            </li>
+
+
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseConf"

@@ -14,6 +14,7 @@ helper('number');
         <p>
             <a class="btn btn-info" href="<?= base_url() ?>productos/nuevo">Agregar</a>
             <a class="btn btn-warning" href="<?= base_url() ?>productos/eliminados">Eliminados</a>
+           
         </p>
 
         <!-- DataTales -->
@@ -54,7 +55,7 @@ helper('number');
                             ?>
                                 <tr>
                                     <td><?php echo $dato['id']; ?></td>
-                                    <td><?php echo $dato['codigo']; ?></td>
+                                    <td><a target="_blank" href="<?=base_url()?>/productos/generaBarras/<?php echo $dato['id'];?>"><?php echo $dato['codigo']; ?></a></td>
                                      <td><?php echo $dato['nombre']; ?></td>
                                       <td><?php echo number_to_currency($dato['precio_venta'], 'USD', 'en_US', 0); ?></td>
                                        <td><?php echo $dato['existencias']; ?></td>

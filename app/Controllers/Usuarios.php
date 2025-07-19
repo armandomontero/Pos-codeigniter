@@ -6,10 +6,11 @@ use App\Controllers\BaseController;
 use App\Models\UsuariosModel;
 use App\Models\CajasModel;
 use App\Models\RolesModel;
+use App\Models\LogsModel;
 
 class Usuarios extends BaseController
 {
-    protected $usuarios, $cajas, $roles;
+    protected $usuarios, $cajas, $roles, $log;
     protected $reglas, $reglasLogin, $reglasCambiaPassword, $reglasUpdate;
 
     public function __construct()
@@ -17,6 +18,7 @@ class Usuarios extends BaseController
         $this->usuarios = new UsuariosModel();
         $this->cajas = new CajasModel();
         $this->roles = new RolesModel();
+        $this->log = new LogsModel();
 
         helper(['form']);
 
@@ -297,6 +299,13 @@ $this->reglasUpdate = [
                         'id_tienda' => $datosUsuario['id_tienda']
                     ];
 
+                    $this->log->save([
+                        'id_usuario' => $datosUsuario['id'],
+                        'evento' => 'Inicia Sesión',
+                        'ip' => $_SERVER['REMOTE_ADDR'],
+                        'device' => $_SERVER['HTTP_USER_AGENT']
+                    ]);
+
                     $session = session();
                     $session->set($datosSesion);
 
@@ -318,6 +327,12 @@ $this->reglasUpdate = [
 
     public function logout()
     {
+        $this->log->save([
+                        'id_usuario' => $this->session->id_usuario,
+                        'evento' => 'Cierra Sesión',
+                        'ip' => $_SERVER['REMOTE_ADDR'],
+                        'device' => $_SERVER['HTTP_USER_AGENT']
+                    ]);
         $session = session();
         $session->destroy();
         return redirect()->to(base_url());

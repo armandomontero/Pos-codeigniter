@@ -43,6 +43,10 @@ $routes->get('/productos/eliminar/(:num)', 'productos::eliminar/$1');
 $routes->get('/productos/reingresar/(:num)', 'productos::reingresar/$1');
 $routes->get('/productos/buscarPorCodigo/(:any)', 'productos::buscarPorCodigo/$1');
 $routes->get('/productos/autoCompleteData(:any)', 'productos::autoCompleteData/$1');
+$routes->get('/productos/generaBarras/(:num)', 'productos::generaBarras/$1');
+$routes->get('/productos/reporteMinimos', 'productos::reporteMinimos');
+$routes->get('/productos/generaReporteMinimo', 'productos::generaReporteMinimo');
+
 
 
 
@@ -125,3 +129,8 @@ $routes->get('/roles/editar/(:num)', 'roles::editar/$1');
 $routes->post('/roles/actualizar', 'roles::actualizar');
 $routes->get('/roles/eliminar/(:num)', 'roles::eliminar/$1');
 $routes->get('/roles/reingresar/(:num)', 'roles::reingresar/$1');
+$routes->get('/roles/permisos/(:num)', 'roles::permisos/$1');
+$routes->post('/roles/guardaPermisos', 'roles::guardaPermisos');
+$routes->get('/roles/no_autorizado', 'roles::no_autorizado');
+
+

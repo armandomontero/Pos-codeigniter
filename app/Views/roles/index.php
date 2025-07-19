@@ -26,6 +26,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
+                                 <th>Permisos</th>
                                 <th></th>
                                 <th></th>
 
@@ -37,6 +38,7 @@
                                 <th>Nombre</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -45,11 +47,11 @@
 
                             ?>
                                 <tr>
-                                    <td><?php echo $dato['id']; ?></td>
-                                    <td><?php echo $dato['nombre']; ?></td>
-                                    <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>roles/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
-                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>roles/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
-
+                            <td><?php echo $dato['id']; ?></td>
+                            <td><?php echo $dato['nombre']; ?></td>
+                            <td><a class="btn btn-primary btn-sm" href="<?= base_url() ?>roles/permisos/<?php echo $dato['id']; ?>"><i class="fas fa-users-cog"></i></a></td>
+                            <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>roles/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
+                            <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>roles/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
                             <?php
                             }

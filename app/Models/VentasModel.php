@@ -55,7 +55,7 @@ class VentasModel extends Model{
     }
 
 
-    public function obtener($activo = 1, $id_tienda){
+    public function obtener( $id_tienda, $activo = 1){
         $this->select('ventas.*, u.nombre AS cajero, c.nombre AS cliente');
         $this->join('usuarios AS u', 'ventas.id_usuario = u.id');
         $this->join('clientes AS c', 'ventas.id_cliente = c.id');
@@ -65,6 +65,19 @@ class VentasModel extends Model{
         $datos = $this->findAll();
 
         return $datos;
+    }
+
+    public function cuentaDia($id_tienda, $fecha){
+        
+        $total = $this->where('activo', 1)->where('DATE(created_at)', $fecha)->where('id_tienda', $id_tienda)->countAllResults();
+        return $total;
+    }
+
+        public function totalDia($id_tienda, $fecha){
+        
+        $total = $this->select('SUM(total) AS totalDia')->where('activo', 1)->where('DATE(created_at)', $fecha)->where('id_tienda', $id_tienda)->first();
+
+        return $total['totalDia'];
     }
 }
 

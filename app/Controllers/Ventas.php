@@ -8,11 +8,12 @@ use App\Models\TemporalMovimientoModel;
 use App\Models\DetalleVentaModel;
 use App\Models\ProductosModel;
 use App\Models\configuracionModel;
+use App\Models\CajasModel;
 use FPDF;
 
 class Ventas extends BaseController
 {
-    protected $ventas, $temporal_compra, $detalle_venta, $productos, $configuracion;
+    protected $ventas, $temporal_compra, $detalle_venta, $productos, $configuracion, $cajas;
 
 
     public function __construct()
@@ -21,6 +22,7 @@ class Ventas extends BaseController
         $this->detalle_venta = new DetalleVentaModel();
         $this->configuracion = new configuracionModel();
         $this->productos = new ProductosModel();
+        $this->cajas = new CajasModel();
         helper(['form']);
     }
 
@@ -96,6 +98,7 @@ class Ventas extends BaseController
         $id_cliente = $this->request->getPost('id_cliente');
         $forma_pago = $this->request->getPost('forma_pago');
 
+       
         
         $id_usuario = $this->session->id_usuario;
         $id_caja = $this->session->id_caja;
@@ -239,8 +242,12 @@ margin: 0 auto;}
              <tr>
             <th class="direccion"><?=$configuracion['direccion']?></th>
             </tr>
+            
                <tr>
             <th class="fecha"><?=date('d-m-Y H:i:s', strtotime($datosCompra['created_at']))?></th>
+            </tr>
+             <tr>
+            <th class="direccion">Folio: <?=$datosCompra['folio']?></th>
             </tr>
           </thead>
         </table>
