@@ -7,6 +7,7 @@ use App\Models\UsuariosModel;
 use App\Models\CajasModel;
 use App\Models\RolesModel;
 use App\Models\LogsModel;
+use App\Models\configuracionModel;
 
 class Usuarios extends BaseController
 {
@@ -290,13 +291,19 @@ $this->reglasUpdate = [
             $datosUsuario = $this->usuarios->where('usuario', $usuario)->first();
             if ($datosUsuario != null) {
                 if (password_verify($password, $datosUsuario['password'])) {
+
+                    //para llamar logo
+                    $configuracion = new configuracionModel();
+                    $logo = $configuracion->select('logo')->where('id_tienda', $datosUsuario['id_tienda'])->first();
+
                     $datosSesion = [
                         'id_usuario' => $datosUsuario['id'],
                         'nombre' => $datosUsuario['nombre'],
                         'user' => $datosUsuario['usuario'],
                         'id_caja' => $datosUsuario['id_caja'],
                         'id_rol' => $datosUsuario['id_rol'],
-                        'id_tienda' => $datosUsuario['id_tienda']
+                        'id_tienda' => $datosUsuario['id_tienda'],
+                        'ruta_logo' => $logo['logo']
                     ];
 
                     $this->log->save([

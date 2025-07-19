@@ -48,9 +48,11 @@ $user_session = session();
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>">
                 <div class="sidebar-brand-icon ">
-                  <i class="fas fa-home"></i>
+                 <img width="80%" src="<?=base_url()?>/img/logo_icon.png?"/>
                 </div>
-                <div class="sidebar-brand-text ml-2 "> Bienvenido/a</div>
+                <div class="sidebar-brand-text ml-0 ">
+                    <img width="90%" src="<?=base_url()?>/img/logo_ligth.png?"/>
+                </div>
             </a>
 
             <!-- Divider -->
@@ -190,7 +192,7 @@ $user_session = session();
 
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-<img height="100%" src="<?=base_url()?>img/logo.png"/>
+<img height="100%" src="<?=base_url().$user_session->ruta_logo?>"/>
                     <!-- Sidebar Toggle (Topbar) -->
                     <form class="form-inline">
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">

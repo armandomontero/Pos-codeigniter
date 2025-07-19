@@ -66,6 +66,7 @@ $routes->get('/clientes/autoCompleteData(:any)', 'clientes::autoCompleteData/$1'
 //Configuracion
 $routes->get('/configuracion', 'configuracion::index');
 $routes->post('/configuracion/actualizar', 'configuracion::actualizar');
+$routes->get('/configuracion/getLogo', 'configuracion::getLogo');
 
 
 //Usuarios

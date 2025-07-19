@@ -109,4 +109,9 @@ class configuracion extends BaseController
             return $this->index($this->request->getPost('id'), $this->validator);
         }
     }
+
+    public function getLogo(){
+          $logo_header = $this->configuracion->select('logo')->where('id_tienda', $this->session->id_tienda)->first();
+          echo $logo_header['logo'];
+    }
 }
