@@ -2,7 +2,7 @@
 namespace App\Models;
 use CodeIgniter\Model;
 
-class CajasModel extends Model{
+class ArqueoCajaModel extends Model{
     protected $table      = 'arqueo_caja';
     protected $primaryKey = 'id';
 
