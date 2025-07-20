@@ -8,13 +8,13 @@ helper('number');
 
         <!-- Page Heading -->
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item"><a href="<?= base_url()?>">Inicio</a></li>
+            <li class="breadcrumb-item"><a href="<?= base_url() ?>">Inicio</a></li>
             <li class="breadcrumb-item active"><?= $titulo ?></li>
         </ol>
         <p>
             <a class="btn btn-info" href="<?= base_url() ?>productos/nuevo">Agregar</a>
             <a class="btn btn-warning" href="<?= base_url() ?>productos/eliminados">Eliminados</a>
-           
+
         </p>
 
         <!-- DataTales -->
@@ -26,7 +26,7 @@ helper('number');
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                            <tr class="bg-primary text-white">
                                 <th>ID</th>
                                 <th>Código</th>
                                 <th>Nombre</th>
@@ -38,8 +38,8 @@ helper('number');
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr>
-                               <th>ID</th>
+                            <tr class="bg-primary text-white">
+                                <th>ID</th>
                                 <th>Código</th>
                                 <th>Nombre</th>
                                 <th>Precio</th>
@@ -54,11 +54,11 @@ helper('number');
 
                             ?>
                                 <tr>
-                                    <td><?php echo $dato['id']; ?></td>
-                                    <td><a target="_blank" href="<?=base_url()?>/productos/generaBarras/<?php echo $dato['id'];?>"><?php echo $dato['codigo']; ?></a></td>
-                                     <td><?php echo $dato['nombre']; ?></td>
-                                      <td><?php echo number_to_currency($dato['precio_venta'], 'USD', 'en_US', 0); ?></td>
-                                       <td><?php echo $dato['existencias']; ?></td>
+                                    <td class="text-right"><?php echo $dato['id']; ?></td>
+                                    <td class="text-right"><a target="_blank" href="<?= base_url() ?>/productos/generaBarras/<?php echo $dato['id']; ?>"><?php echo $dato['codigo']; ?></a></td>
+                                    <td><?php echo $dato['nombre']; ?></td>
+                                    <td class="text-right"><?php echo number_to_currency($dato['precio_venta'], 'USD', 'en_US', 0); ?></td>
+                                    <td class="text-right"><?php echo number_format($dato['existencias'], 0, ',', '.'); ?></td>
                                     <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>productos/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
                                     <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>productos/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
 
@@ -75,22 +75,22 @@ helper('number');
 </main>
 
 <!-- Modal confirmación -->
-    <div class="modal fade" id="modal-confirma" tabindex="-1">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Eliminar Registro</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>¿Está seguro que desea eliminar el registro?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <a type="button" class="btn btn-danger btn-ok">Eliminar</a>
-                </div>
+<div class="modal fade" id="modal-confirma" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Eliminar Registro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea eliminar el registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <a type="button" class="btn btn-danger btn-ok">Eliminar</a>
             </div>
         </div>
     </div>
+</div>

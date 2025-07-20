@@ -25,7 +25,7 @@ helper('number');
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                            <tr class="bg-primary text-white">
                                 <th>ID</th>
                                 <th>Código</th>
                                 <th>Nombre</th>
@@ -36,7 +36,7 @@ helper('number');
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr>
+                            <tr class="bg-primary text-white">
                                 <th>ID</th>
                                 <th>Código</th>
                                 <th>Nombre</th>

@@ -23,7 +23,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                            <tr class="bg-primary text-white">
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th></th>
@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr>
+                            <tr class="bg-primary text-white">
                                 <th>ID</th>
                                 <th>Nombre</th>
                                 <th></th>

@@ -24,24 +24,24 @@ helper('number');
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                            <tr class="bg-primary text-white">
                                 <th>ID</th>
                                 <th>Folio</th>
                                 <th>Total</th>
                                 <th>Fecha</th>
-                                <th>Existencias</th>
+                                <th>Usuario</th>
                                 <th></th>
                                 <th></th>
 
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr>
+                            <tr class="bg-primary text-white">
                                <th>ID</th>
                                 <th>Folio</th>
                                 <th>Total</th>
                                 <th>Fecha</th>
-                                <th>Existencias</th>
+                                <th>Usuario</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -52,11 +52,11 @@ helper('number');
 
                             ?>
                                 <tr>
-                                    <td><?php echo $dato['id']; ?></td>
-                                    <td><?php echo $dato['folio']; ?></td>
-                                     <td><?php echo number_to_currency($dato['total'], 'USD', 'en_US', 0); ?></td>
-                                      <td><?php echo $dato['created_at']; ?></td>
-                                       <td><?php echo $dato['created_at']; ?></td>
+                                    <td class="text-right"><?php echo $dato['id']; ?></td>
+                                    <td class="text-right"><?php echo $dato['folio']; ?></td>
+                                     <td class="text-right"><?php echo number_to_currency($dato['total'], 'USD', 'en_US', 0); ?></td>
+                                      <td class="text-center"><?php echo date('d-m-Y H:i:s', strtotime($dato['created_at'])); ?></td>
+                                       <td><?php echo $dato['nombre']; ?></td>
                                     <td><a class="btn btn-primary btn-sm" href="<?= base_url() ?>compras/muestraCompraPdf/<?php echo $dato['id']; ?>"><i class="far fa-file-pdf"></i></a></td>
                                     <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>compras/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
 

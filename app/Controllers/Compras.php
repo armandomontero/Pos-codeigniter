@@ -26,7 +26,9 @@ class Compras extends BaseController
 
     public function index($activo = 1)
     {
-        $compras = $this->compras->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->orderBy('id', 'DESC')->findAll();
+        $compras = $this->compras->select('compras.id, folio, total, compras.created_at, nombre')->join('usuarios', 'compras.id_usuario = usuarios.id')
+        ->where('compras.activo', $activo)->where('compras.id_tienda', $this->session->id_tienda)
+        ->orderBy('compras.id', 'DESC')->findAll();
         $data = ['titulo' => 'compras', 'datos' => $compras];
 
         echo view('header');
@@ -140,7 +142,6 @@ class Compras extends BaseController
            
 
         $configuracion = $this->configuracion->first();
-
         $pdf = new FPDF('P', 'mm', 'letter');
         
 
