@@ -59,7 +59,7 @@ $idVentaTmp = uniqid();
 
 
             <div class="row">
-                <button type="button" id="completa_venta" class="btn btn-success  mb-2 ">Completar Venta</button>
+                <button type="button" id="completa_venta" class="btn btn-success  mb-2 "><i class="fas fa-check"></i> Completar Venta</button>
                 <div class="col-12 col-sm-6 offset-md-4 ">
                     <label style="font-weight: bold; font-size: 30px; text-align: center;">Total:</label>
                     <span class="align-baseline"><input type="text" class="text-center" text id="total" name="total" size="6" readonly="true" value="0"

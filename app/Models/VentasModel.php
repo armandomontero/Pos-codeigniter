@@ -73,10 +73,24 @@ class VentasModel extends Model{
         return $total;
     }
 
+        public function cuentaDiaCaja($id_tienda, $id_caja,  $fecha){
+        
+        $total = $this->where('activo', 1)->where('DATE(created_at)', $fecha)->where('id_tienda', $id_tienda)->where('id_caja', $id_caja)->countAllResults();
+        return $total;
+    }
+
         public function totalDia($id_tienda, $fecha){
         
         $total = $this->select('SUM(total) AS totalDia')->where('activo', 1)->where('DATE(created_at)', $fecha)->where('id_tienda', $id_tienda)->first();
 
+        return $total['totalDia'];
+    }
+
+    public function totalDiaCaja($id_tienda, $id_caja, $fecha_apertura, $fecha, $forma_pago){
+        
+        $total = $this->select('SUM(total) AS totalDia')->where('activo', 1)->where("created_at BETWEEN '".$fecha_apertura."' AND '".$fecha."' ")
+        ->where('id_tienda', $id_tienda)->where('id_caja', $id_caja)->where('forma_pago', $forma_pago)->first();
+       
         return $total['totalDia'];
     }
 }

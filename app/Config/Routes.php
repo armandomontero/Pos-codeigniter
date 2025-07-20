@@ -120,6 +120,14 @@ $routes->get('/cajas/editar/(:num)', 'cajas::editar/$1');
 $routes->post('/cajas/actualizar', 'cajas::actualizar');
 $routes->get('/cajas/eliminar/(:num)', 'cajas::eliminar/$1');
 $routes->get('/cajas/reingresar/(:num)', 'cajas::reingresar/$1');
+$routes->get('/cajas/arqueos/(:num)', 'cajas::arqueos/$1');
+$routes->get('/cajas/nuevo_arqueo', 'cajas::nuevo_arqueo');
+$routes->post('/cajas/nuevo_arqueo', 'cajas::nuevo_arqueo');
+$routes->get('/cajas/cerrar', 'cajas::cerrar');
+$routes->post('/cajas/cerrar', 'cajas::cerrar');
+
+
+
 
 //Roles
 $routes->get('/roles', 'roles::index');

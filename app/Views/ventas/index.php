@@ -23,7 +23,7 @@ helper('number');
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                            <tr class="bg-primary text-white">
                                 <th>ID</th>
                                 <th>Folio</th>
                                 <th>Total</th>
@@ -36,7 +36,7 @@ helper('number');
                             </tr>
                         </thead>
                         <tfoot>
-                            <tr>
+                            <tr class="bg-primary text-white">
                                <th>ID</th>
                                 <th>Folio</th>
                                 <th>Total</th>
@@ -53,9 +53,9 @@ helper('number');
 
                             ?>
                                 <tr>
-                                    <td><?php echo $dato['id']; ?></td>
-                                    <td><?php echo $dato['folio']; ?></td>
-                                     <td><?php echo number_to_currency($dato['total'], 'USD', 'en_US', 0); ?></td>
+                                    <td class="text-right"><?php echo $dato['id']; ?></td>
+                                    <td class="text-right"><?php echo $dato['folio']; ?></td>
+                                     <td class="text-right"><?php echo number_to_currency($dato['total'], 'USD', 'en_US', 0); ?></td>
                                       <td><?php echo  date('d-m-Y H:i:s', strtotime($dato['created_at'])); ?></td>
                                        <td><?php echo $dato['cajero']; ?></td>
                                         <td><?php echo $dato['cliente']; ?></td>

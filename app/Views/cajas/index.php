@@ -27,7 +27,8 @@
                                 <th>ID</th>
                                 <th>Número</th>
                                 <th>Nombre</th>
-                                <th>Folio</th>
+                                <th>Arqueo</th>
+                                 <th></th>
                                 <th></th>
                                 <th></th>
 
@@ -38,7 +39,8 @@
                                 <th>ID</th>
                                <th>Número</th>
                                 <th>Nombre</th>
-                                <th>Folio</th>
+                                <th>Arqueo</th>
+                                 <th></th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -53,6 +55,7 @@
                                     <td><?php echo $dato['numero_caja']; ?></td>
                                     <td><?php echo $dato['nombre']; ?></td>
                                     <td><?php echo $dato['folio']; ?></td>
+                                    <td><a class="btn btn-primary btn-sm" href="<?= base_url() ?>cajas/arqueos/<?php echo $dato['id']; ?>"><i class="fas fa-balance-scale-right"></i></a></td>
                                     <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>cajas/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
                                     <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>cajas/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
 

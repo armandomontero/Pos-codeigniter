@@ -12,7 +12,7 @@ class ArqueoCajaModel extends Model{
     protected $useSoftDeletes = false;
 
     protected $allowedFields = ['id_caja', 'id_usuario', 'fecha_inicio', 'fecha_fin', 
-    'monto_inicial', 'monto_final', 'total_ventas', 'status'];
+    'monto_inicial', 'monto_final', 'total_efectivo', 'total_tarjeta', 'total_transferencia', 'total_ventas', 'diferencia', 'status'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -39,6 +39,17 @@ class ArqueoCajaModel extends Model{
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+
+    public function getDatos($id_caja){
+        $this->select('arqueo_caja.*, cajas.nombre');
+        $this->join('cajas', 'arqueo_caja.id_caja = cajas.id');
+        $this->where('arqueo_caja.id_caja', $id_caja);
+        $this->orderBy('arqueo_caja.id', 'DESC');
+        $datos = $this->findAll();
+
+        return $datos;
+    }
 }
 
 ?>
