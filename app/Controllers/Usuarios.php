@@ -8,11 +8,13 @@ use App\Models\CajasModel;
 use App\Models\RolesModel;
 use App\Models\LogsModel;
 use App\Models\configuracionModel;
+use CodeIgniter\API\ResponseTrait;
 
 class Usuarios extends BaseController
 {
     protected $usuarios, $cajas, $roles, $log;
     protected $reglas, $reglasLogin, $reglasCambiaPassword, $reglasUpdate;
+    use ResponseTrait;
 
     public function __construct()
     {
@@ -381,6 +383,37 @@ $this->reglasUpdate = [
             echo view('footer');
         } else {
             $this->cambia_password($this->validator);
+        }
+    }
+
+
+
+     public function authAPI()
+    {
+
+        if ($this->request->getMethod() == "POST" && $this->validate($this->reglasLogin)) {
+            $usuario = $this->request->getPost('usuario');
+            $password = $this->request->getPost('password');
+            
+            $datosUsuario = $this->usuarios->where('usuario', $usuario)->first();
+            if ($datosUsuario != null) {
+                if (password_verify($password, $datosUsuario['password'])) {
+
+                    $resultado = $datosUsuario['usuario'].' autenticado!';
+                    return $this->respond($resultado);
+                   
+
+                } else {
+                    $resultado = 'contraseña incorrecta';
+                     return $this->respond($resultado);
+                }
+            } else {
+                $resultado = 'Usuario o contraseña incorrecta';
+                 return $this->failServerError($resultado);
+            }
+        } else {
+            $resultado = 'Error en el servidor';
+                 return $this->failServerError($resultado);
         }
     }
 }

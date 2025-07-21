@@ -82,6 +82,8 @@ $routes->post('/usuarios/valida', 'usuarios::valida');
 $routes->get('/usuarios/logout', 'usuarios::logout');
 $routes->get('/usuarios/cambia_password', 'usuarios::cambia_password');
 $routes->post('/usuarios/actualizar_password', 'usuarios::actualizar_password');
+$routes->post('/usuarios/authAPI', 'usuarios::authAPI');
+
 
 //Compras
 $routes->get('/compras/nuevo', 'compras::nuevo');
@@ -142,4 +144,9 @@ $routes->get('/roles/permisos/(:num)', 'roles::permisos/$1');
 $routes->post('/roles/guardaPermisos', 'roles::guardaPermisos');
 $routes->get('/roles/no_autorizado', 'roles::no_autorizado');
 
+
+//API
+$routes->group('api', ['namespace' => 'App\Controllers\API'], function($routes){
+    $routes->get('clientes', 'Clientes::index');
+});
 
