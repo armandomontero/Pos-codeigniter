@@ -88,10 +88,41 @@ $idVentaTmp = uniqid();
                     </tbody>
                 </table>
             </div>
+<div class="mt-3" style="position: relative; height: 100px;">
+                  <button  style="position: absolute;
+  bottom: 5px;
+  right: 5px; 
+  width: 200px;" type="button" data-toggle="modal" data-target="#modal-confirma" data-href="<?= base_url() ?>cajas/cerrar" id="cerrar_caja" class="btn btn-danger  mb-2 boton-inferior"><i class="fas fa-lock"></i> Cerrar Caja</button>
+
+</div>
+      
         </form>
 
     </div>
 </main>
+
+
+<!-- Modal confirmación -->
+<div class="modal fade" id="modal-confirma" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cerrar Caja</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Está seguro que desea cerrar la caja?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <a type="button" class="btn btn-danger btn-ok">Cerrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(function() {

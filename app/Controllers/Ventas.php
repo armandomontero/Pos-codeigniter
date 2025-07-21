@@ -9,6 +9,7 @@ use App\Models\DetalleVentaModel;
 use App\Models\ProductosModel;
 use App\Models\configuracionModel;
 use App\Models\CajasModel;
+use App\Models\ArqueoCajaModel;
 use FPDF;
 
 class Ventas extends BaseController
@@ -85,10 +86,24 @@ class Ventas extends BaseController
 
     public function venta()
     {
+      //comprobamos si hay arqueo inicial de caja que inició sesión
+      $arqueo = new ArqueoCajaModel();
+      if($arqueo->cajaAbierta($this->session->id_caja)){
 
         echo view('header');
         echo view('ventas/venta');
         echo view('footer');
+      }
+      else{
+        $caja = $this->cajas->where('id', $this->session->id_caja)->first();
+        $mensaje = 'Debe hacer apertura de caja, una vez realizado podrá realizar ventas, 
+        favor indicar el monto inicial y luego click en botón "Guardar".';
+        $redirige = 'ventas/venta';
+        $data = ['titulo' => 'Apertura de Caja', 'datos' => $caja, 'mensaje' => $mensaje, 'redirige' => $redirige];
+        echo view('header');
+        echo view('cajas/nuevo_arqueo', $data);
+        echo view('footer');
+      }
     }
 
     public function guardar()

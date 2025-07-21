@@ -50,6 +50,16 @@ class ArqueoCajaModel extends Model{
 
         return $datos;
     }
+
+    public function cajaAbierta($id_caja){
+
+    $existe = $this->where('id_caja', $id_caja)->where('status', 1)->countAllResults();
+    if($existe>0){
+        return true;
+    }else{
+        return false;
+    }
+    }
 }
 
 ?>

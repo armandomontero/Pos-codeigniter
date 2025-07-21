@@ -13,9 +13,17 @@ if(isset($validation)){?>
 </div>
 <?php }?>
 
+<?php 
+if(isset($mensaje)){?>
+<div class="alert alert-warning">
+<?php echo $mensaje;?>
+</div>
+<?php }?>
+
 
         <div class="card-body">
             <form method="POST" action="<?= base_url() ?>/cajas/nuevo_arqueo" autocomplete="off">
+                <input type="hidden" id="redireccion" name="redireccion" value="<?php if(isset($redirige)){echo $redirige;} else{echo 'cajas';} ?>                "/>
                 <div class="form-group mb-4">
                     <div class="row">
                         <div class="col-12 col-sm-4">
@@ -31,7 +39,7 @@ if(isset($validation)){?>
                     </div>
                 </div>
 
-                                <div class="form-group mb-4">
+                  <div class="form-group mb-4">
                     <div class="row">
                         <div class="col-12 col-sm-4">
                             <label>Monto Inical: </label>

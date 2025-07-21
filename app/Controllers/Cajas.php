@@ -165,7 +165,7 @@ class Cajas extends BaseController
     public function nuevo_arqueo(){
         if($this->request->getMethod()=='POST'){
             $fecha = date('Y-m-d H:i:s');
-
+            $redirige = $this->request->getPost('redireccion');
             $existe = 0;
 
             $existe = $this->arqueoCaja->where('id_caja', $this->session->id_caja)->where('status', 1)->countAllResults();
@@ -183,7 +183,7 @@ class Cajas extends BaseController
                 'status' => 1
             ]);
 
-            return redirect()->to(base_url().'cajas');
+            return redirect()->to(base_url().$redirige);
         }
         else{
             $caja = $this->cajas->where('id', $this->session->id_caja)->first();
