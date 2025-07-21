@@ -9,6 +9,8 @@ use App\Models\RolesModel;
 use App\Models\LogsModel;
 use App\Models\configuracionModel;
 use CodeIgniter\API\ResponseTrait;
+use Config\Services;
+use Firebase\JWT\JWT;
 
 class Usuarios extends BaseController
 {
@@ -399,21 +401,45 @@ $this->reglasUpdate = [
             if ($datosUsuario != null) {
                 if (password_verify($password, $datosUsuario['password'])) {
 
-                    $resultado = $datosUsuario['usuario'].' autenticado!';
-                    return $this->respond($resultado);
-                   
-
+                   // $resultado = $datosUsuario['usuario'].' autenticado!';
+                   // return $this->respond($resultado);
+                   $jwt = $this->generateJWT($datosUsuario['usuario']);
+                    return $this->respond(['Token' => $jwt], 201);
                 } else {
                     $resultado = 'contraseña incorrecta';
-                     return $this->respond($resultado);
+                     return $this->failValidationErrors($resultado);
                 }
             } else {
                 $resultado = 'Usuario o contraseña incorrecta';
-                 return $this->failServerError($resultado);
+                 return $this->failNotFound($resultado);
             }
         } else {
             $resultado = 'Error en el servidor';
                  return $this->failServerError($resultado);
         }
+    }
+
+
+    protected function generateJWT($usuario)
+    {
+
+        $datosUsuario = $this->usuarios->where('usuario', $usuario)->first();
+        $key = Services::getSecretKey();
+
+        $payload = [
+            'aud' => base_url(),
+            'iat' => time(),
+            'exp' => time() + 60,
+            'data' => [
+                'username' => $usuario,
+                'nombre' => $datosUsuario['nombre'],
+                'rol' => $datosUsuario['id_rol']
+            ]
+        ];
+
+        $jwt = JWT::encode($payload, $key, 'HS256');
+
+        return $jwt;
+
     }
 }

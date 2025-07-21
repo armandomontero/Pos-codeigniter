@@ -29,4 +29,10 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+
+    public static function getSecretKey(){
+        return 'llave_secreta_para_encriptar_la_wea7776767_/skamsakmsalas?mak
+        asknasjnsja
+        05151515158y76767nsjanjsas ksalskadnslksdmsa_saknsaj';
+    }
 }
