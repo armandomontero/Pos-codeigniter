@@ -64,8 +64,13 @@ helper('number');
                                     <td><?php echo $dato['region']; ?></td>
                                     <td><?php echo $dato['telefono']; ?></td>
                                     <td><a href="mailto:<?=$dato['correo']?>" target="_blank"><?php echo $dato['correo']; ?></a></td>
-                                    <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>clientes/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
-                                    <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>clientes/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
+                                    <td><?php if($dato['id']!=1){?><a class="btn btn-warning btn-sm"
+                                         href="<?= base_url() ?>clientes/editar/<?php echo $dato['id']; ?>">
+                                         <i class="fas fa-edit"></i></a><?php } ?></td>
+                                    <td><?php if($dato['id']!=1){?><a data-toggle="modal" data-target="#modal-confirma" 
+                                        class="btn btn-danger btn-sm" href="#" 
+                                        data-href="<?= base_url() ?>clientes/eliminar/<?php echo $dato['id']; ?>">
+                                        <i class="fas fa-trash-alt"></i></a><?php } ?></td>
 
                                 </tr>
                             <?php

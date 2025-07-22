@@ -40,8 +40,9 @@ class clientes extends BaseController
 
     public function index($activo = 1)
     {
-        $clientes = $this->clientes->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'ASC')->findAll();
-        $data = ['titulo' => 'clientes', 'datos' => $clientes];
+        $id_tienda = $this->session->id_tienda;
+        $clientes = $this->clientes->where('activo', $activo)->where("id_tienda = ".$id_tienda." OR id = 1")->orderBy('nombre', 'ASC')->findAll();
+        $data = ['titulo' => 'Clientes', 'datos' => $clientes];
 
         echo view('header');
         echo view('clientes/index', $data);
@@ -98,6 +99,10 @@ else{
 
     public function editar($id, $valid=null)
     {
+        if($id==1){
+            echo 'No se puede editar este registro!';
+            exit;
+        }
         try {
             $cliente = $this->clientes->where('id', $id)->first();
         } catch (\Exception $e) {
@@ -135,6 +140,10 @@ else{
 
     public function eliminar($id)
     {
+        if($id==1){
+            echo 'No se puede eliminar este registro!';
+            exit;
+        }
         $this->clientes->update($id, [
             'activo' => 0
         ]);
