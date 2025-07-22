@@ -31,8 +31,6 @@ class Services extends BaseService
      */
 
     public static function getSecretKey(){
-        return 'llave_secreta_para_encriptar_la_wea7776767_/skamsakmsalas?mak
-        asknasjnsja
-        05151515158y76767nsjanjsas ksalskadnslksdmsa_saknsaj';
+        return '0M+OasCQjHLsnnjtn2+8UnFE6HYv98bS6LMsyhaNemAFlK47lbOeYRfOSIYdnYKn';
     }
 }

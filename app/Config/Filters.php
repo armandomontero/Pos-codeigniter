@@ -35,6 +35,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'session'  => \App\Filters\SessionFilter::class,
+        'api'  => \App\Filters\ApiFilter::class,
     ];
 
     /**
@@ -71,12 +72,14 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             'session' => ['except' => ['/', 'usuarios/valida', 'api/*', 'usuarios/authAPI']],
+            
              // Example: Exclude login routes
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
         ],
         'after' => [
+            
             // 'honeypot',
             // 'secureheaders',
         ],
@@ -106,5 +109,7 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        'api' => ['before' => ['api/*']]
+    ];
 }

@@ -148,5 +148,6 @@ $routes->get('/roles/no_autorizado', 'roles::no_autorizado');
 //API
 $routes->group('api', ['namespace' => 'App\Controllers\API'], function($routes){
     $routes->get('clientes', 'Clientes::index');
+    $routes->get('clientes/show/(:num)', 'Clientes::show/$1');
 });
 

@@ -29,10 +29,10 @@ class Usuarios extends BaseController
 
         $this->reglas = [
             'usuario' => [
-                'rules' => 'required|is_unique[usuarios.usuario]',
+                'rules' => 'required|is_unique[usuarios.usuario,]',
                 'errors' => [
                     'required' => 'El campo {field} es obligatorio.',
-                    'required' => 'El usuario ingresado ya está registrado.'
+                    'is_unique' => 'El usuario ingresado ya está registrado, favor cambiar nombre de usuario'
                 ]
             ],
             'password' => [
