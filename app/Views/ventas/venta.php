@@ -129,6 +129,26 @@ $idVentaTmp = uniqid();
     </div>
 </div>
 
+<!-- Modal alerta -->
+<div class="modal fade" id="modal-alerta" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atención</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="text-alerta"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script>
     $(function() {
@@ -302,7 +322,8 @@ $idVentaTmp = uniqid();
         $("#completa_venta").click(function() {
             let nFila = $("#tablaProductos tr").length;
             if (nFila < 2) {
-                alert('No hay productos!');
+                $("#text-alerta").html('No se han agregado productos!.');
+                $("#modal-alerta").modal('show');
             } else {
                 $("#form_venta").submit();
             }

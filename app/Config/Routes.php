@@ -8,6 +8,8 @@ use CodeIgniter\Router\RouteCollection;
 
  //Home no logeado
 $routes->get('/', 'Usuarios::login');
+$routes->get('/registro', 'Usuarios::registro');
+$routes->post('/registro', 'Usuarios::registro');
 
  //Home logeado
 $routes->get('/index', 'Home::index');

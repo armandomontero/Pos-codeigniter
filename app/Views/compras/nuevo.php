@@ -84,6 +84,26 @@ $id_compra = uniqid();
     </div>
 </div>
 
+
+<!-- Modal alerta -->
+<div class="modal fade" id="modal-alerta" tabindex="-1">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atención</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="text-alerta"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- invocamos jquery desde acá, ya que si no no carga, la otra opción era afectar todo el template para llamar desde el header -->
 <script src="<?= base_url() ?>vendor/jquery/jquery.min.js"></script>
 
@@ -92,7 +112,8 @@ $id_compra = uniqid();
         $("#completa_compra").click(function(){
             let nFila = $("#tablaProductos tr").length;
             if(nFila<2){
-                alert('No hay productos!');
+                 $("#text-alerta").html('No se han agregado productos!.');
+                $("#modal-alerta").modal('show');
             }
             else{
                 $("#form_compra").submit();
