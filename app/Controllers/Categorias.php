@@ -30,7 +30,7 @@ class Categorias extends BaseController
 
     public function index($activo = 1)
     {
-        $categorias = $this->categorias->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
+        $categorias = $this->categorias->where('activo', $activo)->where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
         $data = ['titulo' => 'Categorias', 'datos' => $categorias];
 
         echo view('header');
@@ -74,18 +74,26 @@ class Categorias extends BaseController
     }
 
 
-    public function editar($id, $valid=null)
+    public function editar($id, $valid = null)
     {
+        if ($id == 1) {
+            echo 'No se puede editar este registro!';
+            exit;
+        }
         try {
-            $categoria = $this->categorias->where('id', $id)->first();
+            $categoria = $this->categorias->where('id', $id)->where('id_tienda', $this->session->id_tienda)->first();
         } catch (\Exception $e) {
             exit($e->getMessage());
         }
-if ($valid != null) {
+        if ($categoria == null) {
+            echo 'No se puede editar este registro!';
+            exit;
+        }
+        if ($valid != null) {
             $data = ['titulo' => 'Editar Categoría', 'datos' => $categoria, 'validation' => $valid];
         } else {
 
-        $data = ['titulo' => 'Editar Categoría', 'datos' => $categoria];
+            $data = ['titulo' => 'Editar Categoría', 'datos' => $categoria];
         }
 
 
@@ -98,18 +106,22 @@ if ($valid != null) {
     public function actualizar()
     {
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
-        $this->categorias->update($this->request->getPost('id'), [
-            'nombre' => $this->request->getPost('nombre')
-        ]);
-        return redirect()->to(base_url() . 'categorias/editar/' . $this->request->getPost('id'));
-    }else{
-         return $this->editar($this->request->getPost('id'), $this->validator);
-    }
-
+            $this->categorias->update($this->request->getPost('id'), [
+                'nombre' => $this->request->getPost('nombre')
+            ]);
+            return redirect()->to(base_url() . 'categorias/editar/' . $this->request->getPost('id'));
+        } else {
+            return $this->editar($this->request->getPost('id'), $this->validator);
+        }
     }
 
     public function eliminar($id)
     {
+        if ($id == 1) {
+            echo 'No se puede editar este registro!';
+            exit;
+        }
+
         $this->categorias->update($id, [
             'activo' => 0
         ]);

@@ -75,10 +75,10 @@ class productos extends BaseController
     public function nuevo($valid = null)
     {
         //llamamos unidades
-        $unidades = $this->unidades->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
+        $unidades = $this->unidades->where('activo', 1)->where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
 
         //llamamos categorias
-        $categorias = $this->categorias->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
+        $categorias = $this->categorias->where('activo', 1)->where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
         if ($valid != null) {
             $data = ['titulo' => 'Agregar Producto', 'unidades' => $unidades, 'categorias' => $categorias, 'validation' => $valid];
         } else {
@@ -125,10 +125,12 @@ class productos extends BaseController
         } else {
 
             //llamamos unidades
-            $unidades = $this->unidades->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
+            $unidades = $this->unidades->where('activo', 1)->
+            where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
 
             //llamamos categorias
-            $categorias = $this->categorias->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->orderBy('nombre', 'asc')->findAll();
+            $categorias = $this->categorias->where('activo', 1)->
+            where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
 
             $data = ['titulo' => 'Editar Producto', 'datos' => $unidad, 'unidades' => $unidades, 'categorias' => $categorias];
 

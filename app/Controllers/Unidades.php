@@ -33,7 +33,8 @@ class Unidades extends BaseController
 
     public function index($activo = 1)
     {
-        $unidades = $this->unidades->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
+        $unidades = $this->unidades->where('activo', $activo)->where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->
+        orderBy('nombre', 'asc')->findAll();
         $data = ['titulo' => 'Unidades', 'datos' => $unidades];
 
         echo view('header');
@@ -82,6 +83,10 @@ class Unidades extends BaseController
 
     public function editar($id, $valid = null)
     {
+        if ($id == 1) {
+            echo 'No se puede editar este registro!';
+            exit;
+        }
         try {
             $unidad = $this->unidades->where('id', $id)->first();
         } catch (\Exception $e) {
@@ -116,6 +121,10 @@ class Unidades extends BaseController
 
     public function eliminar($id)
     {
+        if ($id == 1) {
+            echo 'No se puede editar este registro!';
+            exit;
+        }
         $this->unidades->update($id, [
             'activo' => 0
         ]);
