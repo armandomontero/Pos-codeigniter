@@ -11,7 +11,7 @@ class TemporalMovimientoModel extends Model{
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['folio', 'id_producto', 'codigo', 'nombre', 'cantidad', 'precio', 'subtotal'];
+    protected $allowedFields = ['folio', 'id_producto', 'codigo', 'nombre', 'cantidad', 'precio', 'subtotal', 'tipo_movimiento', 'id_caja'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

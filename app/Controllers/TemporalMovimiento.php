@@ -52,7 +52,9 @@ class TemporalMovimiento extends BaseController
                     'nombre' => $producto['nombre'],
                     'cantidad' => $cantidad,
                     'precio' => $producto['precio_compra'],
-                    'subtotal' => $subtotal
+                    'subtotal' => $subtotal,
+                    'tipo_movimiento' => $tipo_movimiento,
+                    'id_caja' => $this->session->id_caja
                 ]);
             }elseif($tipo_movimiento=='venta'){
              $subtotal = $cantidad * $producto['precio_venta'];
@@ -65,7 +67,9 @@ class TemporalMovimiento extends BaseController
                     'nombre' => $producto['nombre'],
                     'cantidad' => $cantidad,
                     'precio' => $producto['precio_venta'],
-                    'subtotal' => $subtotal
+                    'subtotal' => $subtotal,
+                    'tipo_movimiento' => $tipo_movimiento,
+                    'id_caja' => $this->session->id_caja
                 ]);
         }
         }
@@ -102,6 +106,9 @@ class TemporalMovimiento extends BaseController
         }
        return $fila;
     }
+
+
+    
 
 
     public function totalProductos($id_compra){

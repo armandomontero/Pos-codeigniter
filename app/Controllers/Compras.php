@@ -87,6 +87,16 @@ class Compras extends BaseController
     public function nuevo()
     {
 
+        //comprobamos si la caja ya tiene movimientos temporales de compra almacenados y los limpiamos (eliminamos)
+        $this-> temporal_compra = new TemporalMovimientoModel();
+        $cuenta_movimientos = $this->temporal_compra->where('id_caja', $this->session->id_caja)->where('tipo_movimiento', 'compra')->countAllResults();
+        if($cuenta_movimientos>0){
+           $this->temporal_compra->where('id_caja', $this->session->id_caja);
+            $this->temporal_compra->where('tipo_movimiento', 'compra');
+            $this->temporal_compra->delete();
+        }
+        
+
         echo view('header');
         echo view('compras/nuevo');
         echo view('footer');

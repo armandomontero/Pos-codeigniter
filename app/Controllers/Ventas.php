@@ -90,6 +90,17 @@ class Ventas extends BaseController
       $arqueo = new ArqueoCajaModel();
       if($arqueo->cajaAbierta($this->session->id_caja)){
 
+
+        
+        //comprobamos si la caja ya tiene movimientos temporales de venta almacenados y los limpiamos (eliminamos)
+        $this-> temporal_compra = new TemporalMovimientoModel();
+        $cuenta_movimientos = $this->temporal_compra->where('id_caja', $this->session->id_caja)->where('tipo_movimiento', 'venta')->countAllResults();
+        if($cuenta_movimientos>0){
+           $this->temporal_compra->where('id_caja', $this->session->id_caja);
+            $this->temporal_compra->where('tipo_movimiento', 'venta');
+            $this->temporal_compra->delete();
+        }
+
         echo view('header');
         echo view('ventas/venta');
         echo view('footer');
