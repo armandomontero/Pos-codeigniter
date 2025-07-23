@@ -33,7 +33,21 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
 
-                        <?php
+                       
+                        
+                        <div class="row">
+
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image ">
+                                <img width="430" height="100%" src="<?=base_url()?>img/portada.jpg">
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-0">CleverPOS</h1>
+                                <p class="text-xs font-italic">by <a target="_blank" href="https://infoclever.cl">Infoclever</a></p>
+                                        <p>Bienvenido</p>
+                                         <?php
                         if (isset($validation)) { ?>
                             <div class="alert alert-danger">
                                 <?php echo $validation->listErrors(); ?>
@@ -45,18 +59,6 @@
                                 <?php echo $error ?>
                             </div>
                         <?php } ?>
-                        
-                        <div class="row">
-
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image ">
-                                <img width="420" src="<?=base_url()?>img/portada.jpg">
-                            </div>
-
-                            <div class="col-lg-6">
-                                <div class="p-5">
-                                    <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Sistema POS | Infoclever</h1>
-                                        <p>Bienvenido</p>
                                     </div>
                                     <form class="user" method="POST" action="<?= base_url() ?>usuarios/valida">
                                         <div class="form-group">

@@ -48,10 +48,10 @@ $user_session = session();
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="<?= base_url() ?>">
                 <div class="sidebar-brand-icon ">
-                 <img width="80%" src="<?=base_url()?>/img/logo_icon.png?"/>
+                 <img width="70%" src="<?=base_url()?>img/logo_icon.png?"/>
                 </div>
                 <div class="sidebar-brand-text ml-0 ">
-                    <img width="90%" src="<?=base_url()?>/img/logo_ligth.png?"/>
+                    <img width="100%" src="<?=base_url()?>img/logo_ligth.png?"/>
                 </div>
             </a>
 
