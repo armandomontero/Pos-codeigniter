@@ -11,17 +11,23 @@ $idVentaTmp = uniqid();
             <input type="hidden" id="id_venta" name="id_venta" value="<?= $idVentaTmp ?>" />
             <input type="hidden" id="id_producto" name="id_producto" />
             <div class="form-group">
+                <input type="hidden" id="id_cliente" name="id_cliente" value="1" />
+
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <div class="ui-widget">
                             <label>Cliente:</label>
-                            <input type="hidden" id="id_cliente" name="id_cliente" value="1" />
-                            <input type="text" class="form-control" id="cliente" name="cliente" placeholder="Escribe el Nombre del cliente"
+
+                            <input type="text" readonly class="form-control" id="cliente" name="cliente" placeholder="Escribe el Nombre del cliente y selecciona"
                                 value="Cliente Anónimo" onkeyup="" autocomplete="off" required />
+                            <div class="form-group form-check">
+                                <input type="checkbox" class="form-check-input" id="anonimo" name="anonimo" checked />
+                                <label class="form-check-label" for="anonimo">Anónimo?</label>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <label>Forma de Pago:</label>
                         <select id="forma_pago" name="forma_pago" class="form-control" required>
                             <option value="001">Efectivo</option>
@@ -88,14 +94,14 @@ $idVentaTmp = uniqid();
                     </tbody>
                 </table>
             </div>
-<div class="mt-3" style="position: relative; height: 100px;">
-                  <button  style="position: absolute;
+            <div class="mt-3" style="position: relative; height: 100px;">
+                <button style="position: absolute;
   bottom: 5px;
   right: 5px; 
   width: 200px;" type="button" data-toggle="modal" data-target="#modal-confirma" data-href="<?= base_url() ?>cajas/cerrar" id="cerrar_caja" class="btn btn-danger  mb-2 boton-inferior"><i class="fas fa-lock"></i> Cerrar Caja</button>
 
-</div>
-      
+            </div>
+
         </form>
 
     </div>
@@ -164,6 +170,18 @@ $idVentaTmp = uniqid();
         });
     });
 
+    $("#anonimo").click(function() {
+        if ($("#anonimo").prop('checked') == false) {
+            $("#cliente").val("");
+            $("#cliente").attr('readonly', false);
+            $("#cliente").focus();
+        } else {
+            $("#cliente").val("Cliente Anónimo");
+            $("#cliente").attr('readonly', true);
+            $("#id_cliente").val(1);
+            $("#codigo").focus();
+        }
+    });
 
     function agregarProducto(id_producto, cantidad, id_venta) {
         if (id_producto != null && id_producto != 0 && cantidad > 0) {
@@ -250,7 +268,7 @@ $idVentaTmp = uniqid();
 
 
     function eliminarProducto(id_producto, id_compra) {
-        if (id_producto != null && id_producto != 0 ) {
+        if (id_producto != null && id_producto != 0) {
 
 
             $.ajax({
@@ -281,12 +299,11 @@ $idVentaTmp = uniqid();
 
 
     $(document).ready(function() {
-        $("#completa_venta").click(function(){
+        $("#completa_venta").click(function() {
             let nFila = $("#tablaProductos tr").length;
-            if(nFila<2){
+            if (nFila < 2) {
                 alert('No hay productos!');
-            }
-            else{
+            } else {
                 $("#form_venta").submit();
             }
         });
