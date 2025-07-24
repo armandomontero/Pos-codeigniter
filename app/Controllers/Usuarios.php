@@ -153,9 +153,10 @@ class Usuarios extends BaseController
                 ]
             ],
             'password' => [
-                'rules' => 'required',
+                'rules' => 'required|min_length[4]',
                 'errors' => [
-                    'required' => 'El campo {field} es obligatorio.'
+                    'required' => 'El campo {field} es obligatorio.',
+                    'min_length' => 'La contraseña debe tener, al menos 4 caracteres.'
                 ]
             ],
             'repassword' => [
@@ -181,6 +182,30 @@ class Usuarios extends BaseController
                 'rules' => 'required',
                 'errors' => [
                     'required' => 'Debe ingresar el Nombre o Razón Social del comercio.'
+                ]
+                ],
+            'region' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+                ],
+            'direccion' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+                ],
+            'comuna' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
+                ]
+                ],
+            'fono' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'El campo {field} es obligatorio.'
                 ]
             ]
         ];
@@ -536,7 +561,24 @@ class Usuarios extends BaseController
                         'activo' => 1,
                         'id_tienda' => $id_tienda
                     ]);
-                    $data = ['mensaje_success' => 'Se ha registrado con éxito, le enviamos un correo electrónico con las instrucciones para ingresar al sistema'];
+                    $email = \Config\Services::email();
+                    $email->setFrom('cleverpos@infoclever.cl', 'CleverPOS');
+                    $email->setTo($this->request->getPost('correo'));
+                    $email->setSubject('Bienvenido/a al sistema CleverPOS');
+                    $email->setMessage('Para acceder debe entrar en este <a href="' . base_url() . '">link</a> e ingresar con los datos que definió al registrarse.');
+                    $email->setMailType('html');
+                    if ($email->send()) {
+                        // Correo enviado correctamente
+                        $enviado = 'OK';
+                    } else {
+                        // Error al enviar el correo
+                        $enviado =  'Error al enviar el correo: ' . $email->printDebugger();
+                        // exit;
+                    }
+                    $data = [
+                        'mensaje_success' => 'Se ha registrado con éxito, le enviamos un correo electrónico con las instrucciones para ingresar al sistema',
+                        'mail_enviado' => $enviado
+                    ];
                     echo view('registro', $data);
                 }
             } else {

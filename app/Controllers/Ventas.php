@@ -10,7 +10,7 @@ use App\Models\ProductosModel;
 use App\Models\configuracionModel;
 use App\Models\CajasModel;
 use App\Models\ArqueoCajaModel;
-use FPDF;
+//use FPDF;
 
 class Ventas extends BaseController
 {
@@ -31,7 +31,7 @@ class Ventas extends BaseController
     {
         $ventas = $this->ventas->obtener($activo, $this->session->id_tienda);
         
-        $data = ['titulo' => 'ventas', 'datos' => $ventas];
+        $data = ['titulo' => 'Ventas', 'datos' => $ventas];
 
         echo view('header');
         echo view('ventas/index', $data);

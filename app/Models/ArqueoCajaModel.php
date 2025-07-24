@@ -1,18 +1,33 @@
 <?php
+
 namespace App\Models;
+
 use CodeIgniter\Model;
 
-class ArqueoCajaModel extends Model{
+class ArqueoCajaModel extends Model
+{
     protected $table      = 'arqueo_caja';
     protected $primaryKey = 'id';
 
-    protected $useAutoIncrement = true; 
+    protected $useAutoIncrement = true;
 
     protected $returnType     = 'array';
     protected $useSoftDeletes = false;
 
-    protected $allowedFields = ['id_caja', 'id_usuario', 'fecha_inicio', 'fecha_fin', 
-    'monto_inicial', 'monto_final', 'total_efectivo', 'total_tarjeta', 'total_transferencia', 'total_ventas', 'diferencia', 'status'];
+    protected $allowedFields = [
+        'id_caja',
+        'id_usuario',
+        'fecha_inicio',
+        'fecha_fin',
+        'monto_inicial',
+        'monto_final',
+        'total_efectivo',
+        'total_tarjeta',
+        'total_transferencia',
+        'total_ventas',
+        'diferencia',
+        'status'
+    ];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -41,7 +56,8 @@ class ArqueoCajaModel extends Model{
     protected $afterDelete    = [];
 
 
-    public function getDatos($id_caja){
+    public function getDatos($id_caja)
+    {
         $this->select('arqueo_caja.*, cajas.nombre');
         $this->join('cajas', 'arqueo_caja.id_caja = cajas.id');
         $this->where('arqueo_caja.id_caja', $id_caja);
@@ -51,15 +67,14 @@ class ArqueoCajaModel extends Model{
         return $datos;
     }
 
-    public function cajaAbierta($id_caja){
+    public function cajaAbierta($id_caja)
+    {
 
-    $existe = $this->where('id_caja', $id_caja)->where('status', 1)->countAllResults();
-    if($existe>0){
-        return true;
-    }else{
-        return false;
-    }
+        $existe = $this->where('id_caja', $id_caja)->where('status', 1)->countAllResults();
+        if ($existe > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
-
-?>

@@ -23,6 +23,13 @@
     <!-- Custom styles for this page -->
     <link href="<?= base_url() ?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
 
+     <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- rut chileno -->
+        <script src="js/jquery.rut.js"></script>
+
+
 </head>
 
 <body class="bg-gradient-primary">
@@ -45,7 +52,7 @@
                             </div>
                             <?php
                             if (isset($validation)) { ?>
-                                <div class="alert alert-danger">
+                                <div class="alert alert-danger text-xs px-0">
                                     <?php echo $validation->listErrors(); ?>
                                 </div>
                             <?php }
@@ -59,8 +66,15 @@
                                 <div class="alert alert-success">
                                     <?php echo $mensaje_success ?>
                                 </div>
+                            <?php } 
+                            if (isset($mail_enviado)&&($mail_enviado!='OK')) { ?>
+                                <div class="alert alert-warning">
+                                    <?php echo $mail_enviado ?>
+                                </div>
                             <?php } ?>
-                            <form class="user" method="POST" action="<?= base_url() ?>registro">
+                     
+
+                            <form class="user" id="formulario-registro" method="POST" action="<?= base_url() ?>registro">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input required type="text" class="form-control form-control-user" id="nombre" name="nombre"
@@ -76,10 +90,18 @@
                                         <input type="text" required class="form-control form-control-user" value="<?= set_value('nombre_tienda') ?>" id="nombre_tienda" name="nombre_tienda"
                                             placeholder="Razón Social o Nombre Tienda">
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 control-group">
                                         <input type="text" required class="form-control form-control-user" id="rut" name="rut"
                                             placeholder="RUT tienda o RUN Persona Natural" value="<?= set_value('rut') ?>">
+                                             
                                     </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-12 mb-3 mb-sm-0">
+                                        <input type="text" required class="form-control form-control-user" value="<?= set_value('direccion') ?>" id="direccion" name="direccion"
+                                            placeholder="Dirección">
+                                    </div>
+                                   
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -144,7 +166,7 @@
                                             id="repassword" name="repassword" placeholder="Repita Contraseña" value="<?= set_value('repassword') ?>">
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">
+                                <button type="button" id="boton-enviar" class="btn btn-primary btn-user btn-block">
                                     Registrarme
                                 </button>
                                 <hr>
@@ -163,9 +185,17 @@
 
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ <div style="position: absolute; top:10%; right:30%;" class="toast  m-2" id="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <strong class="me-auto">Atención</strong>
+    <small></small>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body alert alert-danger">
+  </div>
+</div>
+
+   
 
     <!-- Core plugin JavaScript-->
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -173,6 +203,108 @@
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
+    <script>
+        $("#rut").rut({formatOn: 'keyup', validateOn: 'keyup'})
+  .on('rutInvalido', function(){ 
+  })
+  .on('rutValido', function(){ 
+  });
+
+
+  $("#boton-enviar").click(function(){
+    if($("#nombre").val()=='') {
+    $(".toast-body").html('El campo Nombre es obligatorio');
+    $('.toast').toast('show');
+    $("#nombre").select();
+    $("#nombre").focus();
+    exit;
+}
+
+if($("#usuario").val()=='') {
+    $(".toast-body").html('El campo Usuario es obligatorio');
+    $('.toast').toast('show');
+    $("#usuario").select();
+    $("#usuario").focus();
+    exit;
+}
+
+if($("#nombre_tienda").val()=='') {
+    $(".toast-body").html('Debe ingresar el nombre de la tienda');
+    $('.toast').toast('show');
+    $("#nombre_tienda").select();
+    $("#nombre_tienda").focus();
+    exit;
+}
+if(!$.validateRut($("#rut").val())) {
+    $(".toast-body").html('El rut ingresado no es válido.');
+    $('.toast').toast('show');
+    $("#rut").select();
+    $("#rut").focus();
+    exit;
+}
+if($("#direccion").val()=='') {
+    $(".toast-body").html('El campo direccion es obligatorio');
+    $('.toast').toast('show');
+    $("#direccion").select();
+    $("#direccion").focus();
+    exit;
+}
+if($("#region").val()=='') {
+    $(".toast-body").html('Debe seleccionar una región');
+    $('.toast').toast('show');
+    $("#region").select();
+    $("#region").focus();
+    exit;
+}
+if($("#comuna").val()=='') {
+    $(".toast-body").html('El campo Comuna es obligatorio');
+    $('.toast').toast('show');
+    $("#comuna").select();
+    $("#comuna").focus();
+    exit;
+}
+    if(!validateEmail($("#correo").val())||$("#correo").val()=='') {
+    $(".toast-body").html('El formato del email no es correcto');
+    $('.toast').toast('show');
+    $("#correo").select();
+    $("#correo").focus();
+    exit;
+}
+if($("#fono").val()=='') {
+    $(".toast-body").html('El campo Teléfono es obligatorio');
+    $('.toast').toast('show');
+    $("#fono").select();
+    $("#fono").focus();
+    exit;
+}
+if($("#password").val()=='' || $("#password").val().length<4) {
+    $(".toast-body").html('El campo Contraseña es obligatorio y bebe contener, al menos 4 caracteres');
+    $('.toast').toast('show');
+    $("#password").select();
+    $("#password").focus();
+    exit;
+}
+
+if($("#repassword").val()!=$("#password").val()) {
+    $(".toast-body").html('Las contraseñas deben ser iguales');
+    $('.toast').toast('show');
+    $("#repassword").select();
+    $("#repassword").focus();
+    exit;
+}
+
+$("#formulario-registro").submit();
+});
+
+
+
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+    </script>
+
 </body>
 
 </html>
+
