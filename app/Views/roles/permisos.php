@@ -12,6 +12,7 @@
 
 <div>
     <form method="POST" action="<?=base_url()?>roles/guardaPermisos">
+          <?=csrf_field()?>
         <input type="hidden" value="<?=$id_rol?>" name="id_rol"/>
         <div class="form-group">
             <?php foreach($permisos as $row) {?>

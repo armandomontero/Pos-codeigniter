@@ -7,6 +7,7 @@ $id_compra = uniqid();
     <!-- Page Heading -->
     <div class="card-body">
         <form method="POST" name="form_compra" id="form_compra" action="<?= base_url() ?>compras/guardar" autocomplete="off">
+              <?=csrf_field()?>
             <input type="hidden" id="id_producto" name="id_producto" />
              <input type="hidden" value="<?=$id_compra?>" id="id_compra" name="id_compra" />
             <div class="form-group mb-4">

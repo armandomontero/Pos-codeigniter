@@ -17,6 +17,7 @@ if(isset($validation)){?>
 
         <div class="card-body">
             <form method="POST" action="<?= base_url() ?>/clientes/actualizar" autocomplete="off">
+                  <?=csrf_field()?>
                 <input type="hidden" id="id" name="id" value="<?=$datos['id']?>"?>
             <div class="form-group">
                 <div class="row">

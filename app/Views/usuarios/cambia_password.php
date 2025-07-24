@@ -22,6 +22,7 @@ if(isset($mensaje)){?>
 
         <div class="card-body">
             <form method="POST" action="<?= base_url() ?>/usuarios/actualizar_password" autocomplete="off">
+                  <?=csrf_field()?>
                 <input type="hidden" name="id" id="id" value="<?=$usuario['id']?>"/>
                 <div class="form-group mb-4">
                     <div class="row">

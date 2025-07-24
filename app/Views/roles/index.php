@@ -14,6 +14,13 @@
             <a class="btn btn-warning" href="<?= base_url() ?>roles/eliminados">Eliminados</a>
         </p>
 
+<?php 
+if(isset($mensaje)){?>
+<div class="alert alert-success">
+<?php echo $mensaje;?>
+</div>
+<?php }?>
+
         <!-- DataTales -->
         <div class="card shadow mb-4">
             <div class="card-header py-3">

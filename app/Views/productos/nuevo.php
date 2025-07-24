@@ -16,6 +16,7 @@ if(isset($validation)){?>
 <?php }?>
 
         <form method="POST" action="<?= base_url() ?>/productos/insertar" autocomplete="off">
+              <?=csrf_field()?>
             <div class="form-group">
                 <div class="row">
                     <div class="col-12 col-sm-6">

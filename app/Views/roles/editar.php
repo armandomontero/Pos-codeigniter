@@ -14,10 +14,15 @@ if(isset($validation)){?>
 <div class="alert alert-danger">
 <?php echo $validation->listErrors();?>
 </div>
+<?php }
+if(isset($exito)){?>
+<div class="alert alert-success">
+<?php echo $exito;?>
+</div>
 <?php }?>
-
         <div class="card-body">
-            <form method="POST" action="<?= base_url() ?>/roles/actualizar" autocomplete="off">
+            <form method="POST" action="<?= base_url() ?>roles/actualizar" autocomplete="off">
+                  <?=csrf_field()?>
                 <input type="hidden" id="id" name="id" value="<?=$datos['id']?>"?>
                 <div class="form-group mb-4">
                     <div class="row">

@@ -32,10 +32,10 @@ class roles extends BaseController
         ];
     }
 
-    public function index($activo = 1)
+    public function index($activo = 1, $mensaje = null)
     {
         $roles = $this->roles->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
-        $data = ['titulo' => 'Roles', 'datos' => $roles];
+        $data = ['titulo' => 'Roles', 'datos' => $roles, 'mensaje' => $mensaje];
 
         echo view('header');
         echo view('roles/index', $data);
@@ -72,7 +72,8 @@ class roles extends BaseController
                 'activo' => 1,
                 'id_tienda' => $this->session->id_tienda
             ]);
-            return redirect()->to(base_url() . 'roles');
+            $mensaje = 'Registro almacenado!';
+            $this->index(1, $mensaje);
         } else {
             $this->nuevo($this->validator);
         }
@@ -94,7 +95,7 @@ class roles extends BaseController
         if ($valid != null) {
             $data = ['titulo' => 'Editar Rol', 'datos' => $categoria, 'validation' => $valid];
         } else {
-
+           
             $data = ['titulo' => 'Editar Rol', 'datos' => $categoria];
         }
 

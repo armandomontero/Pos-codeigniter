@@ -61,6 +61,7 @@
                         <?php } ?>
                                     </div>
                                     <form class="user" method="POST" action="<?= base_url() ?>usuarios/valida">
+                                          <?=csrf_field()?>
                                         <div class="form-group">
                                             <label>Usuario: </label>
                                             <input type="text" name="usuario" value="<?=set_value('usuario')?>" id="usuario" class="form-control form-control-user"
