@@ -3,8 +3,7 @@
 #-------------------------
 
 
-#configuracion smtp
-app/Config/Email.php
+
 
 # OS X
 .DS_Store
@@ -130,4 +129,6 @@ nb-configuration.xml
 /results/
 /phpunit*.xml
 
+#configuracion smtp
 /.php-cs-fixer.php
+app/Config/Email.php
