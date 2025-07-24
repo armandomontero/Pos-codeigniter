@@ -2,6 +2,10 @@
 # Operating Specific Junk Files
 #-------------------------
 
+
+#configuracion smtp
+Email.php
+
 # OS X
 .DS_Store
 .AppleDouble

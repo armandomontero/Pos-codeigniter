@@ -521,11 +521,12 @@ class Usuarios extends BaseController
                     echo view('registro', $data);
                     exit;
                 } else {
-
+                    //limpiamos rut
+                    $rut = str_replace('.', '', $this->request->getPost('rut'));
                     //primero creamos la tienda
                     $tienda = new TiendasModel();
                     $insertTienda = [
-                        'rut' => $this->request->getPost('rut'),
+                        'rut' => $rut,
                         'nombre' => $this->request->getPost('nombre_tienda'),
                         'direccion' => $this->request->getPost('direccion'),
                         'comuna' => $this->request->getPost('comuna'),
