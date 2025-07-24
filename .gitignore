@@ -4,7 +4,7 @@
 
 
 #configuracion smtp
-Email.php
+app/Config/Email.php
 
 # OS X
 .DS_Store
