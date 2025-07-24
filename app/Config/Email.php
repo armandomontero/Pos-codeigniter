@@ -8,7 +8,7 @@ class Email extends BaseConfig
 {
     public string $fromEmail  = '';
     public string $fromName   = '';
-    public string $recipients = 'd';
+    public string $recipients = '';
 
     /**
      * The "user agent"
@@ -18,7 +18,7 @@ class Email extends BaseConfig
     /**
      * The mail sending protocol: mail, sendmail, smtp
      */
-    public string $protocol = 'smtp';
+    public string $protocol = '';
 
     /**
      * The server path to Sendmail.
