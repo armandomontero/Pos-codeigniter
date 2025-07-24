@@ -44,7 +44,7 @@ class productos extends BaseController
         ];
     }
 
-    public function index($activo = 1)
+    public function index($activo = 1, $mensaje = null)
     {
         $permiso = $this->roles_permisos->verificaPermiso($this->session->id_rol, 'ProductosListado');
         if (!$permiso) {
@@ -55,7 +55,7 @@ class productos extends BaseController
         }
 
         $productos = $this->productos->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
-        $data = ['titulo' => 'Productos', 'datos' => $productos];
+        $data = ['titulo' => 'Productos', 'datos' => $productos, 'mensaje' => $mensaje];
 
         echo view('header');
         echo view('productos/index', $data);
@@ -105,7 +105,8 @@ class productos extends BaseController
                 'id_tienda' => $this->session->id_tienda
 
             ]);
-            return redirect()->to(base_url() . 'productos');
+            $mensaje = 'Registro almacenado!';
+            $this->index(1, $mensaje);
         } else {
             $this->nuevo($this->validator);
         }
