@@ -92,9 +92,7 @@ class productos extends BaseController
     public function insertar()
     {
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
-
             $carpeta_base = 'img/' . $this->session->id_tienda . '/productos';
-
             if ($this->request->getFile('imagen')->getPath()) {
 
                 $validacion = $this->validate([
@@ -158,13 +156,10 @@ class productos extends BaseController
 
             //llamamos unidades
             $unidades = $this->unidades->where('activo', 1)->where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
-
             //llamamos categorias
             $categorias = $this->categorias->where('activo', 1)->where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
 
             $data = ['titulo' => 'Editar Producto', 'datos' => $unidad, 'unidades' => $unidades, 'categorias' => $categorias];
-
-
 
             echo view('header');
             echo view('productos/editar', $data);
