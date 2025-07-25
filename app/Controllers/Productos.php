@@ -48,10 +48,10 @@ class productos extends BaseController
     {
         $permiso = $this->roles_permisos->verificaPermiso($this->session->id_rol, 'ProductosListado');
         if (!$permiso) {
-        echo view('header');
-        echo view('roles/no_autorizado');
-        echo view('footer');
-        exit;
+            echo view('header');
+            echo view('roles/no_autorizado');
+            echo view('footer');
+            exit;
         }
 
         $productos = $this->productos->where('activo', $activo)->where('id_tienda', $this->session->id_tienda)->findAll();
@@ -92,6 +92,36 @@ class productos extends BaseController
     public function insertar()
     {
         if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
+
+            $carpeta_base = 'img/' . $this->session->id_tienda . '/productos';
+
+            if ($this->request->getFile('imagen')->getPath()) {
+
+                $validacion = $this->validate([
+                    'imagen' => [
+                        'uploaded[imagen]',
+                        'mime_in[imagen,image/png,image/jpeg]',
+                        'max_size[imagen,4096]'
+                    ]
+                ]);
+                if ($validacion) {
+                    $img = $this->request->getFile('imagen');
+                    $nombre_archivo = uniqid() . 'imagen.' . $img->getExtension();
+                    $carpeta = './img/' . $this->session->id_tienda . '/productos';
+
+
+                    $img->move($carpeta, $nombre_archivo);
+                } else {
+                    echo $validacion;
+                }
+
+                $ruta_bd = $carpeta_base . '/' . $nombre_archivo;
+            } else {
+                $ruta_bd = null;
+            }
+
+
+
             $this->productos->save([
                 'codigo' => $this->request->getPost('codigo'),
                 'nombre' => $this->request->getPost('nombre'),
@@ -102,7 +132,8 @@ class productos extends BaseController
                 'id_unidad' => $this->request->getPost('id_unidad'),
                 'id_categoria' => $this->request->getPost('id_categoria'),
                 'activo' => 1,
-                'id_tienda' => $this->session->id_tienda
+                'id_tienda' => $this->session->id_tienda,
+                'imagen' => $ruta_bd
 
             ]);
             $mensaje = 'Registro almacenado!';
@@ -126,12 +157,10 @@ class productos extends BaseController
         } else {
 
             //llamamos unidades
-            $unidades = $this->unidades->where('activo', 1)->
-            where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
+            $unidades = $this->unidades->where('activo', 1)->where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
 
             //llamamos categorias
-            $categorias = $this->categorias->where('activo', 1)->
-            where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
+            $categorias = $this->categorias->where('activo', 1)->where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
 
             $data = ['titulo' => 'Editar Producto', 'datos' => $unidad, 'unidades' => $unidades, 'categorias' => $categorias];
 
@@ -147,6 +176,43 @@ class productos extends BaseController
     public function actualizar()
     {
 
+        //comprobamos que exista imagen
+            $producto = $this->productos->where('id', $this->request->getPost('id'))->first();
+            $ruta_bd = null;
+            if ($producto) {
+                $ruta_bd = $producto['imagen'];
+            }
+            $carpeta_base = 'img/' . $this->session->id_tienda . '/productos';
+
+            if ($this->request->getFile('imagen')->getPath()) {
+
+              
+                $validacion = $this->validate([
+                    'imagen' => [
+                        'uploaded[imagen]',
+                        'mime_in[imagen,image/png,image/jpeg]',
+                        'max_size[imagen,4096]'
+                    ]
+                ]);
+                if ($validacion) {
+                    $img = $this->request->getFile('imagen');
+                    $nombre_archivo = uniqid() . 'imagen.' . $img->getExtension();
+                    $carpeta = './img/' . $this->session->id_tienda . '/productos';
+                //Borramos anterior
+                    if (file_exists('./' . $producto['imagen']) && $producto['imagen'] != "") {
+                        unlink('./' . $producto['imagen']);
+                    }
+
+                    $img->move($carpeta, $nombre_archivo);
+                } else {
+                    echo $validacion;
+                }
+
+                $ruta_bd = $carpeta_base . '/' . $nombre_archivo;
+            } 
+
+
+
         $this->productos->update($this->request->getPost('id'), [
             'codigo' => $this->request->getPost('codigo'),
             'nombre' => $this->request->getPost('nombre'),
@@ -155,7 +221,8 @@ class productos extends BaseController
             'stock_minimo' => $this->request->getPost('stock_minimo'),
             'inventariable' => $this->request->getPost('inventariable'),
             'id_unidad' => $this->request->getPost('id_unidad'),
-            'id_categoria' => $this->request->getPost('id_categoria')
+            'id_categoria' => $this->request->getPost('id_categoria'),
+            'imagen' => $ruta_bd
         ]);
         return redirect()->to(base_url() . 'productos/editar/' . $this->request->getPost('id'));
     }

@@ -11,7 +11,7 @@
 
 
         <div class="card-body">
-            <form method="POST" action="<?= base_url() ?>/productos/actualizar" autocomplete="off">
+            <form method="POST" enctype="multipart/form-data" action="<?= base_url() ?>/productos/actualizar" autocomplete="off">
                   <?=csrf_field()?>
                 <input type="hidden" id="id" name="id" value="<?=$datos['id']?>"?>
                  <div class="form-group">
@@ -82,6 +82,19 @@
                              <?php if($datos['inventariable']==0) echo 'selected'; ?>
                             value="0">No</option>
                         </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                       <label>Imagen:</label>
+                            
+                            <input  type="file" class="form-control" id="imagen" name="imagen" accept="image/jpeg, image/png" />
+                    </div>
+                    <div class="col-12 col-sm-6">
+                       <img src="<?= base_url() . $datos['imagen'] ?>" class="img-responsive" width="200" />
                     </div>
                 </div>
             </div>

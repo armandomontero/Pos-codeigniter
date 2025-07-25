@@ -15,7 +15,7 @@ if(isset($validation)){?>
 </div>
 <?php }?>
 
-        <form method="POST" action="<?= base_url() ?>/productos/insertar" autocomplete="off">
+        <form method="POST" enctype="multipart/form-data" action="<?= base_url() ?>productos/insertar" autocomplete="off">
               <?=csrf_field()?>
             <div class="form-group">
                 <div class="row">
@@ -85,6 +85,20 @@ if(isset($validation)){?>
                              <?php if(0==set_value('inventariable')){echo 'selected';} ?>
                             value="0">No</option>
                         </select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                       <label>Imagen:</label>
+                            
+                            <input  type="file" class="form-control" id="imagen" name="imagen" accept="image/jpeg, image/png" />
+                    </div>
+                    <div class="col-12 col-sm-6">
+                       
                     </div>
                 </div>
             </div>

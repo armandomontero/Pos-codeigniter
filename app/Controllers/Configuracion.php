@@ -53,38 +53,38 @@ class configuracion extends BaseController
             $configuracion = $this->configuracion->where('id', $this->request->getPost('id'))->first();
             $ruta_bd = '/';
             if ($configuracion) {
-            $ruta_bd = $configuracion['logo'];
+                $ruta_bd = $configuracion['logo'];
             }
             $carpeta_base = 'img/' . $this->session->id_tienda . '/logo';
-           
-            if($this->request->getFile('tienda_logo')->getPath()){
 
-            $validacion = $this->validate([
-                'tienda_logo' => [
-                    'uploaded[tienda_logo]',
-                    'mime_in[tienda_logo,image/png,image/jpeg]',
-                    'max_size[tienda_logo,4096]'
-                ]
-            ]);
-            if ($validacion) {
-                $img = $this->request->getFile('tienda_logo');
-                $nombre_archivo = uniqid().'logo.' . $img->getExtension();
-                $carpeta = './img/' . $this->session->id_tienda . '/logo';
-                
+            if ($this->request->getFile('tienda_logo')->getPath()) {
+
+                $validacion = $this->validate([
+                    'tienda_logo' => [
+                        'uploaded[tienda_logo]',
+                        'mime_in[tienda_logo,image/png,image/jpeg]',
+                        'max_size[tienda_logo,4096]'
+                    ]
+                ]);
+                if ($validacion) {
+                    $img = $this->request->getFile('tienda_logo');
+                    $nombre_archivo = uniqid() . 'logo.' . $img->getExtension();
+                    $carpeta = './img/' . $this->session->id_tienda . '/logo';
 
 
-                //Borramos anterior
-                if (file_exists('./' . $configuracion['logo'])&&$configuracion['logo']!="") {
-                    unlink('./' . $configuracion['logo']);
+
+                    //Borramos anterior
+                    if (file_exists('./' . $configuracion['logo']) && $configuracion['logo'] != "") {
+                        unlink('./' . $configuracion['logo']);
+                    }
+
+                    $img->move($carpeta, $nombre_archivo);
+                } else {
+                    echo $validacion;
                 }
 
-                $img->move($carpeta, $nombre_archivo);
-            } else {
-                echo $validacion;
+                $ruta_bd = $carpeta_base . '/' . $nombre_archivo;
             }
-
-            $ruta_bd = $carpeta_base . '/' . $nombre_archivo;
-        }
 
             if ($configuracion) {
                 //actualizamos
@@ -110,8 +110,9 @@ class configuracion extends BaseController
         }
     }
 
-    public function getLogo(){
-          $logo_header = $this->configuracion->select('logo')->where('id_tienda', $this->session->id_tienda)->first();
-          echo $logo_header['logo'];
+    public function getLogo()
+    {
+        $logo_header = $this->configuracion->select('logo')->where('id_tienda', $this->session->id_tienda)->first();
+        echo $logo_header['logo'];
     }
 }
