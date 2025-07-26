@@ -15,136 +15,136 @@ $routes->post('/registro', 'Usuarios::registro');
 $routes->get('/index', 'Home::index');
 
 //Unidades
-$routes->get('/unidades', 'unidades::index');
-$routes->get('/unidades/eliminados', 'unidades::eliminados');
-$routes->get('/unidades/nuevo', 'unidades::nuevo');
-$routes->post('/unidades/insertar', 'unidades::insertar');
-$routes->get('/unidades/editar/(:num)', 'unidades::editar/$1');
-$routes->post('/unidades/actualizar', 'unidades::actualizar');
-$routes->get('/unidades/eliminar/(:num)', 'unidades::eliminar/$1');
-$routes->get('/unidades/reingresar/(:num)', 'unidades::reingresar/$1');
+$routes->get('/unidades', 'Unidades::index');
+$routes->get('/unidades/eliminados', 'Unidades::eliminados');
+$routes->get('/unidades/nuevo', 'Unidades::nuevo');
+$routes->post('/unidades/insertar', 'Unidades::insertar');
+$routes->get('/unidades/editar/(:num)', 'Unidades::editar/$1');
+$routes->post('/unidades/actualizar', 'Unidades::actualizar');
+$routes->get('/unidades/eliminar/(:num)', 'Unidades::eliminar/$1');
+$routes->get('/unidades/reingresar/(:num)', 'Unidades::reingresar/$1');
 
 //Categorias
-$routes->get('/categorias', 'categorias::index');
-$routes->get('/categorias/eliminados', 'categorias::eliminados');
-$routes->get('/categorias/nuevo', 'categorias::nuevo');
-$routes->post('/categorias/insertar', 'categorias::insertar');
-$routes->get('/categorias/editar/(:num)', 'categorias::editar/$1');
-$routes->post('/categorias/actualizar', 'categorias::actualizar');
-$routes->get('/categorias/eliminar/(:num)', 'categorias::eliminar/$1');
-$routes->get('/categorias/reingresar/(:num)', 'categorias::reingresar/$1');
+$routes->get('/categorias', 'Categorias::index');
+$routes->get('/categorias/eliminados', 'Categorias::eliminados');
+$routes->get('/categorias/nuevo', 'Categorias::nuevo');
+$routes->post('/categorias/insertar', 'Categorias::insertar');
+$routes->get('/categorias/editar/(:num)', 'Categorias::editar/$1');
+$routes->post('/categorias/actualizar', 'Categorias::actualizar');
+$routes->get('/categorias/eliminar/(:num)', 'Categorias::eliminar/$1');
+$routes->get('/categorias/reingresar/(:num)', 'Categorias::reingresar/$1');
 
 //Productos
-$routes->get('/productos', 'productos::index');
-$routes->get('/productos/eliminados', 'productos::eliminados');
-$routes->get('/productos/nuevo', 'productos::nuevo');
-$routes->post('/productos/insertar', 'productos::insertar');
-$routes->get('/productos/editar/(:num)', 'productos::editar/$1');
-$routes->post('/productos/actualizar', 'productos::actualizar');
-$routes->get('/productos/eliminar/(:num)', 'productos::eliminar/$1');
-$routes->get('/productos/reingresar/(:num)', 'productos::reingresar/$1');
-$routes->get('/productos/buscarPorCodigo/(:any)', 'productos::buscarPorCodigo/$1');
-$routes->get('/productos/autoCompleteData(:any)', 'productos::autoCompleteData/$1');
-$routes->get('/productos/generaBarras/(:num)', 'productos::generaBarras/$1');
-$routes->get('/productos/reporteMinimos', 'productos::reporteMinimos');
-$routes->get('/productos/generaReporteMinimo', 'productos::generaReporteMinimo');
+$routes->get('/productos', 'Productos::index');
+$routes->get('/productos/eliminados', 'Productos::eliminados');
+$routes->get('/productos/nuevo', 'Productos::nuevo');
+$routes->post('/productos/insertar', 'Productos::insertar');
+$routes->get('/productos/editar/(:num)', 'Productos::editar/$1');
+$routes->post('/productos/actualizar', 'Productos::actualizar');
+$routes->get('/productos/eliminar/(:num)', 'Productos::eliminar/$1');
+$routes->get('/productos/reingresar/(:num)', 'Productos::reingresar/$1');
+$routes->get('/productos/buscarPorCodigo/(:any)', 'Productos::buscarPorCodigo/$1');
+$routes->get('/productos/autoCompleteData(:any)', 'Productos::autoCompleteData/$1');
+$routes->get('/productos/generaBarras/(:num)', 'Productos::generaBarras/$1');
+$routes->get('/productos/reporteMinimos', 'Productos::reporteMinimos');
+$routes->get('/productos/generaReporteMinimo', 'Productos::generaReporteMinimo');
 
 
 
 
 //Clientes
-$routes->get('/clientes', 'clientes::index');
-$routes->get('/clientes/eliminados', 'clientes::eliminados');
-$routes->get('/clientes/nuevo', 'clientes::nuevo');
-$routes->post('/clientes/insertar', 'clientes::insertar');
-$routes->get('/clientes/editar/(:num)', 'clientes::editar/$1');
-$routes->post('/clientes/actualizar', 'clientes::actualizar');
-$routes->get('/clientes/eliminar/(:num)', 'clientes::eliminar/$1');
-$routes->get('/clientes/reingresar/(:num)', 'clientes::reingresar/$1');
-$routes->get('/clientes/autoCompleteData(:any)', 'clientes::autoCompleteData/$1');
+$routes->get('/clientes', 'Clientes::index');
+$routes->get('/clientes/eliminados', 'Clientes::eliminados');
+$routes->get('/clientes/nuevo', 'Clientes::nuevo');
+$routes->post('/clientes/insertar', 'Clientes::insertar');
+$routes->get('/clientes/editar/(:num)', 'Clientes::editar/$1');
+$routes->post('/clientes/actualizar', 'Clientes::actualizar');
+$routes->get('/clientes/eliminar/(:num)', 'Clientes::eliminar/$1');
+$routes->get('/clientes/reingresar/(:num)', 'Clientes::reingresar/$1');
+$routes->get('/clientes/autoCompleteData(:any)', 'Clientes::autoCompleteData/$1');
 
 
 
 //Configuracion
-$routes->get('/configuracion', 'configuracion::index');
-$routes->post('/configuracion/actualizar', 'configuracion::actualizar');
-$routes->get('/configuracion/getLogo', 'configuracion::getLogo');
+$routes->get('/configuracion', 'Configuracion::index');
+$routes->post('/configuracion/actualizar', 'Configuracion::actualizar');
+$routes->get('/configuracion/getLogo', 'Configuracion::getLogo');
 
 
 //Usuarios
-$routes->get('/usuarios', 'usuarios::index');
-$routes->get('/usuarios/eliminados', 'usuarios::eliminados');
-$routes->get('/usuarios/nuevo', 'usuarios::nuevo');
-$routes->post('/usuarios/insertar', 'usuarios::insertar');
-$routes->get('/usuarios/editar/(:num)', 'usuarios::editar/$1');
-$routes->post('/usuarios/actualizar', 'usuarios::actualizar');
-$routes->get('/usuarios/eliminar/(:num)', 'usuarios::eliminar/$1');
-$routes->get('/usuarios/reingresar/(:num)', 'usuarios::reingresar/$1');
-$routes->post('/usuarios/valida', 'usuarios::valida');
-$routes->get('/usuarios/logout', 'usuarios::logout');
-$routes->get('/usuarios/cambia_password', 'usuarios::cambia_password');
-$routes->post('/usuarios/actualizar_password', 'usuarios::actualizar_password');
-$routes->post('/usuarios/authAPI', 'usuarios::authAPI');
+$routes->get('/usuarios', 'Usuarios::index');
+$routes->get('/usuarios/eliminados', 'Usuarios::eliminados');
+$routes->get('/usuarios/nuevo', 'Usuarios::nuevo');
+$routes->post('/usuarios/insertar', 'Usuarios::insertar');
+$routes->get('/usuarios/editar/(:num)', 'Usuarios::editar/$1');
+$routes->post('/usuarios/actualizar', 'Usuarios::actualizar');
+$routes->get('/usuarios/eliminar/(:num)', 'Usuarios::eliminar/$1');
+$routes->get('/usuarios/reingresar/(:num)', 'Usuarios::reingresar/$1');
+$routes->post('/usuarios/valida', 'Usuarios::valida');
+$routes->get('/usuarios/logout', 'Usuarios::logout');
+$routes->get('/usuarios/cambia_password', 'Usuarios::cambia_password');
+$routes->post('/usuarios/actualizar_password', 'Usuarios::actualizar_password');
+$routes->post('/usuarios/authAPI', 'Usuarios::authAPI');
 
 
 //Compras
-$routes->get('/compras/nuevo', 'compras::nuevo');
-$routes->post('/compras/guardar', 'compras::guardar');
-$routes->get('/compras/muestraCompraPdf/(:num)', 'compras::muestraCompraPdf/$1');
-$routes->get('/compras/generaCompraPdf/(:num)', 'compras::generaCompraPdf/$1');
-$routes->get('/compras', 'compras::index');
-$routes->get('/compras/eliminar/(:num)', 'compras::eliminar/$1');
-$routes->get('/compras/eliminados', 'compras::eliminados');
-$routes->get('/compras/reingresar/(:num)', 'compras::reingresar/$1');
+$routes->get('/compras/nuevo', 'Compras::nuevo');
+$routes->post('/compras/guardar', 'Compras::guardar');
+$routes->get('/compras/muestraCompraPdf/(:num)', 'Compras::muestraCompraPdf/$1');
+$routes->get('/compras/generaCompraPdf/(:num)', 'Compras::generaCompraPdf/$1');
+$routes->get('/compras', 'Compras::index');
+$routes->get('/compras/eliminar/(:num)', 'Compras::eliminar/$1');
+$routes->get('/compras/eliminados', 'Compras::eliminados');
+$routes->get('/compras/reingresar/(:num)', 'Compras::reingresar/$1');
 
 
 
 //Temporal Movimientos
-$routes->get('/temporalmovimiento/insertar/(:num)/(:num)/(:any)', 'temporalmovimiento::insertar/$1/$2/$3');
-$routes->get('/temporalmovimiento/cargaProductos/(:num)', 'temporalmovimiento::cargaProductos/$1');
-$routes->get('/temporalmovimiento/eliminar/(:num)/(:any)', 'temporalmovimiento::eliminar/$1/$2');
+$routes->get('/temporalmovimiento/insertar/(:num)/(:num)/(:any)', 'TemporalMovimiento::insertar/$1/$2/$3');
+$routes->get('/temporalmovimiento/cargaProductos/(:num)', 'TemporalMovimiento::cargaProductos/$1');
+$routes->get('/temporalmovimiento/eliminar/(:num)/(:any)', 'TemporalMovimiento::eliminar/$1/$2');
 
 //Ventas
-$routes->get('/ventas/venta', 'ventas::venta');
-$routes->post('/ventas/guardar', 'ventas::guardar');
-$routes->get('/ventas/muestraTicket/(:num)', 'ventas::muestraTicket/$1');
-$routes->get('/ventas/generaTicket/(:num)', 'ventas::generaTicket/$1');
-$routes->get('/ventas', 'ventas::index');
-$routes->get('/ventas/eliminar/(:num)', 'ventas::eliminar/$1');
-$routes->get('/ventas/eliminados', 'ventas::eliminados');
-$routes->get('/ventas/reingresar/(:num)', 'ventas::reingresar/$1');
+$routes->get('/ventas/venta', 'Ventas::venta');
+$routes->post('/ventas/guardar', 'Ventas::guardar');
+$routes->get('/ventas/muestraTicket/(:num)', 'Ventas::muestraTicket/$1');
+$routes->get('/ventas/generaTicket/(:num)', 'Ventas::generaTicket/$1');
+$routes->get('/ventas', 'Ventas::index');
+$routes->get('/ventas/eliminar/(:num)', 'Ventas::eliminar/$1');
+$routes->get('/ventas/eliminados', 'Ventas::eliminados');
+$routes->get('/ventas/reingresar/(:num)', 'Ventas::reingresar/$1');
 
 
 //Cajas
-$routes->get('/cajas', 'cajas::index');
-$routes->get('/cajas/eliminados', 'cajas::eliminados');
-$routes->get('/cajas/nuevo', 'cajas::nuevo');
-$routes->post('/cajas/insertar', 'cajas::insertar');
-$routes->get('/cajas/editar/(:num)', 'cajas::editar/$1');
-$routes->post('/cajas/actualizar', 'cajas::actualizar');
-$routes->get('/cajas/eliminar/(:num)', 'cajas::eliminar/$1');
-$routes->get('/cajas/reingresar/(:num)', 'cajas::reingresar/$1');
-$routes->get('/cajas/arqueos/(:num)', 'cajas::arqueos/$1');
-$routes->get('/cajas/nuevo_arqueo', 'cajas::nuevo_arqueo');
-$routes->post('/cajas/nuevo_arqueo', 'cajas::nuevo_arqueo');
-$routes->get('/cajas/cerrar', 'cajas::cerrar');
-$routes->post('/cajas/cerrar', 'cajas::cerrar');
+$routes->get('/cajas', 'Cajas::index');
+$routes->get('/cajas/eliminados', 'Cajas::eliminados');
+$routes->get('/cajas/nuevo', 'Cajas::nuevo');
+$routes->post('/cajas/insertar', 'Cajas::insertar');
+$routes->get('/cajas/editar/(:num)', 'Cajas::editar/$1');
+$routes->post('/cajas/actualizar', 'Cajas::actualizar');
+$routes->get('/cajas/eliminar/(:num)', 'Cajas::eliminar/$1');
+$routes->get('/cajas/reingresar/(:num)', 'Cajas::reingresar/$1');
+$routes->get('/cajas/arqueos/(:num)', 'Cajas::arqueos/$1');
+$routes->get('/cajas/nuevo_arqueo', 'Cajas::nuevo_arqueo');
+$routes->post('/cajas/nuevo_arqueo', 'Cajas::nuevo_arqueo');
+$routes->get('/cajas/cerrar', 'Cajas::cerrar');
+$routes->post('/cajas/cerrar', 'Cajas::cerrar');
 
 
 
 
 //Roles
-$routes->get('/roles', 'roles::index');
-$routes->get('/roles/eliminados', 'roles::eliminados');
-$routes->get('/roles/nuevo', 'roles::nuevo');
-$routes->post('/roles/insertar', 'roles::insertar');
-$routes->get('/roles/editar/(:num)', 'roles::editar/$1');
-$routes->post('/roles/actualizar', 'roles::actualizar');
-$routes->get('/roles/eliminar/(:num)', 'roles::eliminar/$1');
-$routes->get('/roles/reingresar/(:num)', 'roles::reingresar/$1');
-$routes->get('/roles/permisos/(:num)', 'roles::permisos/$1');
-$routes->post('/roles/guardaPermisos', 'roles::guardaPermisos');
-$routes->get('/roles/no_autorizado', 'roles::no_autorizado');
+$routes->get('/roles', 'Roles::index');
+$routes->get('/roles/eliminados', 'Roles::eliminados');
+$routes->get('/roles/nuevo', 'Roles::nuevo');
+$routes->post('/roles/insertar', 'Roles::insertar');
+$routes->get('/roles/editar/(:num)', 'Roles::editar/$1');
+$routes->post('/roles/actualizar', 'Roles::actualizar');
+$routes->get('/roles/eliminar/(:num)', 'Roles::eliminar/$1');
+$routes->get('/roles/reingresar/(:num)', 'Roles::reingresar/$1');
+$routes->get('/roles/permisos/(:num)', 'Roles::permisos/$1');
+$routes->post('/roles/guardaPermisos', 'Roles::guardaPermisos');
+$routes->get('/roles/no_autorizado', 'Roles::no_autorizado');
 
 
 //API
