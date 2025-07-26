@@ -7,7 +7,7 @@ use App\Models\VentasModel;
 use App\Models\TemporalMovimientoModel;
 use App\Models\DetalleVentaModel;
 use App\Models\ProductosModel;
-use App\Models\configuracionModel;
+use App\Models\ConfiguracionModel;
 use App\Models\CajasModel;
 use App\Models\ArqueoCajaModel;
 //use FPDF;

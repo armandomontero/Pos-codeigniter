@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\unidadesModel;
+use App\Models\UnidadesModel;
 
 class Unidades extends BaseController
 {

@@ -35,6 +35,9 @@ $user_session = session();
     <script src="<?=base_url()?>vendor/jquery/jquery.min.js"></script>
     <script src="<?=base_url()?>js/jquery-ui/jquery-ui.min.js"></script>
 
+    <!--Charts -->
+    <script src="<?=base_url()?>js/chart.js"></script>
+
 </head>
 
 <body id="page-top">

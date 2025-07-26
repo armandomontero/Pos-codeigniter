@@ -3,9 +3,9 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\configuracionModel;
+use App\Models\ConfiguracionModel;
 
-class configuracion extends BaseController
+class Configuracion extends BaseController
 {
     protected $configuracion;
     protected $reglas;

@@ -75,7 +75,7 @@ class Filters extends BaseFilters
             
              // Example: Exclude login routes
             // 'honeypot',
-             'csrf',
+             'csrf' => ['except' => ['/ventas/*', '/', 'usuarios/valida', 'api/*', 'usuarios/authAPI', 'registro']],
             // 'invalidchars',
         ],
         'after' => [

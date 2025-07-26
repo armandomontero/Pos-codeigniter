@@ -3,11 +3,11 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\clientesModel;
-use App\Models\categoriasModel;
-use App\Models\unidadesModel;
+use App\Models\ClientesModel;
+use App\Models\CategoriasModel;
+use App\Models\UnidadesModel;
 
-class clientes extends BaseController
+class Clientes extends BaseController
 {
     protected $clientes;
     protected $unidades;
@@ -16,9 +16,9 @@ class clientes extends BaseController
 
     public function __construct()
     {
-        $this->clientes = new clientesModel();
-        $this->unidades = new unidadesModel();
-        $this->categorias = new categoriasModel();
+        $this->clientes = new ClientesModel();
+        $this->unidades = new UnidadesModel();
+        $this->categorias = new CategoriasModel();
 
         helper(['form']);
 

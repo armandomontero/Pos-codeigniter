@@ -13,8 +13,7 @@
 
 .covered {
   position:relative; /* make a new "render context", so absolute positioning is relative to this parent container */
-  opacity: .80;
-  padding:30px; /* only needed for this demo */
+  padding:20px; /* only needed for this demo */
 }
 
 .covered-img {

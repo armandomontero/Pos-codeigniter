@@ -7,7 +7,7 @@ use App\Models\UsuariosModel;
 use App\Models\CajasModel;
 use App\Models\RolesModel;
 use App\Models\LogsModel;
-use App\Models\configuracionModel;
+use App\Models\ConfiguracionModel;
 use App\Models\TiendasModel;
 use CodeIgniter\API\ResponseTrait;
 use Config\Services;

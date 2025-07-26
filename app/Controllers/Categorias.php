@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\Models\categoriasModel;
+use App\Models\CategoriasModel;
 
 class Categorias extends BaseController
 {

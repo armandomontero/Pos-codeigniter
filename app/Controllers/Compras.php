@@ -7,7 +7,7 @@ use App\Models\ComprasModel;
 use App\Models\TemporalMovimientoModel;
 use App\Models\DetalleCompraModel;
 use App\Models\ProductosModel;
-use App\Models\configuracionModel;
+use App\Models\ConfiguracionModel;
 use FPDF;
 
 class Compras extends BaseController

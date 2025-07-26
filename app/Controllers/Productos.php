@@ -4,9 +4,9 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\ProductosModel;
-use App\Models\categoriasModel;
-use App\Models\unidadesModel;
-use App\Models\configuracionModel;
+use App\Models\CategoriasModel;
+use App\Models\UnidadesModel;
+use App\Models\ConfiguracionModel;
 use App\Models\RolesPermisosModel;
 
 use FPDF;
@@ -21,9 +21,9 @@ class productos extends BaseController
     public function __construct()
     {
         $this->productos = new ProductosModel();
-        $this->unidades = new unidadesModel();
-        $this->categorias = new categoriasModel();
-        $this->configuracion = new configuracionModel();
+        $this->unidades = new UnidadesModel();
+        $this->categorias = new CategoriasModel();
+        $this->configuracion = new ConfiguracionModel();
         $this->roles_permisos = new RolesPermisosModel();
 
         helper(['form']);
