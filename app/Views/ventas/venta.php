@@ -49,7 +49,7 @@ $idVentaTmp = uniqid();
                     </div>
                     <div class="col-12 col-sm-4">
                         <label>Nombre Producto: </label>
-                        <input disabled class="form-control" id="nombre" name="nombre" type="text" />
+                        <input  class="form-control" id="nombre" name="nombre" type="text" />
                     </div>
 
                     <div class="col-12 col-sm-4">
@@ -167,6 +167,34 @@ $idVentaTmp = uniqid();
     $(function() {
         $("#codigo").autocomplete({
             source: "<?= base_url() ?>productos/autoCompleteData/",
+            minLength: 3,
+            select: function(event, ui) {
+                event.preventDefault();
+                $("#id_producto").val(ui.item.id);
+                $("#codigo").val(ui.item.value);
+                $("#nombre").val(ui.item.nombre);
+                if ($("#cantidad").val() <= 0) {
+                    $("#cantidad").val(1);
+                }
+                $("#cantidad").select();
+                $("#cantidad").focus();
+
+                setTimeout(
+                    function() {
+                        e = jQuery.Event("keypress");
+                        e.wich = 13;
+                        agregarProducto($("#id_producto").val(), $("#cantidad").val(), '<?= $idVentaTmp ?>');
+                    }
+                )
+            }
+        });
+    });
+
+
+
+    $(function() {
+        $("#nombre").autocomplete({
+            source: "<?= base_url() ?>productos/autoCompletebyName/",
             minLength: 3,
             select: function(event, ui) {
                 event.preventDefault();

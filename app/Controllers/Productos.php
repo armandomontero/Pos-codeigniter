@@ -284,6 +284,26 @@ if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
         echo json_encode($returnData);
     }
 
+
+        public function autoCompletebyName()
+    {
+        $returnData = array();
+        $valor = $this->request->getGet('term');
+        $productos = $this->productos->like('nombre', $valor)->where('activo', 1)->where('id_tienda', $this->session->id_tienda)->findAll();
+        
+        if (!empty($productos)) {
+            foreach ($productos as $row) {
+                $data['id'] = $row['id'];
+                $data['value'] = $row['codigo'];
+                $data['nombre'] = $row['nombre'];
+                $data['label'] = $row['codigo'] . ' - ' . $row['nombre'];
+
+                array_push($returnData, $data);
+            }
+        }
+        echo json_encode($returnData);
+    }
+
     public function generaBarras($id_producto)
     {
 

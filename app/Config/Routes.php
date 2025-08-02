@@ -45,6 +45,7 @@ $routes->get('/productos/eliminar/(:num)', 'Productos::eliminar/$1');
 $routes->get('/productos/reingresar/(:num)', 'Productos::reingresar/$1');
 $routes->get('/productos/buscarPorCodigo/(:any)', 'Productos::buscarPorCodigo/$1');
 $routes->get('/productos/autoCompleteData(:any)', 'Productos::autoCompleteData/$1');
+$routes->get('/productos/autoCompletebyName(:any)', 'Productos::autoCompletebyName/$1');
 $routes->get('/productos/generaBarras/(:num)', 'Productos::generaBarras/$1');
 $routes->get('/productos/reporteMinimos', 'Productos::reporteMinimos');
 $routes->get('/productos/generaReporteMinimo', 'Productos::generaReporteMinimo');
