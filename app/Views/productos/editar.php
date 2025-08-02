@@ -8,7 +8,19 @@
             <li class="breadcrumb-item active"><?= $titulo ?></li>
         </ol>
 
+<?php 
+if(isset($validation)){?>
+<div class="alert alert-danger">
+<?php echo $validation->listErrors();?>
+</div>
+<?php }?>
 
+<?php 
+if(isset($mensaje)){?>
+<div class="alert alert-success">
+<?php echo $mensaje;?>
+</div>
+<?php }?>
 
         <div class="card-body">
             <form method="POST" enctype="multipart/form-data" action="<?= base_url() ?>/productos/actualizar" autocomplete="off">

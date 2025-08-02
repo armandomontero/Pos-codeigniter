@@ -68,7 +68,7 @@ if(isset($mensaje)){?>
                                     <td><?php echo $dato['nombre']; ?></td>
                                     <td class="text-right"><?php echo number_to_currency($dato['precio_venta'], 'USD', 'en_US', 0); ?></td>
                                     <td class="text-right"><?php echo number_format($dato['existencias'], 0, ',', '.'); ?></td>
-                                    <td class="text-center"><?php if($dato['imagen']){echo '<img width="60px" height="60px" src="'.$dato['imagen'].'"/>';} ?></td>
+                                    <td class="text-center"><?php if($dato['imagen']){echo '<img width="60px" height="60px" src="'.$dato['imagen'].'"/>';} else{ echo '<i class="fas lg fa-image"></i>';} ?></td>
                                     <td><a class="btn btn-warning btn-sm" href="<?= base_url() ?>productos/editar/<?php echo $dato['id']; ?>"><i class="fas fa-edit"></i></a></td>
                                     <td><a data-toggle="modal" data-target="#modal-confirma" class="btn btn-danger btn-sm" href="#" data-href="<?= base_url() ?>productos/eliminar/<?php echo $dato['id']; ?>"><i class="fas fa-trash-alt"></i></a></td>
 

@@ -84,12 +84,12 @@ $idVentaTmp = uniqid();
                         <th>#</th>
                         <th>Código</th>
                         <th>Nombre</th>
-                        <th>Precio $</th>
+                        <th >Precio </th>
                         <th>Cantidad</th>
-                        <th>Total $</th>
+                        <th>Total </th>
                         <th width="1%">#</th>
                     </thead>
-                    <tbody>
+                    <tbody >
 
                     </tbody>
                 </table>

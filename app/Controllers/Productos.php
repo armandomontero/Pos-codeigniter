@@ -142,7 +142,7 @@ class productos extends BaseController
     }
 
 
-    public function editar($id)
+    public function editar($id, $valid = null, $mensaje = null)
     {
         try {
             $unidad = $this->productos->where('id', $id)->where('id_tienda', $this->session->id_tienda)->first();
@@ -159,7 +159,7 @@ class productos extends BaseController
             //llamamos categorias
             $categorias = $this->categorias->where('activo', 1)->where("id_tienda = " . $this->session->id_tienda . " OR id = 1")->orderBy('nombre', 'asc')->findAll();
 
-            $data = ['titulo' => 'Editar Producto', 'datos' => $unidad, 'unidades' => $unidades, 'categorias' => $categorias];
+            $data = ['titulo' => 'Editar Producto', 'datos' => $unidad, 'unidades' => $unidades, 'categorias' => $categorias, 'validation' => $valid, 'mensaje' => $mensaje];
 
             echo view('header');
             echo view('productos/editar', $data);
@@ -170,7 +170,7 @@ class productos extends BaseController
 
     public function actualizar()
     {
-
+if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
         //comprobamos que exista imagen
             $producto = $this->productos->where('id', $this->request->getPost('id'))->first();
             $ruta_bd = null;
@@ -219,7 +219,12 @@ class productos extends BaseController
             'id_categoria' => $this->request->getPost('id_categoria'),
             'imagen' => $ruta_bd
         ]);
-        return redirect()->to(base_url() . 'productos/editar/' . $this->request->getPost('id'));
+        $mensaje = 'Registro actualizado!';
+       $this->editar($this->request->getPost('id'), null, $mensaje);
+    }
+    else{
+         $this->editar($this->request->getPost('id'), $this->validator);
+    }
     }
 
     public function eliminar($id)

@@ -35,14 +35,14 @@ class TemporalMovimiento extends BaseController
 
             if ($datosExiste) {
                 $cantidad = $datosExiste->cantidad + $cantidad;
-                $subtotal = $cantidad * $datosExiste->precio;
+                $subtotal = round($cantidad * $datosExiste->precio, 0);
 
                 //actualizamos temporal ya existente
                 $this->temporal_movimiento->updProdCompra($id_producto, $id_compra, $cantidad, $subtotal);
 
             } else {
                 if($tipo_movimiento=='compra'){
-                $subtotal = $cantidad * $producto['precio_compra'];
+                $subtotal = round($cantidad * $producto['precio_compra'], 0);
 
                 //insertamos temporal
                 $this->temporal_movimiento->save([
@@ -57,7 +57,7 @@ class TemporalMovimiento extends BaseController
                     'id_caja' => $this->session->id_caja
                 ]);
             }elseif($tipo_movimiento=='venta'){
-             $subtotal = $cantidad * $producto['precio_venta'];
+             $subtotal = round($cantidad * $producto['precio_venta'], 0);
 
                 //insertamos temporal
                 $this->temporal_movimiento->save([
