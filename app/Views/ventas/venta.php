@@ -162,7 +162,7 @@ $idVentaTmp = uniqid();
                 </button>
             </div>
             <div class="modal-body">
-               <form id="form_venta" name="form_venta" class="form-horizontal"
+               <form id="form_manual" name="form_manual" class="form-horizontal"
             method="" action="" autocomplete="off">
                         <div class="form-group mb-4">
                 <div class="row">
@@ -187,7 +187,7 @@ $idVentaTmp = uniqid();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <a type="button" class="btn btn-danger btn-ok">Cerrar</a>
+                <button id="agrega_manual"  type="button" class="btn btn-success btn-ok">Agregar Item</button>
             </div>
         </div>
     </div>
@@ -272,18 +272,23 @@ $idVentaTmp = uniqid();
                 event.preventDefault();
                 $("#id_producto").val(ui.item.id);
                 $("#codigo").val(ui.item.value);
-                $("#nombre").val(ui.item.nombre);
-                $("#precio").val(ui.item.precio_venta);
-                if ($("#cantidad").val() <= 0) {
-                    $("#cantidad").val(1);
+                $("#nombre_manual").val(ui.item.nombre);
+                $("#precio_manual").val(ui.item.precio_venta);
+                if ($("#cantidad_manual").val() <= 0) {
+                    $("#cantidad_manual").val(1);
                 }
-                $("#cantidad").select();
-                $("#cantidad").focus();
+                $("#precio_manual").select();
+                $("#precio_manual").focus();
 
 
             }
         });
     });
+
+$("#agrega_manual").click(function(){
+agregarProducto($("#id_producto").val(), $("#cantidad_manual").val(), $("#precio_manual").val(), '<?= $idVentaTmp ?>');
+$('#modal-manual').modal('hide');
+});
 
     $("#anonimo").click(function() {
         if ($("#anonimo").prop('checked') == false) {
@@ -382,12 +387,12 @@ $idVentaTmp = uniqid();
     };
 
 
-    function eliminarProducto(id_producto, id_compra) {
+    function eliminarProducto(id_producto, id_compra, precio) {
         if (id_producto != null && id_producto != 0) {
 
 
             $.ajax({
-                url: '<?= base_url() ?>temporalmovimiento/eliminar/' + id_producto + '/' + id_compra,
+                url: '<?= base_url() ?>temporalmovimiento/eliminar/' + id_producto + '/' + id_compra + '/' + precio,
                 dataType: 'json',
                 success: function(resultado) {
                     if (resultado == 0) {

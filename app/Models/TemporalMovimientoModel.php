@@ -57,19 +57,21 @@ class TemporalMovimientoModel extends Model{
         return $datos;
     }
 
-    public function updProdCompra( $id_producto, $folio, $cantidad, $subtotal){
+    public function updProdCompra( $id_producto, $folio, $precio, $cantidad, $subtotal){
         $this->set('cantidad', $cantidad);
         $this->set('subtotal', $subtotal);
         $this->where('id_producto', $id_producto);
         $this->where('folio', $folio);
+        $this->where('precio', $precio);
         $this->update();
 
     }
 
-        public function delProdCompra( $id_producto, $folio){
+        public function delProdCompra( $id_producto, $folio, $precio){
         
         $this->where('id_producto', $id_producto);
         $this->where('folio', $folio);
+        $this->where('precio', $precio);
         $this->delete();
 
     }

@@ -38,7 +38,7 @@ class TemporalMovimiento extends BaseController
                 $subtotal = round($cantidad * $datosExiste->precio, 0);
 
                 //actualizamos temporal ya existente
-                $this->temporal_movimiento->updProdCompra($id_producto, $id_compra, $cantidad, $subtotal);
+                $this->temporal_movimiento->updProdCompra($id_producto, $id_compra, $precio, $cantidad, $subtotal);
 
             } else {
                 
@@ -85,7 +85,7 @@ class TemporalMovimiento extends BaseController
             $fila .="<td align='right'>".number_format($row['precio'], 0, ',', '.')."</td>";
             $fila .="<td align='right'>".$row['cantidad']."</td>";
             $fila .="<td align='right'>".number_format($row['subtotal'], 0, ',', '.')."</td>";
-            $fila .="<td> <a class='borrar btn btn-danger btn-sm' onClick=\"eliminarProducto(".$row['id_producto'].", '".$row['folio']."')\"><i class='fas fa-trash-alt sm'></i></a> </td>";
+            $fila .="<td> <a class='borrar btn btn-danger btn-sm' onClick=\"eliminarProducto(".$row['id_producto'].", '".$row['folio']."', '".$row['precio']."')\"><i class='fas fa-trash-alt sm'></i></a> </td>";
             $fila .= "</tr>";
 
         }
@@ -108,19 +108,19 @@ class TemporalMovimiento extends BaseController
     }
 
 
-    public function eliminar($id_producto, $id_compra)
+    public function eliminar($id_producto, $id_compra, $precio)
     {
-        $datosExiste = $this->temporal_movimiento->porIdProductoCompra($id_producto, $id_compra);
+        $datosExiste = $this->temporal_movimiento->porIdProductoCompra($id_producto, $id_compra, $precio);
         if($datosExiste){
            if($datosExiste->cantidad>1){
             $cantidad = $datosExiste->cantidad - 1;
             $subtotal = $datosExiste->precio*$cantidad;
 
             //actualizamos
-            $this->temporal_movimiento->updProdCompra($id_producto, $id_compra, $cantidad, $subtotal);
+            $this->temporal_movimiento->updProdCompra($id_producto, $id_compra, $precio, $cantidad, $subtotal);
            }
            else{
-            $this->temporal_movimiento->delProdCompra($id_producto, $id_compra);
+            $this->temporal_movimiento->delProdCompra($id_producto, $id_compra, $precio);
            }
         }
 
