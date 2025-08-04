@@ -39,10 +39,11 @@ class TemporalMovimientoModel extends Model{
     protected $afterDelete    = [];
 
 
-    public function porIdProductoCompra($id_producto, $folio){
+    public function porIdProductoCompra($id_producto, $folio, $precio){
         $this->select('*');
         $this->where('folio', $folio);
         $this->where('id_producto', $id_producto);
+        $this->where('precio', $precio);
         $datos = $this->get()->getRow();
 
         return $datos;

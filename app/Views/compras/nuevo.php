@@ -47,7 +47,7 @@ $id_compra = uniqid();
                             <p>&nbsp;</p>
                             <p>&nbsp;</p>
                         </label>
-                        <button onclick="agregarProducto(id_producto.value, cantidad.value, '<?= $id_compra ?>')"
+                        <button onclick="agregarProducto(id_producto.value, cantidad.value, precio.value, '<?= $id_compra ?>')"
                             id="agregar_producto" type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar Producto</button>
                     </div>
                 </div>
@@ -180,12 +180,12 @@ $id_compra = uniqid();
     }
 
 
-    function agregarProducto(id_producto, cantidad, id_compra) {
+    function agregarProducto(id_producto, cantidad, precio,  id_compra) {
         if (id_producto != null && id_producto != 0 && cantidad > 0) {
 
 
             $.ajax({
-                url: '<?= base_url() ?>temporalmovimiento/insertar/' + id_producto + '/' + cantidad + '/' + id_compra + '/' + 'compra',
+                url: '<?= base_url() ?>temporalmovimiento/insertar/' + id_producto + '/' + cantidad + '/' + precio + '/' + id_compra + '/' + 'compra',
                 dataType: 'json',
                 success: function(resultado) {
                     if (resultado == 0) {

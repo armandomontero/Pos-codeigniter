@@ -101,7 +101,7 @@ $routes->get('/compras/reingresar/(:num)', 'Compras::reingresar/$1');
 
 
 //Temporal Movimientos
-$routes->get('/temporalmovimiento/insertar/(:num)/(:any)/(:any)', 'TemporalMovimiento::insertar/$1/$2/$3');
+$routes->get('/temporalmovimiento/insertar/(:num)/(:any)/(:any)/(:any)', 'TemporalMovimiento::insertar/$1/$2/$3/$4');
 $routes->get('/temporalmovimiento/cargaProductos/(:num)', 'TemporalMovimiento::cargaProductos/$1');
 $routes->get('/temporalmovimiento/eliminar/(:num)/(:any)', 'TemporalMovimiento::eliminar/$1/$2');
 

@@ -23,7 +23,7 @@ class TemporalMovimiento extends BaseController
 
 
 
-    public function insertar($id_producto, $cantidad, $id_compra, $tipo_movimiento)
+    public function insertar($id_producto, $cantidad, $precio, $id_compra, $tipo_movimiento)
     {
 
         $error = '';
@@ -31,7 +31,7 @@ class TemporalMovimiento extends BaseController
         $producto = $this->productos->where('id', $id_producto)->first();
 
         if ($producto) {
-            $datosExiste = $this->temporal_movimiento->porIdProductoCompra($id_producto, $id_compra);
+            $datosExiste = $this->temporal_movimiento->porIdProductoCompra($id_producto, $id_compra, $precio);
 
             if ($datosExiste) {
                 $cantidad = $datosExiste->cantidad + $cantidad;
@@ -41,8 +41,8 @@ class TemporalMovimiento extends BaseController
                 $this->temporal_movimiento->updProdCompra($id_producto, $id_compra, $cantidad, $subtotal);
 
             } else {
-                if($tipo_movimiento=='compra'){
-                $subtotal = round($cantidad * $producto['precio_compra'], 0);
+                
+                $subtotal = round($cantidad * $precio, 0);
 
                 //insertamos temporal
                 $this->temporal_movimiento->save([
@@ -51,27 +51,12 @@ class TemporalMovimiento extends BaseController
                     'codigo' => $producto['codigo'],
                     'nombre' => $producto['nombre'],
                     'cantidad' => $cantidad,
-                    'precio' => $producto['precio_compra'],
+                    'precio' => $precio,
                     'subtotal' => $subtotal,
                     'tipo_movimiento' => $tipo_movimiento,
                     'id_caja' => $this->session->id_caja
                 ]);
-            }elseif($tipo_movimiento=='venta'){
-             $subtotal = round($cantidad * $producto['precio_venta'], 0);
-
-                //insertamos temporal
-                $this->temporal_movimiento->save([
-                    'folio' => $id_compra,
-                    'id_producto' => $id_producto,
-                    'codigo' => $producto['codigo'],
-                    'nombre' => $producto['nombre'],
-                    'cantidad' => $cantidad,
-                    'precio' => $producto['precio_venta'],
-                    'subtotal' => $subtotal,
-                    'tipo_movimiento' => $tipo_movimiento,
-                    'id_caja' => $this->session->id_caja
-                ]);
-        }
+            
         }
         } else {
             $error = 'No existe el producto';

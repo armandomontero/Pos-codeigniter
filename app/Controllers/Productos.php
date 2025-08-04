@@ -277,6 +277,8 @@ if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
                 $data['value'] = $row['codigo'];
                 $data['nombre'] = $row['nombre'];
                 $data['label'] = $row['codigo'] . ' - ' . $row['nombre'];
+                $data['precio_venta'] = $row['precio_venta'];
+                $data['precio_compra'] = $row['precio_compra'];
 
                 array_push($returnData, $data);
             }
@@ -297,6 +299,8 @@ if ($this->request->getMethod() == "POST" && $this->validate($this->reglas)) {
                 $data['value'] = $row['codigo'];
                 $data['nombre'] = $row['nombre'];
                 $data['label'] = $row['codigo'] . ' - ' . $row['nombre'];
+                $data['precio_venta'] = $row['precio_venta'];
+                $data['precio_compra'] = $row['precio_compra'];
 
                 array_push($returnData, $data);
             }
