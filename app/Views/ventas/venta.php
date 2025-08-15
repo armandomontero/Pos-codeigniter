@@ -49,13 +49,13 @@ $idVentaTmp = uniqid();
                     </div>
                     <div class="col-12 col-sm-4">
                         <label>Nombre Producto: </label>
-                        <input  class="form-control" id="nombre" name="nombre" type="text" />
+                        <input class="form-control" id="nombre" name="nombre" type="text" />
                     </div>
 
                     <div class="col-12 col-sm-4">
                         <label>Cantidad: </label>
                         <input onkeyup="valida(this)" value="" class="form-control" id="cantidad" name="cantidad" type="number" />
-                        <input  value="" class="form-control" id="precio" name="precio" type="hidden" />
+                        <input value="" class="form-control" id="precio" name="precio" type="hidden" />
                     </div>
                 </div>
             </div>
@@ -86,12 +86,12 @@ $idVentaTmp = uniqid();
                         <th>#</th>
                         <th>Código</th>
                         <th>Nombre</th>
-                        <th >Precio </th>
+                        <th>Precio </th>
                         <th>Cantidad</th>
                         <th>Total </th>
                         <th width="1%">#</th>
                     </thead>
-                    <tbody >
+                    <tbody>
 
                     </tbody>
                 </table>
@@ -162,32 +162,32 @@ $idVentaTmp = uniqid();
                 </button>
             </div>
             <div class="modal-body">
-               <form id="form_manual" name="form_manual" class="form-horizontal"
-            method="" action="" autocomplete="off">
-                        <div class="form-group mb-4">
-                <div class="row">
-                   
-                    <div class="col-12 col-sm-6">
-                        <label>Nombre Producto: </label>
-                        <input placeholder="Escribe el nombre y selecciona..."  class="form-control" id="nombre_manual" name="nombre_manual" type="text" />
-                    </div>
+                <form id="form_manual" name="form_manual" class="form-horizontal"
+                    method="" action="" autocomplete="off">
+                    <div class="form-group mb-4">
+                        <div class="row">
 
-                    <div class="col-12 col-sm-2">
-                        <label>Cantidad: </label>
-                        <input onkeyup="valida(this)" value="" class="form-control" id="cantidad_manual" name="cantidad_manual" type="number" />
-                    </div>
+                            <div class="col-12 col-sm-6">
+                                <label>Nombre Producto: </label>
+                                <input placeholder="Escribe el nombre y selecciona..." class="form-control" id="nombre_manual" name="nombre_manual" type="text" />
+                            </div>
 
-                     <div class="col-12 col-sm-4">
-                        <label>Precio: </label>
-                        <input onkeyup="valida(this)" value="" class="form-control" id="precio_manual" name="precio_manual" type="number" />
+                            <div class="col-12 col-sm-2">
+                                <label>Cantidad: </label>
+                                <input onkeyup="valida(this)" value="" class="form-control" id="cantidad_manual" name="cantidad_manual" type="number" />
+                            </div>
+
+                            <div class="col-12 col-sm-4">
+                                <label>Precio: </label>
+                                <input onkeyup="valida(this)" value="" class="form-control" id="precio_manual" name="precio_manual" type="number" />
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-               </form>
+                </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="agrega_manual"  type="button" class="btn btn-success btn-ok">Agregar Item</button>
+                <button id="agrega_manual" disabled type="button" class="btn btn-success btn-ok">Agregar Item</button>
             </div>
         </div>
     </div>
@@ -264,6 +264,8 @@ $idVentaTmp = uniqid();
     });
 
 
+
+
     $(function() {
         $("#nombre_manual").autocomplete({
             source: "<?= base_url() ?>productos/autoCompletebyName/",
@@ -277,6 +279,8 @@ $idVentaTmp = uniqid();
                 if ($("#cantidad_manual").val() <= 0) {
                     $("#cantidad_manual").val(1);
                 }
+                $("#agrega_manual").prop('disabled', false);
+                $("#nombre_manual").prop('readonly', true);
                 $("#precio_manual").select();
                 $("#precio_manual").focus();
 
@@ -285,10 +289,21 @@ $idVentaTmp = uniqid();
         });
     });
 
-$("#agrega_manual").click(function(){
-agregarProducto($("#id_producto").val(), $("#cantidad_manual").val(), $("#precio_manual").val(), '<?= $idVentaTmp ?>');
-$('#modal-manual').modal('hide');
-});
+    $("#venta_manual").click(function() {
+        $("#nombre_manual").val('');
+        $("#precio_manual").val('');
+        $("#cantidad_manual").val('');
+        $("#nombre_manual").select();
+        $("#nombre_manual").focus();
+        $("#agrega_manual").prop('disabled', true);
+        $("#nombre_manual").prop('readonly', false);
+
+    });
+
+    $("#agrega_manual").click(function() {
+        agregarProducto($("#id_producto").val(), $("#cantidad_manual").val(), $("#precio_manual").val(), '<?= $idVentaTmp ?>');
+        $('#modal-manual').modal('hide');
+    });
 
     $("#anonimo").click(function() {
         if ($("#anonimo").prop('checked') == false) {
